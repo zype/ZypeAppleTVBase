@@ -1,0 +1,11 @@
+For Future modifications:
+
+//Change to a property sheet 
+^The above is put in locations that need to go to a future property sheets giving rise to boolean on and off switches controlling features.
+
+Steps to create a new tvOS app that uses this static framework:
+
+1.  Pull a sample project from Zype Github.
+
+
+
