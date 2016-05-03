@@ -29,7 +29,7 @@ public class CategoryValueModel: BaseModel {
                 return
             }
         }
-        ZypeSDK.sharedInstance.getVideos({ (videos, error) -> Void in
+        ZypeAppleTVBase.sharedInstance.getVideos({ (videos, error) -> Void in
             self.userData["videos"] = videos
             self.userData["videos_date"] = NSDate()
             completion(videos: videos, error: error)
@@ -47,7 +47,7 @@ public class CategoryValueModel: BaseModel {
                 return
             }
         }
-        ZypeSDK.sharedInstance.getPlaylists(QueryPlaylistsModel(category: self), completion: { (playlists, error) -> Void in
+        ZypeAppleTVBase.sharedInstance.getPlaylists(QueryPlaylistsModel(category: self), completion: { (playlists, error) -> Void in
             self.userData["playlists"] = playlists
             self.userData["playlists_date"] = NSDate()
             completion(playlists: playlists, error: error)

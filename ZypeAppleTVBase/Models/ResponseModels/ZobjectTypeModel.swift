@@ -1,6 +1,6 @@
 //
 //  ZobjectTypeModel.swift
-//  ZypeSDK
+//  ZypeAppleTVBase
 //
 //  Created by Ilya Sorokin on 10/22/15.
 //  Copyright © 2015 Ilya Sorokin. All rights reserved.
@@ -54,7 +54,7 @@ public class ZobjectTypeModel: BaseModel {
                 return
             }
         }
-        ZypeSDK.sharedInstance.getZobjects(QueryZobjectsModel(objectType: self), completion: { (objects, error) -> Void in
+        ZypeAppleTVBase.sharedInstance.getZobjects(QueryZobjectsModel(objectType: self), completion: { (objects, error) -> Void in
             self.userData["zobjects"] = objects
             self.userData["zobjects_date"] = NSDate()
             completion(zobjects: objects, error: error)

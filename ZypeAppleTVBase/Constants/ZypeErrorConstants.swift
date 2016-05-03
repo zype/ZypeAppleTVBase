@@ -1,12 +1,12 @@
 //
 //  ZypeErrorConstants.swift
-//  ZypeSDK
+//  ZypeAppleTVBase
 //
 //  Created by Ilya Sorokin on 10/26/15.
 //  Copyright © 2015 Ilya Sorokin. All rights reserved.
 //
 
-public let kErrorDomaine = "ZypeSDK"
+public let kErrorDomaine = "ZypeAppleTVBase"
 
 public let kErrorJSONParsing = 1
 

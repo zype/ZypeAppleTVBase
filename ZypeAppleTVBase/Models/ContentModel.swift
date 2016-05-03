@@ -1,6 +1,6 @@
 //
 //  ContentModel.swift
-//  ZypeSDK
+//  ZypeAppleTVBase
 //
 //  Created by Ilya Sorokin on 11/3/15.
 //  Copyright © 2015 Ilya Sorokin. All rights reserved.

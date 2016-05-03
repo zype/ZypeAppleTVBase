@@ -1,6 +1,6 @@
 //
 //  PlaylistModel.swift
-//  ZypeSDK
+//  ZypeAppleTVBase
 //
 //  Created by Ilya Sorokin on 10/28/15.
 //  Copyright © 2015 Ilya Sorokin. All rights reserved.
@@ -52,7 +52,7 @@ public class PlaylistModel: BaseModel {
                 return
             }
         }
-        ZypeSDK.sharedInstance.retrieveVideosInPlaylist(QueryRetrieveVideosInPlaylistModel(playlist: self), completion:{(videos, error) -> Void in
+        ZypeAppleTVBase.sharedInstance.retrieveVideosInPlaylist(QueryRetrieveVideosInPlaylistModel(playlist: self), completion:{(videos, error) -> Void in
             self.userData["videos"] = videos
             self.userData["date"] = NSDate()
             completion(videos: videos, error: error)

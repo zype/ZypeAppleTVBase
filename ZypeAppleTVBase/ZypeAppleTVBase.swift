@@ -1,5 +1,5 @@
 //
-//  ZypeSDK.swift
+//  ZypeAppleTVBase.swift
 //  Zype
 //
 //  Created by Ilya Sorokin on 10/20/15.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-public class ZypeSDK: NSObject {
+public class ZypeAppleTVBase: NSObject {
 
-    public static let sharedInstance = ZypeSDK()
+    public static let sharedInstance = ZypeAppleTVBase()
     public static var debug = false
     
     private var dataManager: ZypeDataManager?

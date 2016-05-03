@@ -12,7 +12,7 @@ class ZypeLog {
     
     static func write(text: String)
     {
-        if ZypeSDK.debug
+        if ZypeAppleTVBase.debug
         {
             NSLog("SDK log: %@", text)
         }
@@ -21,7 +21,7 @@ class ZypeLog {
     static func error(text: String)
     {
         NSLog("SDK error: %@", text)
-        if ZypeSDK.debug
+        if ZypeAppleTVBase.debug
         {
             abort()
         }
@@ -32,7 +32,7 @@ class ZypeLog {
         if (condition == false)
         {
             NSLog("SDK assert: %@", message)
-            if ZypeSDK.debug
+            if ZypeAppleTVBase.debug
             {
                 abort()
             }

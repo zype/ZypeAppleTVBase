@@ -1,9 +1,9 @@
 
-Pod::Spec.new do |s|
 
+Pod::Spec.new do |s|
 # 1
 s.platform = :tvos
-s.ios.deployment_target = '9.0'
+s.tvos.deployment_target = '9.0'
 s.name = "ZypeAppleTVBase"
 s.summary = "ZypeAppleTVBase lets a user use Zype tvOS SDK."
 s.requires_arc = true
@@ -30,5 +30,5 @@ s.framework = "UIKit"
 s.source_files = "ZypeAppleTVBase/**/*.{swift}"
 
 # 9
-s.resources = "ZypeAppleTVBase/**/*.{png,jpeg,jpg,storyboard,xib}"
+# s.resources = "ZypeAppleTVBase/**/*.{png,jpeg,jpg,storyboard,xib}"
 end

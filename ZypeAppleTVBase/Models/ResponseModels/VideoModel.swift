@@ -63,7 +63,7 @@ public class VideoModel: BaseModel {
     
     public func getVideoObject(type: VideoUrlType, completion:(playerObject: VideoObjectModel?, error: NSError?) -> Void)
     {
-        ZypeSDK.sharedInstance.getVideoObject(self, type: type, completion: completion)
+        ZypeAppleTVBase.sharedInstance.getVideoObject(self, type: type, completion: completion)
     }
     
     private func loadThumbnails(thumbnails: Array<AnyObject>?)
