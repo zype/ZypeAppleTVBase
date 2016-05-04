@@ -11,6 +11,7 @@ import UIKit
 
 public class VideoModel: BaseModel {
     
+    private(set) internal var videoId = ""
     private(set) internal var videoURL = ""
     private(set) public var descriptionString: String = ""
     
@@ -31,6 +32,13 @@ public class VideoModel: BaseModel {
     init(fromJson: Dictionary<String, AnyObject>)
     {
         super.init(json: fromJson)
+        do {
+            videoId = try SSUtils.stringFromDictionary(fromJson, key: kJSON_Id)
+        }
+        catch _ {
+            ZypeLog.error("Exception: VideoModel | Init Video Id")
+        }
+        
         do {
             descriptionString = try SSUtils.stringFromDictionary(fromJson, key: kJSONDescription)
         }
