@@ -27,24 +27,34 @@ public class VideoModel: BaseModel {
     private(set) public var categories = Dictionary<String, Array<String> >()
     
     private(set) public var thumbnails = Array<ThumbnailModel>()
-        
+    
     init(fromJson: Dictionary<String, AnyObject>)
     {
         super.init(json: fromJson)
-        do
-        {
+        do {
             descriptionString = try SSUtils.stringFromDictionary(fromJson, key: kJSONDescription)
+        }
+        catch _ {
+            ZypeLog.error("Exception: VideoModel | Init Description")
+        }
+        
+        do {
             durationValue = try SSUtils.intagerFromDictionary(fromJson, key: kJSONDuration)
+        }
+        catch _ {
+            ZypeLog.error("Exception: VideoModel | Init Duration")
+        }
+        
+        do {
             ratingValue = try SSUtils.doubleFromDictionary(fromJson, key: kJSONRating)
-
-            self.loadPrices(fromJson)
-            self.loadThumbnails(fromJson[kJSONThumbnails] as? Array<AnyObject>)
-            self.loadCategories(fromJson[kJSONCategories] as? Array<AnyObject>)
         }
-        catch _
-        {
-            ZypeLog.error("Exception: VideoModel")
+        catch _ {
+            ZypeLog.error("Exception: VideoModel | Init Rating")
         }
+        
+        self.loadPrices(fromJson)
+        self.loadThumbnails(fromJson[kJSONThumbnails] as? Array<AnyObject>)
+        self.loadCategories(fromJson[kJSONCategories] as? Array<AnyObject>)
     }
     
     public func getThumbnailByHeight(height: Int) -> ThumbnailModel?
@@ -85,7 +95,7 @@ public class VideoModel: BaseModel {
         }
         catch _
         {
-            ZypeLog.error("Exception: VideoModel")
+            ZypeLog.error("Exception: VideoModel | Load Thumbnails")
         }
     }
     
@@ -113,7 +123,7 @@ public class VideoModel: BaseModel {
         }
         catch _
         {
-            ZypeLog.error("Exception: VideoModel")
+            ZypeLog.error("Exception: VideoModel | Load Categories")
         }
     }
     
@@ -128,7 +138,7 @@ public class VideoModel: BaseModel {
         }
         catch _
         {
-            ZypeLog.error("Exception: VideoModel")
+            ZypeLog.error("Exception: VideoModel | Load Prices")
         }
     }
 }
