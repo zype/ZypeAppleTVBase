@@ -258,5 +258,10 @@ public class ZypeAppleTVBase: NSObject {
         return dataManager == nil ? nil :
             dataManager!.cacheManager.loadedPlaylists[playlistID]
     }
+    
+    //MARK: get app info
+    public func getAppInfo(queryModel: QueryBaseModel,  completion:(backgroundUrl: String?, error: NSError?) -> Void) {
+        dataManager?.loadAppInfo(queryModel, completion: completion)
+    }
         
 }

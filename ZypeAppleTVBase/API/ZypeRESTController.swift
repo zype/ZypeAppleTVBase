@@ -48,6 +48,9 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
         "&zobject_id=%@&zobject_id!=%@" +
     "&created_at=%@&published_at=%@&dpt=%@"
 
+    //get app info
+    private let kApiGetAppInfo = "%@/app?app_key=%@"
+    
     //
     //variables
     //
@@ -227,6 +230,13 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
     {
         let perPage = queryModel.perPage == 0 ? kApiMaxItems : queryModel.perPage
         let urlAsString = String(format: kGetRetrieveVideosInPlaylist, self.keys.apiDomain, queryModel.playlistID, keys.appKey, queryModel.page, perPage)
+        getQuery(urlAsString, withCompletion: completion)
+    }
+    
+    //MARK: App Info
+    func getAppInfo(queryModel: QueryBaseModel, completion:(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)
+    {
+        let urlAsString = String(format: kApiGetAppInfo, self.keys.apiDomain, keys.appKey);
         getQuery(urlAsString, withCompletion: completion)
     }
 

@@ -455,6 +455,20 @@ class ZypeDataManager : NSObject {
             self.videoCompletion(toArray, error: error, completion:completion)
         })
     }
+    
+    //MARK: App Info
+    func loadAppInfo(queryModel: QueryBaseModel, completion:(backgroundUrl: String?, error: NSError?) -> Void)
+    {
+        self.serviceController.getAppInfo(queryModel, completion: { (jsonDic, let error) -> Void in
+            if jsonDic != nil {
+                let response = jsonDic![kJSONResponse] as! NSDictionary
+                let backgroundImageUrl = response .valueForKey("background_url") as? String
+                
+                completion(backgroundUrl: backgroundImageUrl, error:nil)
+                
+            }
+        })
+    }
 
     //MARK: Private
     private func loadFavorites(page: Int = kApiFirstPage)
