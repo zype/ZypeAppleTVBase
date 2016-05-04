@@ -137,8 +137,9 @@ class ZypeDataManager : NSObject {
 
     func createConsumer(consumer: ConsumerModel, completion:(success: Bool, error: NSError?) -> Void)
     {
-        self.serviceController.createConsumer(consumer) { (jsonDic, var error) -> Void in
+        self.serviceController.createConsumer(consumer) { (jsonDic, err) -> Void in
             var success = false
+            var error = err
             if error == nil && jsonDic != nil
             {
                 error = self.isServiceError(jsonDic!)
