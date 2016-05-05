@@ -149,4 +149,12 @@ public class VideoModel: BaseModel {
             ZypeLog.error("Exception: VideoModel | Load Prices")
         }
     }
+    
+    public func getId() -> String{
+        return videoId
+    }
+    
+    public func getUrl() -> String{
+        return videoURL
+    }
 }

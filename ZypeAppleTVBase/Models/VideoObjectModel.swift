@@ -12,6 +12,8 @@ public class VideoObjectModel: NSObject {
 
     internal(set) public var videoURL = ""
     
+     internal(set) public var videoId = ""
+    
     internal(set) public var json: Dictionary <String, AnyObject>?
     
     
