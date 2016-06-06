@@ -469,6 +469,21 @@ class ZypeDataManager : NSObject {
             }
         })
     }
+    
+    //MARK: Device Linking
+    func getDevicePin(device: String, completion:(devicepPin: String?, error: NSError?) -> Void)
+    {
+        self.serviceController.getDevicePin(device, completion: { (jsonDic, let error) -> Void in
+            if jsonDic != nil {
+                let response = jsonDic![kJSONResponse] as! NSDictionary
+                let devicepPin = response .valueForKey("pin") as? String
+                
+                completion(devicepPin: devicepPin, error:nil)
+                
+            }
+        })
+    }
+
 
     //MARK: Private
     private func loadFavorites(page: Int = kApiFirstPage)

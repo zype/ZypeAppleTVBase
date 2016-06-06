@@ -263,5 +263,9 @@ public class ZypeAppleTVBase: NSObject {
     public func getAppInfo(queryModel: QueryBaseModel,  completion:(backgroundUrl: String?, error: NSError?) -> Void) {
         dataManager?.loadAppInfo(queryModel, completion: completion)
     }
-        
+    
+    //MARK:Device Linking
+    public func createDevicePin(device: String,  completion:(devicepPin: String?, error: NSError?) -> Void) {
+        dataManager?.getDevicePin(device, completion: completion)
+    }
 }
