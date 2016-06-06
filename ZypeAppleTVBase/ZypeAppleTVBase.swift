@@ -11,7 +11,7 @@ import UIKit
 public class ZypeAppleTVBase: NSObject {
 
     public static let sharedInstance = ZypeAppleTVBase()
-    public static var debug = false
+    public static var debug = true
     
     private var dataManager: ZypeDataManager?
     

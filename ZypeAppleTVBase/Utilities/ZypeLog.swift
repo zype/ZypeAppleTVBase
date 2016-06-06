@@ -23,7 +23,8 @@ class ZypeLog {
         NSLog("SDK error: %@", text)
         if ZypeAppleTVBase.debug
         {
-            abort()
+            NSLog("Abort.. SDK log: %@", text)
+            //abort()
         }
     }
     
