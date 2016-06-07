@@ -19,4 +19,18 @@ public class ZypeAppSettings {
     private init() {
         
     }
+    
+    
+    public func deviceId() -> String {
+        var deviceID = NSUserDefaults().valueForKey("device")
+        
+        if(deviceID == nil) {
+            deviceID = UIDevice.currentDevice().identifierForVendor!.UUIDString
+            print(deviceID)
+            NSUserDefaults().setValue(deviceID, forKey: "device")
+        }
+        
+        return deviceID as! String
+    }
+    
 }
