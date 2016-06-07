@@ -484,6 +484,18 @@ class ZypeDataManager : NSObject {
         })
     }
 
+    func getLinkedStatus(device: String, completion:(linked: Bool?, error: NSError?) -> Void)
+    {
+        self.serviceController.getLinkedStatus(device, completion: { (jsonDic, let error) -> Void in
+            if jsonDic != nil {
+                let response = jsonDic![kJSONResponse] as! NSDictionary
+                let linkedStatus = response .valueForKey("linked") as? Bool
+                
+                completion(linked: linkedStatus, error:nil)
+                
+            }
+        })
+    }
 
     //MARK: Private
     private func loadFavorites(page: Int = kApiFirstPage)

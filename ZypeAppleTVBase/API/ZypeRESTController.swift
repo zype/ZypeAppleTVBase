@@ -54,6 +54,7 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
     //device linking
     private let kApiGetDevicePin = "%@/pin/acquire?app_key=%@"
      private let kGetDevicePinParameters = "linked_device_id=%@"
+     private let kApiGetLinkedStatus = "%@/pin/status?app_key=%@&linked_device_id=%@"
     //
     //variables
     //
@@ -250,6 +251,13 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
         let urlAsString = String(format: kApiGetDevicePin, self.keys.apiDomain, keys.appKey);
         postQuery(urlAsString, bodyAsString: bodyString, withCompletion: completion)
     }
+    
+    func getLinkedStatus(device: String, completion:(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)
+    {
+        let urlAsString = String(format: kApiGetLinkedStatus, self.keys.apiDomain, keys.appKey, device);
+        getQuery(urlAsString, withCompletion: completion)
+    }
+
     
     //private
       private func deleteQuery(urlAsString: String,

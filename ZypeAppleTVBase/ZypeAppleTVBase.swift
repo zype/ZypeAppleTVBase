@@ -268,4 +268,8 @@ public class ZypeAppleTVBase: NSObject {
     public func createDevicePin(device: String,  completion:(devicepPin: String?, error: NSError?) -> Void) {
         dataManager?.getDevicePin(device, completion: completion)
     }
+    
+    public func getLinkedStatus(device: String,  completion:(linked: Bool?, error: NSError?) -> Void) {
+        dataManager?.getLinkedStatus(device, completion: completion)
+    }
 }
