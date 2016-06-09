@@ -86,6 +86,32 @@ class ZypeDataManager : NSObject {
             }
        })
     }
+    
+    func login(deviceId: String, pin: String, completion:(logedIn: Bool, error: NSError?) -> Void)
+    {
+        serviceController.getTokenWithUsername(username, withPassword: passwd, withCompletion: {(data, error) -> Void in
+            if (error != nil)
+            {
+                self.loginCompletion(false, error: error, completion: completion)
+            }
+            else if (data == nil)
+            {
+                self.loginCompletion(false, error: NSError(domain: kErrorDomaine, code: kErrorServiceError, userInfo: nil), completion: completion)
+            }
+            else
+            {
+                let error = self.tokenManager.setLoginAccessTokenData(data!)
+                if (error != nil)
+                {
+                    self.loginCompletion(false, error: error, completion: completion)
+                }
+                else
+                {
+                    self.loadConsumer(completion)
+                }
+            }
+        })
+    }
 
     func loadConsumer(completion:(success: Bool, error: NSError?) -> Void)
     {
