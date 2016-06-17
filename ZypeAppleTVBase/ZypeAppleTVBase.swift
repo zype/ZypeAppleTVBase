@@ -56,9 +56,9 @@ public class ZypeAppleTVBase: NSObject {
     
     public func login(deviceId: String, pin: String, completion:((logedIn: Bool, error: NSError?) -> Void), token: ZypeTokenModel = ZypeTokenModel())
     {
-        dataManager?.tokenManager.tokenModel = token
+       /* dataManager?.tokenManager.tokenModel = token
         dataManager == nil ? completion(logedIn: false, error: NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
-            dataManager?.login(username, passwd: passwd, completion: completion)
+            dataManager?.login(username, passwd: passwd, completion: completion)*/
     }
     
     

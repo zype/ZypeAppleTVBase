@@ -46,7 +46,7 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
         "&category[%@]=%@&category![%@]=%@" +
         "&q=%@&keyword=%@&id=%@&id!=%@&status=%@" +
         "&zobject_id=%@&zobject_id!=%@" +
-    "&created_at=%@&published_at=%@&dpt=%@"
+    "&created_at=%@&published_at=%@&dpt=%@%@"
 
     //get app info
     private let kApiGetAppInfo = "%@/app?app_key=%@"
@@ -140,10 +140,11 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
         let status:String = SSUtils.escapedString(query.status)
         let createdDate:String = SSUtils.dateToString(query.createdDate)
         let publishedDate:String = SSUtils.dateToString(query.publishedDate)
+        let anyQueryString:String = query.anyQueryString
         var urlAsString:String = String(format: kApiGetListVideos, self.keys.apiDomain, keys.appKey, String(query.active), String(query.onAir), query.page, perPage,
             categoryKey, categoryValue, exceptCategoryKey, exceptCategoryValue,
             search, keyword, query.videoID, query.exceptVideoID, status, query.zObjectID, query.exceptZObjectID,
-            createdDate, publishedDate, String(query.dpt));
+            createdDate, publishedDate, String(query.dpt),anyQueryString);
         if let _ = query.sort {
           urlAsString = String(format: "%@&sort=%@&order=%@", urlAsString, query.sort!, query.ascending ? "asc" : "desc")
         }

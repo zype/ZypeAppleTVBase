@@ -30,6 +30,7 @@ public class QueryVideosModel: QueryBaseModel {
     public var onAir: Bool = false
     public var sort: String?
     public var ascending: Bool = false
+    public var anyQueryString: String = "" //something like &category[video_type]=Film
     
     public init(categoryValue: CategoryValueModel? = nil,
         exceptCategoryValue: CategoryValueModel? = nil,
