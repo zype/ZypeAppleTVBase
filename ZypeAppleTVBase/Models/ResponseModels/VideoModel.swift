@@ -28,6 +28,7 @@ public class VideoModel: BaseModel {
     private(set) public var categories = Dictionary<String, Array<String> >()
     
     private(set) public var thumbnails = Array<ThumbnailModel>()
+    private(set) public var images = Array<ThumbnailModel>()
     
     init(fromJson: Dictionary<String, AnyObject>)
     {
@@ -62,6 +63,7 @@ public class VideoModel: BaseModel {
         
         self.loadPrices(fromJson)
         self.loadThumbnails(fromJson[kJSONThumbnails] as? Array<AnyObject>)
+        self.loadImages(fromJson[kJSONImages] as? Array<AnyObject>)
         self.loadCategories(fromJson[kJSONCategories] as? Array<AnyObject>)
     }
     
@@ -104,6 +106,27 @@ public class VideoModel: BaseModel {
         catch _
         {
             ZypeLog.error("Exception: VideoModel | Load Thumbnails")
+        }
+    }
+    
+    private func loadImages(images: Array<AnyObject>?)
+    {
+        do
+        {
+            if (images != nil)
+            {
+                for value in images!
+                {
+                    let url = try SSUtils.stringFromDictionary(value as? Dictionary<String, AnyObject>, key: kJSONUrl)
+                    let nameValue = value[kJSONTitle]
+                    let name = ((nameValue as? String) != nil) ? (nameValue as! String) : ""
+                    self.images.append(ThumbnailModel(height: 0, width: 0, url: url, name: name))
+                }
+            }
+        }
+        catch _
+        {
+            ZypeLog.error("Exception: VideoModel | Load Images")
         }
     }
     

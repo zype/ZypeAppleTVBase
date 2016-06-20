@@ -32,6 +32,7 @@ internal let kJSONDescription = "description"
 internal let kJSONDuration = "duration"
 internal let kJSONRating = "rating"
 internal let kJSONThumbnails = "thumbnails"
+internal let kJSONImages = "images"
 internal let kJSONCategories = "categories"
 
 internal let kJSONCreatedAt = "created_at"
