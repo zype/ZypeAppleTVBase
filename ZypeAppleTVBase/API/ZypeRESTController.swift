@@ -20,7 +20,7 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
 
     //Zobjects
     private let kGetZobjectTypes = "%@/zobject_types?app_key=%@&page=%d&per_page=%d&keywords=%@"
-    private let kGetZobjects = "%@/zobjects/?app_key=%@&zobject_type=%@&page=%d&per_page=%d&keywords=%@"
+    private let kGetZobjects = "%@/zobjects/?app_key=%@&zobject_type=%@&page=%d&per_page=%d&keywords=%@%@"
 
     //Subscriptions
     private let kGetSubscriptions = "%@/subscriptions/?app_key=%@&page=%d&per_page=%d&q=%@&id=%@&id!=%@"
@@ -186,7 +186,7 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
         let perPage = queryModel.perPage == 0 ? kApiMaxItems : queryModel.perPage
         let type = SSUtils.escapedString(queryModel.zobjectType)
         let keywords = SSUtils.escapedString(queryModel.keywords)
-        let urlAsString = String(format: kGetZobjects, self.keys.apiDomain, keys.appKey, type, queryModel.page, perPage, keywords)
+        let urlAsString = String(format: kGetZobjects, self.keys.apiDomain, keys.appKey, type, queryModel.page, perPage, keywords, queryModel.anyQueryString)
         getQuery(urlAsString, withCompletion: completion)
     }
 

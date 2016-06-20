@@ -12,6 +12,7 @@ public class QueryZobjectsModel: QueryBaseModel {
 
     public var zobjectType = ""
     public var keywords = ""
+    public var anyQueryString = ""
     
     public init (objectType: ZobjectTypeModel? = nil)
     {
