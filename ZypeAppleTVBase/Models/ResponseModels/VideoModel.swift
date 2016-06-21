@@ -169,7 +169,7 @@ public class VideoModel: BaseModel {
         }
         catch _
         {
-            ZypeLog.error("Exception: VideoModel | Load Prices")
+          //  ZypeLog.error("Exception: VideoModel | Load Prices")
         }
     }
     
