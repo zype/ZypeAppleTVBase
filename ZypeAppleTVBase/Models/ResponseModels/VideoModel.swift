@@ -24,15 +24,22 @@ public class VideoModel: BaseModel {
     private(set) public var rentalPrice: String = ""
     private(set) public var rentalRequired = false
     
+    private(set) public var episode: Int = 0
+    private(set) public var series: Int = 0
+    
     private(set) public var categoryValueIDs = Array<String>()
     private(set) public var categories = Dictionary<String, Array<String> >()
     
     private(set) public var thumbnails = Array<ThumbnailModel>()
     private(set) public var images = Array<ThumbnailModel>()
     
+    private(set) public var fullJson = Dictionary<String, AnyObject>()
+    
     init(fromJson: Dictionary<String, AnyObject>)
     {
         super.init(json: fromJson)
+        fullJson = fromJson
+        
         do {
             videoId = try SSUtils.stringFromDictionary(fromJson, key: kJSON_Id)
         }
@@ -59,6 +66,20 @@ public class VideoModel: BaseModel {
         }
         catch _ {
             ZypeLog.error("Exception: VideoModel | Init Rating")
+        }
+      
+        do {
+            episode = try SSUtils.intagerFromDictionary(fromJson, key: kJSONEpisode)
+        }
+        catch _ {
+           // ZypeLog.error("Exception: VideoModel | Init Episode")
+        }
+        
+        do {
+            series = try SSUtils.intagerFromDictionary(fromJson, key: kJSONSeries)
+        }
+        catch _ {
+           // ZypeLog.error("Exception: VideoModel | Init Series")
         }
         
         self.loadPrices(fromJson)
@@ -179,5 +200,9 @@ public class VideoModel: BaseModel {
     
     public func getUrl() -> String{
         return videoURL
+    }
+    
+    public func changeTitle(title: String) {
+        self.titleString = title
     }
 }

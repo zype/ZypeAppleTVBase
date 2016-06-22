@@ -10,7 +10,7 @@ import UIKit
 
 public class BaseModel : NSObject  {
         
-    private(set) public var titleString: String = ""
+    public var titleString: String = ""
     private(set) public var ID: String = ""
     
     var userData = Dictionary<String, AnyObject>()
