@@ -25,7 +25,7 @@ public class QueryVideosModel: QueryBaseModel {
     public var exceptZObjectID: String = ""
     public var createdDate: NSDate? = nil
     public var publishedDate: NSDate? = nil
-    public var dpt: Bool = false
+    public var dpt: Bool = true
 //    public var sortBy: String = ""
     public var onAir: Bool = false
     public var sort: String?
