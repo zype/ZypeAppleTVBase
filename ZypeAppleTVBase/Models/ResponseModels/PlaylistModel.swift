@@ -10,6 +10,7 @@ import UIKit
 
 public class PlaylistModel: BaseModel {
  
+    private(set) public var pId = ""
     private(set) public var descriptionString = ""
     private(set) public var keywords = Array<String>()
     private(set) public var active = false
@@ -19,12 +20,17 @@ public class PlaylistModel: BaseModel {
     private(set) public var playlistItemCount = 0
     private(set) public var siteID = ""
     private(set) public var relatedVideoIDs = Array<String>()
+    private(set) public var parentId = ""
+    
+    private(set) public var thumbnails = Array<ThumbnailModel>()
+    private(set) public var images = Array<ThumbnailModel>()
     
     public init(fromJson: Dictionary<String, AnyObject>)
     {
         super.init(json: fromJson)
         do
         {
+            self.pId = try SSUtils.stringFromDictionary(fromJson, key: kJSON_Id)
             self.descriptionString = try SSUtils.stringFromDictionary(fromJson, key: kJSONDescription)
             self.keywords = fromJson[kJSON_Keywords] as! Array<String>
             self.active = try SSUtils.boolFromDictionary(fromJson, key: kJSONActive)
@@ -34,11 +40,14 @@ public class PlaylistModel: BaseModel {
             self.playlistItemCount = try SSUtils.intagerFromDictionary(fromJson, key: kJSONPlaylistItemCount)
             self.siteID = try SSUtils.stringFromDictionary(fromJson, key: kJSONSiteId)
             self.relatedVideoIDs = fromJson[kJSONRelatedVideoIds] as! Array <String>
+            self.parentId = try SSUtils.stringFromDictionary(fromJson, key: kJSONParentId)
         }
         catch _
         {
             ZypeLog.error("Exception: PlaylistModel")
         }
+        self.loadThumbnails(fromJson[kJSONThumbnails] as? Array<AnyObject>)
+        self.loadImages(fromJson[kJSONImages] as? Array<AnyObject>)
     }
     
     public func getVideos(loadedSince: NSDate = NSDate(), completion:(videos: Array<VideoModel>?, error: NSError?) -> Void)
@@ -59,5 +68,49 @@ public class PlaylistModel: BaseModel {
         })
     }
 
+    private func loadThumbnails(thumbnails: Array<AnyObject>?)
+    {
+        do
+        {
+            if (thumbnails != nil)
+            {
+                for value in thumbnails!
+                {
+                    let height = try SSUtils.intagerFromDictionary(value as? Dictionary<String, AnyObject>, key: kJSONHeight)
+                    let width = try SSUtils.intagerFromDictionary(value as? Dictionary<String, AnyObject>, key: kJSONWidth)
+                    let url = try SSUtils.stringFromDictionary(value as? Dictionary<String, AnyObject>, key: kJSONUrl)
+                    let nameValue = value[kJSONName]
+                    let name = ((nameValue as? String) != nil) ? (nameValue as! String) : ""
+                    self.thumbnails.append(ThumbnailModel(height: height, width: width, url: url, name: name))
+                }
+            }
+        }
+        catch _
+        {
+            ZypeLog.error("Exception: PlaylistModel | Load Thumbnails")
+        }
+    }
+
+    
+    private func loadImages(images: Array<AnyObject>?)
+    {
+        do
+        {
+            if (images != nil)
+            {
+                for value in images!
+                {
+                    let url = try SSUtils.stringFromDictionary(value as? Dictionary<String, AnyObject>, key: kJSONUrl)
+                    let nameValue = value[kJSONTitle]
+                    let name = ((nameValue as? String) != nil) ? (nameValue as! String) : ""
+                    self.images.append(ThumbnailModel(height: 0, width: 0, url: url, name: name))
+                }
+            }
+        }
+        catch _
+        {
+            ZypeLog.error("Exception: PlaylistModel | Load Images")
+        }
+    }
 }
 

@@ -27,7 +27,7 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
     private let kCreateSubscription = "%@/subscriptions/?app_key=%@&subscription[%@]=&@"
 
     //playlists
-    private let kGetPlaylists = "%@/playlists?app_key=%@&page=%d&per_page=%d&active=%@&keyword=%@&category[%@]=%@&sort=priority&order=desc&parent_id=%@"
+    private let kGetPlaylists = "%@/playlists?app_key=%@&page=%d&per_page=%d&active=%@&keyword=%@&category[%@]=%@&sort=priority&order=asc&parent_id=%@"
     private let kGetRetrieveVideosInPlaylist = "%@/playlists/%@/videos?app_key=%@&page=%d&per_page=%d"
 
     //OAut
