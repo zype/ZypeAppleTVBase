@@ -50,6 +50,8 @@
 		A16F79801CD921D500667FEF /* ZypeTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16F795B1CD921D500667FEF /* ZypeTokenModel.swift */; };
 		A16F79811CD921D500667FEF /* SSUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16F795D1CD921D500667FEF /* SSUtils.swift */; };
 		A16F79821CD921D500667FEF /* ZypeLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16F795E1CD921D500667FEF /* ZypeLog.swift */; };
+		A1EE04F31D480AA00064E48F /* DeviceLinking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1EE04F21D480AA00064E48F /* DeviceLinking.storyboard */; };
+		A1EE04F61D480C950064E48F /* DeviceLinkingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EE04F51D480C950064E48F /* DeviceLinkingVC.swift */; };
 		EA622A30AEDFE0C485D2C1A1 /* Pods_ZypeAppleTVBaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AA5E319B2DFFC481C5E32F /* Pods_ZypeAppleTVBaseTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -114,6 +116,8 @@
 		A16F795B1CD921D500667FEF /* ZypeTokenModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZypeTokenModel.swift; sourceTree = "<group>"; };
 		A16F795D1CD921D500667FEF /* SSUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSUtils.swift; sourceTree = "<group>"; };
 		A16F795E1CD921D500667FEF /* ZypeLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZypeLog.swift; sourceTree = "<group>"; };
+		A1EE04F21D480AA00064E48F /* DeviceLinking.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = DeviceLinking.storyboard; path = ZypeAppleTVBaseResources/Layouts/DeviceLinking.storyboard; sourceTree = "<group>"; };
+		A1EE04F51D480C950064E48F /* DeviceLinkingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceLinkingVC.swift; path = ViewControllers/DeviceLinkingVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +174,7 @@
 			children = (
 				A16F79161CD8EADD00667FEF /* ZypeAppleTVBase */,
 				A16F79221CD8EADD00667FEF /* ZypeAppleTVBaseTests */,
+				A1EE04F01D480A6C0064E48F /* ZypeAppleTVBaseResources */,
 				A16F79151CD8EADD00667FEF /* Products */,
 				0786054F770901E8A7320998 /* Pods */,
 				1856C20C1650FFC62E4397F0 /* Frameworks */,
@@ -188,6 +193,7 @@
 		A16F79161CD8EADD00667FEF /* ZypeAppleTVBase */ = {
 			isa = PBXGroup;
 			children = (
+				A1EE04F41D480C720064E48F /* ViewController */,
 				A12C59891CE3976C008B4334 /* Helpers */,
 				A16F79331CD921D500667FEF /* API */,
 				A16F79351CD921D500667FEF /* Constants */,
@@ -305,6 +311,30 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		A1EE04F01D480A6C0064E48F /* ZypeAppleTVBaseResources */ = {
+			isa = PBXGroup;
+			children = (
+				A1EE04F11D480A800064E48F /* Layouts */,
+			);
+			name = ZypeAppleTVBaseResources;
+			sourceTree = "<group>";
+		};
+		A1EE04F11D480A800064E48F /* Layouts */ = {
+			isa = PBXGroup;
+			children = (
+				A1EE04F21D480AA00064E48F /* DeviceLinking.storyboard */,
+			);
+			name = Layouts;
+			sourceTree = "<group>";
+		};
+		A1EE04F41D480C720064E48F /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A1EE04F51D480C950064E48F /* DeviceLinkingVC.swift */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -401,6 +431,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1EE04F31D480AA00064E48F /* DeviceLinking.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,6 +564,7 @@
 				A16F79771CD921D500667FEF /* FavoriteModel.swift in Sources */,
 				A16F79741CD921D500667FEF /* BaseModel.swift in Sources */,
 				A16F79781CD921D500667FEF /* PlaylistModel.swift in Sources */,
+				A1EE04F61D480C950064E48F /* DeviceLinkingVC.swift in Sources */,
 				A16F79661CD921D500667FEF /* ZypeFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

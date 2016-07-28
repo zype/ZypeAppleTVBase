@@ -10,7 +10,9 @@ import UIKit
 
 class VimeoUrl: BaseUrl, VideoUrl {
 
-    private let kPlayerGetVideo = "%@/embed/%@.json?app_key=%@"
+    // add check here to see if user is logged in and if he is change url with access token
+    
+    private let kPlayerGetVideo = "%@/embed/%@.json?app_key=%@&dvr=false"
 
      func getVideoObject(video: VideoModel, completion:(playerObject: VideoObjectModel, error: NSError?) -> Void)
      {
@@ -21,6 +23,7 @@ class VimeoUrl: BaseUrl, VideoUrl {
                 let response = jsonDic?[kJSONResponse]
                 if response != nil
                 {
+                  
                     let outputs = response?[kJSONBody]?![kJSONOutputs] as? Array <Dictionary<String, String> >
                     if outputs?.first != nil
                     {
