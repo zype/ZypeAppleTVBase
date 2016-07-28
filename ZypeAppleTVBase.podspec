@@ -32,7 +32,7 @@ s.source_files = "ZypeAppleTVBase/**/*.{swift}"
 # 9
 # s.resources = "ZypeAppleTVBase/**/*.{png,jpeg,jpg,storyboard,xib}"
 s.resource_bundles = {
-    'ZypeAppleTVBase' => ['ZypeAppleTVBase/Classes/**/*.{storyboard,xib}']
-  }
+    'ZypeAppleTVBase' => ['Pod/**/*.{png,jpeg,jpg,storyboard,xib}']
+ }
 
 end
