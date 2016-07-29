@@ -7,7 +7,7 @@
         <!--Device LinkingVC-->
         <scene sceneID="QXQ-pq-ej3">
             <objects>
-                <viewController storyboardIdentifier="DeviceLinkingVC" id="0Eo-r3-ThJ" customClass="DeviceLinkingVC" customModule="ZypeAppleTVBaseResources" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DeviceLinkingVC" id="0Eo-r3-ThJ" customClass="DeviceLinkingVC" customModule="ZypeAppleTVBase" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Tys-wF-5C7"/>
                         <viewControllerLayoutGuide type="bottom" id="eLm-D6-Yun"/>

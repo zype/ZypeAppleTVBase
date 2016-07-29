@@ -52,6 +52,9 @@
 		A11F0FF51D4A5E5300166479 /* ZypeAppleTVBase.h in Headers */ = {isa = PBXBuildFile; fileRef = A11F0FCC1D4A5E5300166479 /* ZypeAppleTVBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A11F0FF61D4A5E5300166479 /* ZypeAppleTVBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11F0FCD1D4A5E5300166479 /* ZypeAppleTVBase.swift */; };
 		A11F0FFA1D4A5E7700166479 /* ZypeAppleTVBaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11F0FF81D4A5E7700166479 /* ZypeAppleTVBaseTests.swift */; };
+		A11F10001D4A858900166479 /* Pods_ZypeAppleTVBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A11F0FFF1D4A858900166479 /* Pods_ZypeAppleTVBase.framework */; };
+		A14401641D4A970E006F5621 /* ResourcesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14401631D4A970E006F5621 /* ResourcesTest.swift */; };
+		A14401651D4B9C8C006F5621 /* DeviceLinkingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11F0FCB1D4A5E5300166479 /* DeviceLinkingVC.swift */; };
 		BDC819BA7293BFABBCC6D361 /* Pods_ZypeAppleTVBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 374D76DD72D1DDD78E31B65C /* Pods_ZypeAppleTVBase.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +66,13 @@
 			remoteGlobalIDString = A11F0F831D4A5E0200166479;
 			remoteInfo = ZypeAppleTVBase;
 		};
+		A11F10011D4A85B400166479 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A16F790B1CD8EADD00667FEF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A11F0F531D4A55DF00166479;
+			remoteInfo = ZypeAppleTVBaseResources;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -70,8 +80,6 @@
 		44104F0975F4A39966F0703E /* Pods-ZypeAppleTVBaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZypeAppleTVBaseTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZypeAppleTVBaseTests/Pods-ZypeAppleTVBaseTests.release.xcconfig"; sourceTree = "<group>"; };
 		44AA5E319B2DFFC481C5E32F /* Pods_ZypeAppleTVBaseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZypeAppleTVBaseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DF2A3FD2DC74F67C966B8C9 /* Pods-ZypeAppleTVBaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZypeAppleTVBaseTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZypeAppleTVBaseTests/Pods-ZypeAppleTVBaseTests.debug.xcconfig"; sourceTree = "<group>"; };
-		6EF570196CFC5EFE289C4D72 /* Pods-ZypeAppleTVBase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZypeAppleTVBase.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZypeAppleTVBase/Pods-ZypeAppleTVBase.release.xcconfig"; sourceTree = "<group>"; };
-		95A75F32323EA56EC6C01402 /* Pods-ZypeAppleTVBase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZypeAppleTVBase.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZypeAppleTVBase/Pods-ZypeAppleTVBase.debug.xcconfig"; sourceTree = "<group>"; };
 		A11F0F541D4A55DF00166479 /* ZypeAppleTVBaseResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZypeAppleTVBaseResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		A11F0F561D4A55DF00166479 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A11F0F5E1D4A570E00166479 /* DeviceLinking.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DeviceLinking.storyboard; sourceTree = "<group>"; };
@@ -121,6 +129,11 @@
 		A11F0FCD1D4A5E5300166479 /* ZypeAppleTVBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZypeAppleTVBase.swift; sourceTree = "<group>"; };
 		A11F0FF71D4A5E7700166479 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A11F0FF81D4A5E7700166479 /* ZypeAppleTVBaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZypeAppleTVBaseTests.swift; sourceTree = "<group>"; };
+		A11F0FFD1D4A857200166479 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = "../../../../Library/Developer/Xcode/DerivedData/ZypeAppleTVBase-flafjsgfhtzdvsdiyicdjprllmrg/Build/Products/Debug-appletvsimulator/Kingfisher/Kingfisher.framework"; sourceTree = "<group>"; };
+		A11F0FFF1D4A858900166479 /* Pods_ZypeAppleTVBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_ZypeAppleTVBase.framework; path = "../../../../Library/Developer/Xcode/DerivedData/ZypeAppleTVBase-flafjsgfhtzdvsdiyicdjprllmrg/Build/Products/Debug-appletvsimulator/Pods_ZypeAppleTVBase.framework"; sourceTree = "<group>"; };
+		A14401631D4A970E006F5621 /* ResourcesTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesTest.swift; sourceTree = "<group>"; };
+		C27AC61475DD0933FD4D02CF /* Pods-ZypeAppleTVBase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZypeAppleTVBase.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZypeAppleTVBase/Pods-ZypeAppleTVBase.debug.xcconfig"; sourceTree = "<group>"; };
+		EE5612D613C4DFA0F78BC80F /* Pods-ZypeAppleTVBase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZypeAppleTVBase.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZypeAppleTVBase/Pods-ZypeAppleTVBase.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +156,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A11F10001D4A858900166479 /* Pods_ZypeAppleTVBase.framework in Frameworks */,
 				A11F0F8E1D4A5E0300166479 /* ZypeAppleTVBase.framework in Frameworks */,
 				58B07726006722D72ACC1C2B /* Pods_ZypeAppleTVBaseTests.framework in Frameworks */,
 			);
@@ -154,10 +168,10 @@
 		0786054F770901E8A7320998 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				95A75F32323EA56EC6C01402 /* Pods-ZypeAppleTVBase.debug.xcconfig */,
-				6EF570196CFC5EFE289C4D72 /* Pods-ZypeAppleTVBase.release.xcconfig */,
 				4DF2A3FD2DC74F67C966B8C9 /* Pods-ZypeAppleTVBaseTests.debug.xcconfig */,
 				44104F0975F4A39966F0703E /* Pods-ZypeAppleTVBaseTests.release.xcconfig */,
+				C27AC61475DD0933FD4D02CF /* Pods-ZypeAppleTVBase.debug.xcconfig */,
+				EE5612D613C4DFA0F78BC80F /* Pods-ZypeAppleTVBase.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -165,6 +179,8 @@
 		1856C20C1650FFC62E4397F0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A11F0FFF1D4A858900166479 /* Pods_ZypeAppleTVBase.framework */,
+				A11F0FFD1D4A857200166479 /* Kingfisher.framework */,
 				374D76DD72D1DDD78E31B65C /* Pods_ZypeAppleTVBase.framework */,
 				44AA5E319B2DFFC481C5E32F /* Pods_ZypeAppleTVBaseTests.framework */,
 			);
@@ -220,6 +236,7 @@
 			children = (
 				A11F0FF71D4A5E7700166479 /* Info.plist */,
 				A11F0FF81D4A5E7700166479 /* ZypeAppleTVBaseTests.swift */,
+				A14401631D4A970E006F5621 /* ResourcesTest.swift */,
 			);
 			path = ZypeAppleTVBaseTests;
 			sourceTree = "<group>";
@@ -421,6 +438,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A11F10021D4A85B400166479 /* PBXTargetDependency */,
 				A11F0F901D4A5E0300166479 /* PBXTargetDependency */,
 			);
 			name = ZypeAppleTVBaseTests;
@@ -577,6 +595,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A14401651D4B9C8C006F5621 /* DeviceLinkingVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -631,6 +650,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A11F0FFA1D4A5E7700166479 /* ZypeAppleTVBaseTests.swift in Sources */,
+				A14401641D4A970E006F5621 /* ResourcesTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -642,12 +662,16 @@
 			target = A11F0F831D4A5E0200166479 /* ZypeAppleTVBase */;
 			targetProxy = A11F0F8F1D4A5E0300166479 /* PBXContainerItemProxy */;
 		};
+		A11F10021D4A85B400166479 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A11F0F531D4A55DF00166479 /* ZypeAppleTVBaseResources */;
+			targetProxy = A11F10011D4A85B400166479 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		A11F0F581D4A55DF00166479 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 95A75F32323EA56EC6C01402 /* Pods-ZypeAppleTVBase.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -665,7 +689,6 @@
 		};
 		A11F0F591D4A55DF00166479 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6EF570196CFC5EFE289C4D72 /* Pods-ZypeAppleTVBase.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -683,7 +706,7 @@
 		};
 		A11F0F961D4A5E0300166479 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 95A75F32323EA56EC6C01402 /* Pods-ZypeAppleTVBase.debug.xcconfig */;
+			baseConfigurationReference = C27AC61475DD0933FD4D02CF /* Pods-ZypeAppleTVBase.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
@@ -704,7 +727,7 @@
 		};
 		A11F0F971D4A5E0300166479 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6EF570196CFC5EFE289C4D72 /* Pods-ZypeAppleTVBase.release.xcconfig */;
+			baseConfigurationReference = EE5612D613C4DFA0F78BC80F /* Pods-ZypeAppleTVBase.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
@@ -724,10 +747,10 @@
 		};
 		A11F0F991D4A5E0300166479 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 95A75F32323EA56EC6C01402 /* Pods-ZypeAppleTVBase.debug.xcconfig */;
+			baseConfigurationReference = 4DF2A3FD2DC74F67C966B8C9 /* Pods-ZypeAppleTVBaseTests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = ZypeAppleTVBaseTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zype.ZypeAppleTVBaseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TVOS_DEPLOYMENT_TARGET = 9.2;
@@ -736,10 +759,10 @@
 		};
 		A11F0F9A1D4A5E0300166479 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6EF570196CFC5EFE289C4D72 /* Pods-ZypeAppleTVBase.release.xcconfig */;
+			baseConfigurationReference = 44104F0975F4A39966F0703E /* Pods-ZypeAppleTVBaseTests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = ZypeAppleTVBaseTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zype.ZypeAppleTVBaseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TVOS_DEPLOYMENT_TARGET = 9.2;

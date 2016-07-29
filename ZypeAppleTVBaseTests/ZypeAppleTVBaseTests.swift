@@ -14,7 +14,7 @@ let consumerPassword = "d"
 
 // @TODO need another solution here
 // shouldn't use a real appKey
-let settings = SettingsModel(appKey: "use-a-app-key", apiDomain: "https://api.stg-sigma.zype.com", tokenDomain: "https://admin.stg-sigma.zype.com")
+let settings = SettingsModel(appKey: "use-a-app-key", apiDomain: "https://api.zype.com", tokenDomain: "https://admin.stg-sigma.zype.com")
 
 class ZypeAppleTVBaseTests: XCTestCase {
     
@@ -40,7 +40,7 @@ class ZypeAppleTVBaseTests: XCTestCase {
     func endTest()
     {
         XCTAssertTrue(NSThread.isMainThread())
-        waitingCount--
+        waitingCount = waitingCount - 1
     }
     
     func initLib(complition:() -> Void)
@@ -75,13 +75,6 @@ class ZypeAppleTVBaseTests: XCTestCase {
         }
     }
     
-    //
-    //    func testPerformanceExample() {
-    //        // This is an example of a performance test case.
-    //        self.measureBlock {
-    //            // Put the code you want to measure the time of here.
-    //        }
-    //    }
     
     func testInitialize()
     {
