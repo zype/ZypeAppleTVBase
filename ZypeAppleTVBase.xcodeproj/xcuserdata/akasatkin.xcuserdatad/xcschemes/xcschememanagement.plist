@@ -4,19 +4,39 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>ZypeAppleTVBase.xcscheme</key>
+		<key>ZypeAppleTVBaseFramework.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
-		</dict>
-		<key>ZypeAppleTVBaseTests.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>6</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>A11F0F531D4A55DF00166479</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A11F0F671D4A5D5E00166479</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A11F0F701D4A5D5E00166479</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A11F0F831D4A5E0200166479</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A11F0F8C1D4A5E0300166479</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>A16F79131CD8EADD00667FEF</key>
 		<dict>
 			<key>primary</key>

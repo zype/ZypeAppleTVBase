@@ -8,8 +8,9 @@ end
   # Pods for ZypeAppleTVBase
 
 target 'ZypeAppleTVBaseTests' do
-    inherit! :search_paths
+    #inherit! :search_paths
     # Pods for testing
+    pod 'Kingfisher', '~> 2.4'  
 end
 
 

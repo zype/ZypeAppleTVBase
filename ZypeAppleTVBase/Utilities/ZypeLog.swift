@@ -35,7 +35,7 @@ class ZypeLog {
             NSLog("SDK assert: %@", message)
             if ZypeAppleTVBase.debug
             {
-                abort()
+               // abort()
             }
         }
     }
