@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ZypeAppleTVBase
 
 class DeviceLinkingVC: UIViewController {
     
