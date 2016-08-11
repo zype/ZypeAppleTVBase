@@ -23,21 +23,35 @@ class ResourcesTest: XCTestCase {
     }
     
     func testResourceBundle() {
-       
-        
-        let resourcesBundlePath = (NSBundle.mainBundle().resourcePath! as NSString).stringByAppendingPathComponent("ZypeAppleTVBaseResources.bundle")
-        
-        let podBundle = NSBundle(path: resourcesBundlePath)
-        
-        XCTAssertNotNil(podBundle)
+        let podBundle = NSBundle(forClass: ZypeAppleTVBase.self)
+        if let bundleURL = podBundle.URLForResource("ZypeAppleTVBaseResources", withExtension: "bundle") {
+            
+            if let bundle = NSBundle(URL: bundleURL) {
+                XCTAssertNotNil(bundle)
+            }else {
+                assertionFailure("Could not load the bundle")
+            }
+        }else {
+            assertionFailure("Could not create a path to the bundle")
+        }
     }
-    
+
+
     func testGetStoryboard() {
-        let resourcesBundlePath = (NSBundle.mainBundle().resourcePath! as NSString).stringByAppendingPathComponent("ZypeAppleTVBaseResources.bundle")
-        
-        let podBundle = NSBundle(path: resourcesBundlePath)
-        let storyboard = UIStoryboard(name: "DeviceLinking", bundle: podBundle)
-        XCTAssertNotNil(storyboard)
+        let podBundle = NSBundle(forClass: ZypeAppleTVBase.self)
+        if let bundleURL = podBundle.URLForResource("ZypeAppleTVBaseResources", withExtension: "bundle") {
+            
+            if let bundle = NSBundle(URL: bundleURL) {
+                let storyboard = UIStoryboard(name: "DeviceLinking", bundle: bundle)
+                
+                let vc = storyboard.instantiateViewControllerWithIdentifier("DeviceLinkingVC")
+                XCTAssertNotNil(vc)
+            }else {
+                assertionFailure("Could not load the bundle")
+            }
+        }else {
+            assertionFailure("Could not create a path to the bundle")
+        }
     }
     
     func testPerformanceExample() {

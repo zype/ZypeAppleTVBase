@@ -53,8 +53,9 @@
 		A11F0FF61D4A5E5300166479 /* ZypeAppleTVBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11F0FCD1D4A5E5300166479 /* ZypeAppleTVBase.swift */; };
 		A11F0FFA1D4A5E7700166479 /* ZypeAppleTVBaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11F0FF81D4A5E7700166479 /* ZypeAppleTVBaseTests.swift */; };
 		A11F10001D4A858900166479 /* Pods_ZypeAppleTVBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A11F0FFF1D4A858900166479 /* Pods_ZypeAppleTVBase.framework */; };
+		A12E28801D5CD4D100E1BAED /* ZypeAppleTVBaseResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A11F0F541D4A55DF00166479 /* ZypeAppleTVBaseResources.bundle */; };
+		A12E28811D5CD4FA00E1BAED /* ZypeAppleTVBaseResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A11F0F541D4A55DF00166479 /* ZypeAppleTVBaseResources.bundle */; };
 		A14401641D4A970E006F5621 /* ResourcesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14401631D4A970E006F5621 /* ResourcesTest.swift */; };
-		A14401651D4B9C8C006F5621 /* DeviceLinkingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11F0FCB1D4A5E5300166479 /* DeviceLinkingVC.swift */; };
 		A14401671D4BD305006F5621 /* ZypeUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14401661D4BD305006F5621 /* ZypeUtilities.swift */; };
 		BDC819BA7293BFABBCC6D361 /* Pods_ZypeAppleTVBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 374D76DD72D1DDD78E31B65C /* Pods_ZypeAppleTVBase.framework */; };
 /* End PBXBuildFile section */
@@ -503,6 +504,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A12E28811D5CD4FA00E1BAED /* ZypeAppleTVBaseResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,6 +512,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A12E28801D5CD4D100E1BAED /* ZypeAppleTVBaseResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -598,7 +601,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A14401651D4B9C8C006F5621 /* DeviceLinkingVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -52,6 +52,7 @@ class ZypeAppleTVBaseTests: XCTestCase {
         })
     }
     
+    /*
     func login(complition:() -> Void)
     {
         initLib ({ () -> Void in
@@ -61,7 +62,7 @@ class ZypeAppleTVBaseTests: XCTestCase {
                 complition()
             })
         })
-    }
+    }*/
     
     func videos(complition:(videos: Array<VideoModel>?)->Void)
     {
@@ -140,7 +141,7 @@ class ZypeAppleTVBaseTests: XCTestCase {
         })
     }
     
-    func testCreateConsumer()
+   /* func testCreateConsumer()
     {
         initLib { () -> Void in
             ZypeAppleTVBase.sharedInstance.createConsumer(ConsumerModel(name: "q", email: "q@q.q", password: "q"), completion: { (success, error) -> Void in
@@ -149,7 +150,7 @@ class ZypeAppleTVBaseTests: XCTestCase {
                 self.endTest()
             })
         }
-    }
+    }*/
     
     func testMultiQuery()
     {
@@ -245,6 +246,7 @@ class ZypeAppleTVBaseTests: XCTestCase {
         }
     }
     
+    /*
     func testCreateSubscriptions()
     {
         login { () -> Void in
@@ -254,7 +256,7 @@ class ZypeAppleTVBaseTests: XCTestCase {
                 self.endTest()
             })
         }
-    }
+    }*/
     
     func testGetStream()
     {
