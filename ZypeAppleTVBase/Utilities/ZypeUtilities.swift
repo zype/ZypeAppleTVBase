@@ -33,4 +33,17 @@ public class ZypeUtilities {
         return NSUserDefaults.standardUserDefaults().boolForKey(kDeviceLinkedStatus)
     }
     
+    public static func imageFromResourceBundle(imageName: String) -> UIImage? {
+        let podBundle = NSBundle(forClass: ZypeAppleTVBase.self)
+        if let bundleURL = podBundle.URLForResource("ZypeAppleTVBaseResources", withExtension: "bundle") {
+            if let bundle = NSBundle(URL: bundleURL) {
+                let imagePath = bundle.pathForResource(imageName, ofType: "")
+                if imagePath != nil {
+                    return UIImage(contentsOfFile: imagePath!)!
+                }
+            }
+        }
+        return nil
+    }
+    
 }
