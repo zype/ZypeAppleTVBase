@@ -29,4 +29,8 @@ public class ZypeUtilities {
         }
     }
     
+    public static func isDeviceLinked() -> Bool {
+        return NSUserDefaults.standardUserDefaults().boolForKey(kDeviceLinkedStatus)
+    }
+    
 }
