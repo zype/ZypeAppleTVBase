@@ -15,7 +15,7 @@ enum UtilError: ErrorType {
 internal let kApiDateFromeStringFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZ"
 internal let kApiDateToStringFormat = "yyyy-MM-dd"
 
-class SSUtils {
+public class SSUtils {
     
     static func dateToString(date: NSDate?, format: String = kApiDateToStringFormat) -> String
     {
@@ -94,7 +94,7 @@ class SSUtils {
         return value as! Double
     }
     
-    static func boolFromDictionary(dic: Dictionary<String, AnyObject>?, key: String) throws -> Bool
+    public static func boolFromDictionary(dic: Dictionary<String, AnyObject>?, key: String) throws -> Bool
     {
         if (dic == nil)
         {

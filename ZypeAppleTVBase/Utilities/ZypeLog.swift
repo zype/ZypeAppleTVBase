@@ -8,9 +8,9 @@
 
 import UIKit
 
-class ZypeLog {
+public class ZypeLog {
     
-    static func write(text: String)
+    public static func write(text: String)
     {
         if ZypeAppleTVBase.debug
         {
@@ -18,7 +18,7 @@ class ZypeLog {
         }
     }
     
-    static func error(text: String)
+    public static func error(text: String)
     {
         NSLog("SDK error: %@", text)
         if ZypeAppleTVBase.debug
@@ -28,7 +28,7 @@ class ZypeLog {
         }
     }
     
-    static func assert(condition: Bool, message: String)
+    public static func assert(condition: Bool, message: String)
     {
         if (condition == false)
         {
