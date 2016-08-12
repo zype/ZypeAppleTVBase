@@ -24,6 +24,7 @@ public class VideoModel: BaseModel {
     private(set) public var rentalPrice: String = ""
     private(set) public var rentalRequired = false
     private(set) public var subscriptionRequired = false
+    private(set) public var onAir = false
     
     private(set) public var episode: Int = 0
     private(set) public var series: Int = 0
@@ -87,6 +88,12 @@ public class VideoModel: BaseModel {
             subscriptionRequired = try SSUtils.boolFromDictionary(fromJson, key: kJSONSubscriptionRequired)        }
         catch _ {
              ZypeLog.error("Exception: VideoModel | Subscription Required")
+        }
+        
+        do {
+            onAir = try SSUtils.boolFromDictionary(fromJson, key: kJSONSubscriptionRequired)        }
+        catch _ {
+            ZypeLog.error("Exception: VideoModel | On Air")
         }
         
         self.loadPrices(fromJson)
