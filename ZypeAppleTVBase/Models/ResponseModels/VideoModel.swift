@@ -91,7 +91,7 @@ public class VideoModel: BaseModel {
         }
         
         do {
-            onAir = try SSUtils.boolFromDictionary(fromJson, key: kJSONSubscriptionRequired)        }
+            onAir = try SSUtils.boolFromDictionary(fromJson, key: kJSONOnAir)        }
         catch _ {
             ZypeLog.error("Exception: VideoModel | On Air")
         }
