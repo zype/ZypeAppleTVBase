@@ -61,6 +61,7 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="ykT-ma-jgQ" id="4XD-Ws-9fv"/>
+                        <outlet property="firstLineLabel" destination="PnQ-rF-fCF" id="PmI-3n-4uN"/>
                         <outlet property="pinLabel" destination="XkQ-0G-oP5" id="GpL-4A-2Es"/>
                     </connections>
                 </viewController>

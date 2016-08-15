@@ -9,7 +9,9 @@
 import UIKit
 
 class DeviceLinkingVC: UIViewController {
-    
+
+    var deviceLinkingUrl: String?
+    @IBOutlet weak var firstLineLabel: UILabel!
     @IBOutlet weak var pinLabel: UILabel!
     var timer = NSTimer()
     lazy var deviceString = ZypeAppSettings.sharedInstance.deviceId()
@@ -17,6 +19,9 @@ class DeviceLinkingVC: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        if (deviceLinkingUrl != nil) {
+            firstLineLabel .text = "From your computer or mobile device, go to \(deviceLinkingUrl!)"
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
