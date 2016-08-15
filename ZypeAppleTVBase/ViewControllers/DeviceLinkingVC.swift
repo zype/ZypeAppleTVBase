@@ -22,6 +22,7 @@ class DeviceLinkingVC: UIViewController {
         if (deviceLinkingUrl != nil) {
             firstLineLabel .text = "From your computer or mobile device, go to \(deviceLinkingUrl!)"
         }
+        UIButton.appearance().setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
     }
     
     override func viewDidAppear(animated: Bool) {
