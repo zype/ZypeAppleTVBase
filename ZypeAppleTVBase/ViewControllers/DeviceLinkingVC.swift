@@ -45,15 +45,14 @@ class DeviceLinkingVC: UIViewController {
         timer = NSTimer.scheduledTimerWithTimeInterval(5, target:self, selector: #selector(DeviceLinkingVC.checkDeviceStatus), userInfo: nil, repeats: true)
     }
     
-     func checkDeviceStatus(){
+    func checkDeviceStatus(){
         ZypeAppleTVBase.sharedInstance.getLinkedStatus(deviceString, completion: {(status: Bool?, error: NSError?) in
             if status == true {
-                    NSUserDefaults.standardUserDefaults().setBool(true, forKey: kDeviceLinkedStatus)
-                    self.dismissViewControllerAnimated(true, completion: nil)
+                NSUserDefaults.standardUserDefaults().setBool(true, forKey: kDeviceLinkedStatus)
+                self.dismissViewControllerAnimated(true, completion: nil)
+            } else {
+                NSUserDefaults.standardUserDefaults().setBool(false, forKey: kDeviceLinkedStatus)
             }
-            dispatch_async(dispatch_get_main_queue(),{
-               
-            })
         })
     }
     

@@ -53,6 +53,18 @@ public class ZypeUtilities {
         return NSUserDefaults.standardUserDefaults().boolForKey(kDeviceLinkedStatus)
     }
     
+    public static func checkDeviceLinkingWithServer() {
+        let deviceString = ZypeAppSettings.sharedInstance.deviceId()
+        ZypeAppleTVBase.sharedInstance.getLinkedStatus(deviceString, completion: {(status: Bool?, error: NSError?) in
+            if status == true {
+                NSUserDefaults.standardUserDefaults().setBool(true, forKey: kDeviceLinkedStatus)
+            } else {
+                NSUserDefaults.standardUserDefaults().setBool(false, forKey: kDeviceLinkedStatus)
+            }
+        })
+    }
+
+    
     public static func imageFromResourceBundle(imageName: String) -> UIImage? {
         let podBundle = NSBundle(forClass: ZypeAppleTVBase.self)
         if let bundleURL = podBundle.URLForResource("ZypeAppleTVBaseResources", withExtension: "bundle") {

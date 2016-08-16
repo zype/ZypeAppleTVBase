@@ -57,6 +57,8 @@
 		A12E28811D5CD4FA00E1BAED /* ZypeAppleTVBaseResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A11F0F541D4A55DF00166479 /* ZypeAppleTVBaseResources.bundle */; };
 		A14401641D4A970E006F5621 /* ResourcesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14401631D4A970E006F5621 /* ResourcesTest.swift */; };
 		A14401671D4BD305006F5621 /* ZypeUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14401661D4BD305006F5621 /* ZypeUtilities.swift */; };
+		A1ACBDB71D62628C000BD27D /* iconLocked.png in Resources */ = {isa = PBXBuildFile; fileRef = A1ACBDB51D62628C000BD27D /* iconLocked.png */; };
+		A1ACBDB81D62628C000BD27D /* iconUnlocked.png in Resources */ = {isa = PBXBuildFile; fileRef = A1ACBDB61D62628C000BD27D /* iconUnlocked.png */; };
 		BDC819BA7293BFABBCC6D361 /* Pods_ZypeAppleTVBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 374D76DD72D1DDD78E31B65C /* Pods_ZypeAppleTVBase.framework */; };
 /* End PBXBuildFile section */
 
@@ -135,6 +137,8 @@
 		A11F0FFF1D4A858900166479 /* Pods_ZypeAppleTVBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_ZypeAppleTVBase.framework; path = "../../../../Library/Developer/Xcode/DerivedData/ZypeAppleTVBase-flafjsgfhtzdvsdiyicdjprllmrg/Build/Products/Debug-appletvsimulator/Pods_ZypeAppleTVBase.framework"; sourceTree = "<group>"; };
 		A14401631D4A970E006F5621 /* ResourcesTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesTest.swift; sourceTree = "<group>"; };
 		A14401661D4BD305006F5621 /* ZypeUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZypeUtilities.swift; sourceTree = "<group>"; };
+		A1ACBDB51D62628C000BD27D /* iconLocked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconLocked.png; sourceTree = "<group>"; };
+		A1ACBDB61D62628C000BD27D /* iconUnlocked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconUnlocked.png; sourceTree = "<group>"; };
 		C27AC61475DD0933FD4D02CF /* Pods-ZypeAppleTVBase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZypeAppleTVBase.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZypeAppleTVBase/Pods-ZypeAppleTVBase.debug.xcconfig"; sourceTree = "<group>"; };
 		EE5612D613C4DFA0F78BC80F /* Pods-ZypeAppleTVBase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZypeAppleTVBase.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZypeAppleTVBase/Pods-ZypeAppleTVBase.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -212,6 +216,8 @@
 			isa = PBXGroup;
 			children = (
 				A11F0F611D4A576900166479 /* android_icon.png */,
+				A1ACBDB51D62628C000BD27D /* iconLocked.png */,
+				A1ACBDB61D62628C000BD27D /* iconUnlocked.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -495,6 +501,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1ACBDB71D62628C000BD27D /* iconLocked.png in Resources */,
+				A1ACBDB81D62628C000BD27D /* iconUnlocked.png in Resources */,
 				A11F0F621D4A576900166479 /* android_icon.png in Resources */,
 				A11F0F5F1D4A570E00166479 /* DeviceLinking.storyboard in Resources */,
 			);
