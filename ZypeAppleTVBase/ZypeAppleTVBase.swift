@@ -47,20 +47,20 @@ public class ZypeAppleTVBase: NSObject {
         dataManager?.login(username, passwd: passwd, completion: completion)
     }
     
+    public func login(deviceId: String, pin: String, completion:((logedIn: Bool, error: NSError?) -> Void), token: ZypeTokenModel = ZypeTokenModel())
+    {
+        dataManager?.tokenManager.tokenModel = token
+        dataManager == nil ? completion(logedIn: false, error: NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
+        dataManager?.login(deviceId, pin: pin, completion: completion)
+        
+    }
+    
     public func login(completion:((logedIn: Bool, error: NSError?) -> Void), token: ZypeTokenModel = ZypeTokenModel())
     {
         dataManager?.tokenManager.tokenModel = token
         dataManager == nil ? completion(logedIn: false, error: NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
         dataManager?.loadConsumer(completion)
     }
-    
-    public func login(deviceId: String, pin: String, completion:((logedIn: Bool, error: NSError?) -> Void), token: ZypeTokenModel = ZypeTokenModel())
-    {
-       /* dataManager?.tokenManager.tokenModel = token
-        dataManager == nil ? completion(logedIn: false, error: NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
-            dataManager?.login(username, passwd: passwd, completion: completion)*/
-    }
-    
     
     public func createConsumer(consumer: ConsumerModel, completion:(success: Bool, error: NSError?) -> Void)
     {

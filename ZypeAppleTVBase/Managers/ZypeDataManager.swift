@@ -89,7 +89,7 @@ class ZypeDataManager : NSObject {
     
     func login(deviceId: String, pin: String, completion:(logedIn: Bool, error: NSError?) -> Void)
     {
-      /*  serviceController.getTokenWithUsername(username, withPassword: passwd, withCompletion: {(data, error) -> Void in
+        serviceController.getTokenWithDeviceId(deviceId, withPin: pin, withCompletion:{(data, error) -> Void in
             if (error != nil)
             {
                 self.loginCompletion(false, error: error, completion: completion)
@@ -110,7 +110,7 @@ class ZypeDataManager : NSObject {
                     self.loadConsumer(completion)
                 }
             }
-        })*/
+        })
     }
 
     func loadConsumer(completion:(success: Bool, error: NSError?) -> Void)
@@ -518,9 +518,9 @@ class ZypeDataManager : NSObject {
                 if (message == "Invalid Device Pin.") {
                      completion(linked: false, error:nil)
                 } else {
+                    print("JSON: \(jsonDic)")
                 let response = jsonDic![kJSONResponse] as? NSDictionary
                 let linkedStatus = response!.valueForKey("linked") as? Bool
-                
                 completion(linked: linkedStatus, error:nil)
                 }
                 

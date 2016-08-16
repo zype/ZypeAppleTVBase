@@ -35,6 +35,7 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
     private let kAPIConsumerInformation = "%@/consumers/%@/?access_token=%@"
 
     private let kOAuth_GetTokenByLogin = "username=%@&password=%@&client_id=%@&client_secret=%@&grant_type=password"
+     private let kOAuth_GetTokenByByLoginWithDeviceIdAndPin = "linked_device_id=%@&pin=%@&client_id=%@&client_secret=%@&grant_type=password"
     private let kOAuth_UpdateTokenByRefreshToken = "refresh_token=%@&client_id=%@&client_secret=%@&grant_type=refresh_token"
 //    private let kOAuth_PostUpdateTokenByRefreshToken = "%@/oauth/token/?client_id=%@&client_secret=%@&refresh_token=%@&grant_type=refresh_token"
     private let kOAuth_GetTokenInfo = "%@/oauth/token/info?access_token=%@"
@@ -77,6 +78,13 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
     {
         let escapedPassword = SSUtils.escapedString(password)
         let bodyString = String(format: kOAuth_GetTokenByLogin, username, escapedPassword, keys.clientId, keys.clientSecret)
+        let URLString = String(format: kOAuth_GetToken, self.keys.tokenDomain)
+        postQuery(URLString, bodyAsString: bodyString, withCompletion: completion)
+    }
+    
+    func getTokenWithDeviceId(deviceId: String, withPin pin: String, withCompletion completion: (jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)
+    {
+        let bodyString = String(format: kOAuth_GetTokenByByLoginWithDeviceIdAndPin, deviceId, pin, keys.clientId, keys.clientSecret)
         let URLString = String(format: kOAuth_GetToken, self.keys.tokenDomain)
         postQuery(URLString, bodyAsString: bodyString, withCompletion: completion)
     }

@@ -58,11 +58,23 @@ public class ZypeUtilities {
         ZypeAppleTVBase.sharedInstance.getLinkedStatus(deviceString, completion: {(status: Bool?, error: NSError?) in
             if status == true {
                 NSUserDefaults.standardUserDefaults().setBool(true, forKey: kDeviceLinkedStatus)
+                loginConsumerToGetToken(deviceString, pin: "zeib836")
             } else {
                 NSUserDefaults.standardUserDefaults().setBool(false, forKey: kDeviceLinkedStatus)
             }
         })
     }
+    
+    static func loginConsumerToGetToken(deviceId: String, pin: String) {
+        ZypeAppleTVBase.sharedInstance.login(deviceId, pin: pin, completion: {(loggedIn: Bool?, error: NSError?) in
+            if loggedIn == true {
+               print("logged in")
+            } else {
+               print("not logged in")
+            }
+        })
+    }
+    
 
     
     public static func imageFromResourceBundle(imageName: String) -> UIImage? {
