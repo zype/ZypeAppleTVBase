@@ -280,4 +280,15 @@ public class ZypeAppleTVBase: NSObject {
     public func getLinkedStatus(device: String,  completion:(linked: Bool?, pin: String?, error: NSError?) -> Void) {
         dataManager?.getLinkedStatus(device, completion: completion)
     }
+    
+    //MARK: Token
+    public func getToken(completion:(token: String?, error: NSError?) -> Void) {
+        let tokenManager = dataManager?.tokenManager
+        if (!tokenManager!.isAccessTokenExpired()){
+            completion(token: tokenManager?.tokenModel.accessToken, error: nil)
+        } else {
+            print("Check if this is returns a new token..")
+             dataManager?.getToken(completion)
+        }
+    }
 }

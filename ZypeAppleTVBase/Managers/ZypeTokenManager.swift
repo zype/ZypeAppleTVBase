@@ -28,10 +28,12 @@ class ZypeTokenManager {
         }
         else if isAccessTokenExpired() == false
         {
+            print("isAccessTokenExpired() == false")
             completion(token: tokenModel.accessToken)
         }
         else
         {
+              print("isAccessTokenExpired() UPDATING")
             update(refreshToken: tokenModel.refreshToken, completion:{(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void in
                 ZypeLog.assert(error == nil && jsonDic != nil, message: "error get new token")
                 if jsonDic != nil
@@ -57,9 +59,10 @@ class ZypeTokenManager {
     
     //private
     
-    private func isAccessTokenExpired() -> Bool
+    func isAccessTokenExpired() -> Bool
     {
         let currentDate = Int(NSDate().timeIntervalSince1970)
+        print ("Token will expire in: \(tokenModel.expirationDate - currentDate)")
         return currentDate >= (tokenModel.expirationDate - kTokenAcceptableBuffer)
     }
     

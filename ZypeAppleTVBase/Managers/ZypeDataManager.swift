@@ -527,7 +527,15 @@ class ZypeDataManager : NSObject {
             }
         })
     }
-
+    
+    //MARK: Token
+    func getToken(completion:(token: String?, error: NSError?) -> Void)
+    {
+        tokenManager.accessToken({ (token) -> Void in
+            completion(token: token, error: nil)
+            }, update: serviceController.refreshAccessTokenWithCompletionHandler)
+    }
+    
     //MARK: Private
     private func loadFavorites(page: Int = kApiFirstPage)
     {
@@ -545,9 +553,9 @@ class ZypeDataManager : NSObject {
                     self.loadFavorites(page + 1)
                 }
             })
-        }, update: serviceController.refreshAccessTokenWithCompletionHandler)
+            }, update: serviceController.refreshAccessTokenWithCompletionHandler)
     }
-
+    
     private func favoriteVideo(token: String, object: BaseModel, completion:(success: Bool, error: NSError?) -> Void)
     {
         self.serviceController.favoriteObject(token, consumerId: self.consumer.ID, objectID: object.ID, completion: { (jsonDic, var error) -> Void in
