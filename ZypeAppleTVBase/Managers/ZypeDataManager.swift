@@ -510,18 +510,18 @@ class ZypeDataManager : NSObject {
         })
     }
 
-    func getLinkedStatus(device: String, completion:(linked: Bool?, error: NSError?) -> Void)
+    func getLinkedStatus(device: String, completion:(linked: Bool?,pin: String?, error: NSError?) -> Void)
     {
         self.serviceController.getLinkedStatus(device, completion: { (jsonDic, let error) -> Void in
             if jsonDic != nil {
                 let message = jsonDic!["message"] as? String
                 if (message == "Invalid Device Pin.") {
-                     completion(linked: false, error:nil)
+                    completion(linked: false, pin:nil, error:nil)
                 } else {
-                    print("JSON: \(jsonDic)")
                 let response = jsonDic![kJSONResponse] as? NSDictionary
                 let linkedStatus = response!.valueForKey("linked") as? Bool
-                completion(linked: linkedStatus, error:nil)
+                let pin = response!.valueForKey("pin") as? String
+                    completion(linked: linkedStatus, pin: pin, error:nil)
                 }
                 
             }

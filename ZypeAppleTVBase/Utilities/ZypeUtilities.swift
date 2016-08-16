@@ -55,24 +55,27 @@ public class ZypeUtilities {
     
     public static func checkDeviceLinkingWithServer() {
         let deviceString = ZypeAppSettings.sharedInstance.deviceId()
-        ZypeAppleTVBase.sharedInstance.getLinkedStatus(deviceString, completion: {(status: Bool?, error: NSError?) in
+        ZypeAppleTVBase.sharedInstance.getLinkedStatus(deviceString, completion: {(status: Bool?, pin: String?, error: NSError?) in
             if status == true {
                 NSUserDefaults.standardUserDefaults().setBool(true, forKey: kDeviceLinkedStatus)
-                loginConsumerToGetToken(deviceString, pin: "zeib836")
+                loginConsumerToGetToken(deviceString, pin: pin)
             } else {
                 NSUserDefaults.standardUserDefaults().setBool(false, forKey: kDeviceLinkedStatus)
+                ZypeAppleTVBase.sharedInstance.logOut()
             }
         })
     }
     
-    static func loginConsumerToGetToken(deviceId: String, pin: String) {
-        ZypeAppleTVBase.sharedInstance.login(deviceId, pin: pin, completion: {(loggedIn: Bool?, error: NSError?) in
-            if loggedIn == true {
-               print("logged in")
-            } else {
-               print("not logged in")
-            }
-        })
+    public static func loginConsumerToGetToken(deviceId: String, pin: String?) {
+        if (pin != nil) {
+            ZypeAppleTVBase.sharedInstance.login(deviceId, pin: pin!, completion: {(loggedIn: Bool?, error: NSError?) in
+                if loggedIn == true {
+                    print("logged in")
+                } else {
+                    print("not logged in")
+                }
+            })
+        }
     }
     
 

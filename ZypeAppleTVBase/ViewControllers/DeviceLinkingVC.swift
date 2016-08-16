@@ -46,12 +46,14 @@ class DeviceLinkingVC: UIViewController {
     }
     
     func checkDeviceStatus(){
-        ZypeAppleTVBase.sharedInstance.getLinkedStatus(deviceString, completion: {(status: Bool?, error: NSError?) in
+        ZypeAppleTVBase.sharedInstance.getLinkedStatus(deviceString, completion: {(status: Bool?, pin: String?, error: NSError?) in
             if status == true {
                 NSUserDefaults.standardUserDefaults().setBool(true, forKey: kDeviceLinkedStatus)
+                ZypeUtilities.loginConsumerToGetToken(self.deviceString, pin: pin)
                 self.dismissViewControllerAnimated(true, completion: nil)
             } else {
                 NSUserDefaults.standardUserDefaults().setBool(false, forKey: kDeviceLinkedStatus)
+                ZypeAppleTVBase.sharedInstance.logOut()
             }
         })
     }

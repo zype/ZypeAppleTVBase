@@ -12,6 +12,8 @@ class VimeoUrl: BaseUrl, VideoUrl {
 
     // add check here to see if user is logged in and if he is change url with access token
     
+    
+    
     private let kPlayerGetVideo = "%@/embed/%@.json?app_key=%@&dvr=false"
 
      func getVideoObject(video: VideoModel, completion:(playerObject: VideoObjectModel, error: NSError?) -> Void)
