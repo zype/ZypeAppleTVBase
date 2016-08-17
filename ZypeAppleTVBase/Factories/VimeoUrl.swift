@@ -28,43 +28,31 @@ class VimeoUrl: BaseUrl, VideoUrl {
             ZypeAppleTVBase.sharedInstance.getToken({
                 (token: String?, error: NSError?) in
                 let urlAsString = String(format: self.kPlayerGetVideo, self.controller!.keys.playerDomain, video.ID, token!)
-                self.controller!.getQuery(urlAsString, withCompletion: { (jsonDic, error) -> Void in
-                    let player = VideoObjectModel()
-                    player.json = jsonDic
-                    let response = jsonDic?[kJSONResponse]
-                    if response != nil
-                    {
-                        
-                        let outputs = response?[kJSONBody]?![kJSONOutputs] as? Array <Dictionary<String, String> >
-                        if outputs?.first != nil
-                        {
-                            player.videoURL = outputs!.first![kJSONUrl]!
-                        }
-                    }
-                    completion(playerObject: player, error: error)
-                })
-                
+                self.callVideoObject(urlAsString, completion: completion)
             })
         } else {
             //call with api key
             let urlAsString = String(format: kPlayerGetVideo, self.controller!.keys.playerDomain, video.ID, self.controller!.keys.appKey)
-            self.controller!.getQuery(urlAsString, withCompletion: { (jsonDic, error) -> Void in
-                let player = VideoObjectModel()
-                player.json = jsonDic
-                let response = jsonDic?[kJSONResponse]
-                if response != nil
-                {
-                    
-                    let outputs = response?[kJSONBody]?![kJSONOutputs] as? Array <Dictionary<String, String> >
-                    if outputs?.first != nil
-                    {
-                        player.videoURL = outputs!.first![kJSONUrl]!
-                    }
-                }
-                completion(playerObject: player, error: error)
-            })
-
+            callVideoObject(urlAsString, completion: completion)
         }
+    }
+    
+    func callVideoObject(url: String, completion:(playerObject: VideoObjectModel, error: NSError?) -> Void)
+    {
+        self.controller!.getQuery(url, withCompletion: { (jsonDic, error) -> Void in
+            let player = VideoObjectModel()
+            player.json = jsonDic
+            let response = jsonDic?[kJSONResponse]
+            if response != nil
+            {
+                let outputs = response?[kJSONBody]?![kJSONOutputs] as? Array <Dictionary<String, String> >
+                if outputs?.first != nil
+                {
+                    player.videoURL = outputs!.first![kJSONUrl]!
+                }
+            }
+            completion(playerObject: player, error: error)
+        })
     }
     
 }
