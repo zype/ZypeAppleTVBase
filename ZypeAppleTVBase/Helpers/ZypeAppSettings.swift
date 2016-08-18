@@ -10,8 +10,10 @@ import Foundation
 
 public struct LimitLivestream {
     public var limit: Int = 0
+    public var played: Int = 0
     public var message: String = ""
     public var refreshRate: Int = 0
+    public var starts: NSTimeInterval = 0
     public var isSet = false
 }
 

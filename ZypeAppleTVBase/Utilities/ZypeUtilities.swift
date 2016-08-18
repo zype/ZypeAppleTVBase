@@ -115,7 +115,31 @@ public class ZypeUtilities {
         })
     }
     
+    public static func livestreamStarts() {
+        ZypeAppSettings.sharedInstance.limitLivestream.starts = NSDate().timeIntervalSince1970
+    }
     
+    public static func livestreamStopped() {
+        let playedForDuration = Int(NSDate().timeIntervalSince1970 - ZypeAppSettings.sharedInstance.limitLivestream.starts)
+         ZypeAppSettings.sharedInstance.limitLivestream.played = ZypeAppSettings.sharedInstance.limitLivestream.played + playedForDuration
+        print("stopped playing: \(ZypeAppSettings.sharedInstance.limitLivestream.played)")
+    }
+    
+    public static func livestreamLimitReached() -> Bool {
+       //if limit livestream not set return false
+        if (!ZypeAppSettings.sharedInstance.limitLivestream.isSet){
+            return false
+        }
+        
+        if (ZypeAppSettings.sharedInstance.limitLivestream.limit < ZypeAppSettings.sharedInstance.limitLivestream.played){
+            return true
+        } else {
+            return false
+        }
+        
+        
+    }
+
     
     
     
