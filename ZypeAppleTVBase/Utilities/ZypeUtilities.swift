@@ -10,6 +10,8 @@ import Foundation
 
 public class ZypeUtilities {
     
+    
+    //MARK: - Device Linking
     public static func presentFrameworkVC(caller: UIViewController) {
         let podBundle = NSBundle(forClass: ZypeAppleTVBase.self)
         
@@ -66,6 +68,7 @@ public class ZypeUtilities {
         })
     }
     
+    //MARK: - Login with token
     public static func loginConsumerToGetToken(deviceId: String, pin: String?) {
         if (pin != nil) {
             ZypeAppleTVBase.sharedInstance.login(deviceId, pin: pin!, completion: {(loggedIn: Bool?, error: NSError?) in
@@ -77,8 +80,6 @@ public class ZypeUtilities {
             })
         }
     }
-    
-
     
     public static func imageFromResourceBundle(imageName: String) -> UIImage? {
         let podBundle = NSBundle(forClass: ZypeAppleTVBase.self)
@@ -92,5 +93,30 @@ public class ZypeUtilities {
         }
         return nil
     }
+    
+    //MARK: - Limit Livestream
+    public static func loadLimitLivestreamZObject() {
+        let type = QueryZobjectsModel()
+        type.zobjectType = "limit_livestream"
+        ZypeAppleTVBase.sharedInstance.getZobjects(type, completion: {(objects: Array<ZobjectModel>?, error: NSError?) in
+            if let _ = objects where objects!.count > 0 {
+                let limitLivestream = objects?.first
+                do {
+                    ZypeAppSettings.sharedInstance.limitLivestream.limit = try SSUtils.intagerFromDictionary(limitLivestream?.json, key: "limit")
+                    ZypeAppSettings.sharedInstance.limitLivestream.isSet = true
+                }
+                catch _ {
+                     ZypeLog.error("Exception: ZobjectModel - Limit")
+                }
+                 ZypeAppSettings.sharedInstance.limitLivestream.refreshRate = Int((limitLivestream?.getStringValue("refresh_rate"))!)!
+                
+                ZypeAppSettings.sharedInstance.limitLivestream.message =  (limitLivestream?.getStringValue("message"))!
+            }
+        })
+    }
+    
+    
+    
+    
     
 }

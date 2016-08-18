@@ -8,6 +8,13 @@
 
 import Foundation
 
+public struct LimitLivestream {
+    public var limit: Int = 0
+    public var message: String = ""
+    public var refreshRate: Int = 0
+    public var isSet = false
+}
+
 private let sharedInstance = ZypeAppSettings()
 
 public class ZypeAppSettings {
@@ -15,6 +22,8 @@ public class ZypeAppSettings {
     public static let sharedInstance = ZypeAppSettings()
     
     public var appVersion = "1.0.0"
+    
+    public var limitLivestream = LimitLivestream()
     
     private init() {
         
