@@ -17,7 +17,7 @@ internal let kApiDateToStringFormat = "yyyy-MM-dd"
 
 public class SSUtils {
     
-    static func dateToString(date: NSDate?, format: String = kApiDateToStringFormat) -> String
+    public static func dateToString(date: NSDate?, format: String = kApiDateToStringFormat) -> String
     {
         if date == nil
         {
@@ -29,7 +29,7 @@ public class SSUtils {
         return dateString
     }
     
-    static func stringToDate(string: String, format: String = kApiDateFromeStringFormat) -> NSDate?
+    public static func stringToDate(string: String, format: String = kApiDateFromeStringFormat) -> NSDate?
     {
         if string.isEmpty
         {
@@ -40,7 +40,7 @@ public class SSUtils {
         return dateFormatter.dateFromString(string)
     }
     
-    static func stringFromDictionary(dic: Dictionary<String, AnyObject>?, key: String) throws -> String
+    public static func stringFromDictionary(dic: Dictionary<String, AnyObject>?, key: String) throws -> String
     {
         if (dic == nil)
         {
@@ -58,7 +58,7 @@ public class SSUtils {
         return value as! String
     }
     
-    static func intagerFromDictionary(dic: Dictionary<String, AnyObject>?, key: String) throws -> Int
+    public static func intagerFromDictionary(dic: Dictionary<String, AnyObject>?, key: String) throws -> Int
     {
         if (dic == nil)
         {
@@ -76,7 +76,7 @@ public class SSUtils {
         return value as! Int
     }
 
-    static func doubleFromDictionary(dic: Dictionary<String, AnyObject>?, key: String) throws -> Double
+    public static func doubleFromDictionary(dic: Dictionary<String, AnyObject>?, key: String) throws -> Double
     {
         if (dic == nil)
         {
