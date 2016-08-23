@@ -4,4 +4,4 @@ machine:
 
 test:
   override:
-    - xcodebuild -workspace ZypeAppleTVBase.xcworkspace -scheme ZypeAppleTVBase -configuration Debug build test -sdk appletvsimulator
+    -xcodebuild -workspace ZypeAppleTVBase.xcworkspace -scheme ZypeAppleTVBase -configuration Debug build test -sdk appletvsimulator
