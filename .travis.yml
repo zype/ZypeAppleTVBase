@@ -2,4 +2,4 @@ language: objective-c
 osx_image: xcode7.3 
 xcode_workspace: ZypeAppleTVBase.xcworkspace 
 xcode_scheme: ZypeAppleTVBase 
-xcode_sdk: tvossimulator9.2 
+xcode_sdk: appletvos9.2
