@@ -34,6 +34,34 @@
                ReferencedContainer = "container:ZypeAppleTVBase.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E6260CBB73095364430EC34B13FAE80F"
+               BuildableName = "Pods_ZypeAppleTVBase.framework"
+               BlueprintName = "Pods-ZypeAppleTVBase"
+               ReferencedContainer = "container:Pods/Pods.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "65B2A91A3E16469CF6837EFD44E0AC08"
+               BuildableName = "Pods_ZypeAppleTVBaseTests.framework"
+               BlueprintName = "Pods-ZypeAppleTVBaseTests"
+               ReferencedContainer = "container:Pods/Pods.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
