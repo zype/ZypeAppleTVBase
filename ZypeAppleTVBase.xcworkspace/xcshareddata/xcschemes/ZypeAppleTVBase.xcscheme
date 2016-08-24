@@ -20,6 +20,20 @@
                ReferencedContainer = "container:ZypeAppleTVBase.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A11F0F531D4A55DF00166479"
+               BuildableName = "ZypeAppleTVBaseResources.bundle"
+               BlueprintName = "ZypeAppleTVBaseResources"
+               ReferencedContainer = "container:ZypeAppleTVBase.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

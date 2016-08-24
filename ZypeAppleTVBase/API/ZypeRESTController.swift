@@ -305,8 +305,9 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
             request.setValue(self.keys.userAgent, forHTTPHeaderField:"User-Agent")
         }
         let task = session!.dataTaskWithRequest(request) {
-            (let data, let response, var error) in
-            ZypeLog.assert(error == nil, message: "http error: \(error)")
+            (let data, let response, error) in
+            var err = error
+            ZypeLog.assert(error == nil, message: "http error: \(err)")
             var statusCode = 0
             if response != nil
             {
@@ -323,10 +324,10 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
                 {
                     let dataString = String(data:data!, encoding:NSUTF8StringEncoding)
                     ZypeLog.error("JSON Parse Error \(dataString)")
-                    error = NSError(domain: kErrorDomaine, code: kErrorJSONParsing, userInfo: ["data" : dataString!])
+                    err = NSError(domain: kErrorDomaine, code: kErrorJSONParsing, userInfo: ["data" : dataString!])
                 }
             }
-            completion(statusCode: statusCode, jsonDic: jsonDic, error: error)
+            completion(statusCode: statusCode, jsonDic: jsonDic, error: err)
         }
         task.resume()
         return task

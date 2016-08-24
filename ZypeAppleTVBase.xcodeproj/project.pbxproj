@@ -418,12 +418,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A11F0F951D4A5E0300166479 /* Build configuration list for PBXNativeTarget "ZypeAppleTVBase" */;
 			buildPhases = (
-				E811B45DF5CCB2DDEF05B779 /* 📦 Check Pods Manifest.lock */,
+				E811B45DF5CCB2DDEF05B779 /* [CP] Check Pods Manifest.lock */,
 				A11F0F7F1D4A5E0200166479 /* Sources */,
 				A11F0F801D4A5E0200166479 /* Frameworks */,
 				A11F0F811D4A5E0200166479 /* Headers */,
 				A11F0F821D4A5E0200166479 /* Resources */,
-				3E3B45084CD860887F53E1B1 /* 📦 Copy Pods Resources */,
+				3E3B45084CD860887F53E1B1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -438,12 +438,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A11F0F981D4A5E0300166479 /* Build configuration list for PBXNativeTarget "ZypeAppleTVBaseTests" */;
 			buildPhases = (
-				9BC3CD781A805121C7874DE5 /* 📦 Check Pods Manifest.lock */,
+				9BC3CD781A805121C7874DE5 /* [CP] Check Pods Manifest.lock */,
 				A11F0F891D4A5E0300166479 /* Sources */,
 				A11F0F8A1D4A5E0300166479 /* Frameworks */,
 				A11F0F8B1D4A5E0300166479 /* Resources */,
-				2656C0C2249BCC88D7A09166 /* 📦 Embed Pods Frameworks */,
-				B35EB4C9DB55643F18E3C2FC /* 📦 Copy Pods Resources */,
+				2656C0C2249BCC88D7A09166 /* [CP] Embed Pods Frameworks */,
+				B35EB4C9DB55643F18E3C2FC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -527,14 +527,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2656C0C2249BCC88D7A09166 /* 📦 Embed Pods Frameworks */ = {
+		2656C0C2249BCC88D7A09166 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -542,14 +542,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZypeAppleTVBaseTests/Pods-ZypeAppleTVBaseTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3E3B45084CD860887F53E1B1 /* 📦 Copy Pods Resources */ = {
+		3E3B45084CD860887F53E1B1 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -557,14 +557,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZypeAppleTVBase/Pods-ZypeAppleTVBase-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9BC3CD781A805121C7874DE5 /* 📦 Check Pods Manifest.lock */ = {
+		9BC3CD781A805121C7874DE5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -572,14 +572,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		B35EB4C9DB55643F18E3C2FC /* 📦 Copy Pods Resources */ = {
+		B35EB4C9DB55643F18E3C2FC /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -587,14 +587,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZypeAppleTVBaseTests/Pods-ZypeAppleTVBaseTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E811B45DF5CCB2DDEF05B779 /* 📦 Check Pods Manifest.lock */ = {
+		E811B45DF5CCB2DDEF05B779 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
