@@ -22,23 +22,12 @@ public class ZypeUtilities {
                  ZypeAppSettings.sharedInstance.deviceLinking.isEnabled = true
                 
                 //load url for the client
-                ZypeAppSettings.sharedInstance.limitLivestream.message =  (limitLivestream?.getStringValue("message"))!
+                 let dLinking = objects?.first
+                ZypeAppSettings.sharedInstance.deviceLinking.linkUrl =  (dLinking?.getStringValue("link_url"))!
                 
                 //check if device is linked
                  ZypeUtilities.checkDeviceLinkingWithServer()
                 
-                let limitLivestream = objects?.first
-                do {
-                    ZypeAppSettings.sharedInstance.limitLivestream.limit = try SSUtils.intagerFromDictionary(limitLivestream?.json, key: "limit")
-                    ZypeAppSettings.sharedInstance.limitLivestream.isSet = true
-                }
-                catch _ {
-                    ZypeLog.error("Exception: ZobjectModel - Limit")
-                }
-                ZypeAppSettings.sharedInstance.limitLivestream.refreshRate = Int((limitLivestream?.getStringValue("refresh_rate"))!)!
-                
-                ZypeAppSettings.sharedInstance.limitLivestream.message =  (limitLivestream?.getStringValue("message"))!
-               
             } else {
                 print("no zObject Device Linking")
                 ZypeAppSettings.sharedInstance.deviceLinking.isEnabled = false
