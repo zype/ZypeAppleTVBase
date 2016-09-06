@@ -17,6 +17,15 @@ public struct LimitLivestream {
     public var isSet = false
 }
 
+public struct DeviceLinking {
+    public var isEnabled = false
+    public var played: Int = 0
+    public var message: String = ""
+    public var refreshRate: Int = 0
+    public var starts: NSTimeInterval = 0
+    public var isSet = false
+}
+
 private let sharedInstance = ZypeAppSettings()
 
 public class ZypeAppSettings {
@@ -26,6 +35,8 @@ public class ZypeAppSettings {
     public var appVersion = "1.0.0"
     
     public var limitLivestream = LimitLivestream()
+    
+    public var deviceLinking = DeviceLinking()
     
     private init() {
         

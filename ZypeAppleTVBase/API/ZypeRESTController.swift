@@ -27,7 +27,7 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
     private let kCreateSubscription = "%@/subscriptions/?app_key=%@&subscription[%@]=&@"
 
     //playlists
-    private let kGetPlaylists = "%@/playlists?app_key=%@&page=%d&per_page=%d&active=%@&keyword=%@&category[%@]=%@&sort=priority&order=asc&parent_id=%@"
+    private let kGetPlaylists = "%@/playlists?app_key=%@&page=%d&per_page=%d&active=%@&keyword=%@&category[%@]=%@&sort=priority&order=%@&parent_id=%@"
     private let kGetRetrieveVideosInPlaylist = "%@/playlists/%@/videos?app_key=%@&page=%d&per_page=%d"
 
     //OAut
@@ -235,7 +235,7 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
         let perPage = queryModel.perPage == 0 ? kApiMaxItems : queryModel.perPage
         let urlAsString = String(format: kGetPlaylists, self.keys.apiDomain, keys.appKey, queryModel.page, perPage,
             String(queryModel.active),  SSUtils.escapedString(queryModel.keyword),
-            SSUtils.escapedString(queryModel.categoryKey), SSUtils.escapedString(queryModel.categoryValue), queryModel.parentId)
+            SSUtils.escapedString(queryModel.categoryKey), SSUtils.escapedString(queryModel.categoryValue),queryModel.ordering, queryModel.parentId)
         getQuery(urlAsString, withCompletion: completion)
     }
 

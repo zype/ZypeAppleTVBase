@@ -10,6 +10,31 @@ import Foundation
 
 public class ZypeUtilities {
     
+    //MARK: - Device Linking zObject. 
+    //Needs to be configured in admin panel for device linking to work
+
+    public static func loadDeviceLinkingZObject() {
+        let type = QueryZobjectsModel()
+        type.zobjectType = "device_linking"
+        ZypeAppleTVBase.sharedInstance.getZobjects(type, completion: {(objects: Array<ZobjectModel>?, error: NSError?) in
+            if let _ = objects where objects!.count > 0 {
+                let limitLivestream = objects?.first
+                do {
+                    ZypeAppSettings.sharedInstance.limitLivestream.limit = try SSUtils.intagerFromDictionary(limitLivestream?.json, key: "limit")
+                    ZypeAppSettings.sharedInstance.limitLivestream.isSet = true
+                }
+                catch _ {
+                    ZypeLog.error("Exception: ZobjectModel - Limit")
+                }
+                ZypeAppSettings.sharedInstance.limitLivestream.refreshRate = Int((limitLivestream?.getStringValue("refresh_rate"))!)!
+                
+                ZypeAppSettings.sharedInstance.limitLivestream.message =  (limitLivestream?.getStringValue("message"))!
+            } else {
+                print("no zObject Device Linking")
+                ZypeAppSettings.sharedInstance.deviceLinking.isEnabled = false
+            }
+        })
+    }
     
     //MARK: - Device Linking
     public static func presentFrameworkVC(caller: UIViewController) {

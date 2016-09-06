@@ -15,6 +15,7 @@ public class QueryPlaylistsModel: QueryBaseModel {
     public var active: Bool = true
     public var keyword: String = ""
     public var parentId: String = ""
+    public var ordering: String = "asc"
     
     public init(category: CategoryValueModel? = nil,
         active: Bool = true,
