@@ -1,8 +1,3 @@
-language: objective-c  
-osx_image: xcode7.3 
-xcode_workspace: ZypeAppleTVBase.xcworkspace 
-xcode_scheme: ZypeAppleTVBase 
-xcode_sdk: appletvsimulator9.2
-
+language: objective-c
 script:
   -  xctool test -workspace ZypeAppleTVBase.xcworkspace -scheme ZypeAppleTVBase -sdk appletvsimulator9.2 ONLY_ACTIVE_ARCH=NO

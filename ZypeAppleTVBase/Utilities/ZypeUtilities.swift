@@ -18,6 +18,11 @@ public class ZypeUtilities {
         type.zobjectType = "device_linking"
         ZypeAppleTVBase.sharedInstance.getZobjects(type, completion: {(objects: Array<ZobjectModel>?, error: NSError?) in
             if let _ = objects where objects!.count > 0 {
+               //enable device linking in the app
+                 ZypeAppSettings.sharedInstance.deviceLinking.isEnabled = true
+                //load url for the client
+                
+                
                 let limitLivestream = objects?.first
                 do {
                     ZypeAppSettings.sharedInstance.limitLivestream.limit = try SSUtils.intagerFromDictionary(limitLivestream?.json, key: "limit")
@@ -29,6 +34,7 @@ public class ZypeUtilities {
                 ZypeAppSettings.sharedInstance.limitLivestream.refreshRate = Int((limitLivestream?.getStringValue("refresh_rate"))!)!
                 
                 ZypeAppSettings.sharedInstance.limitLivestream.message =  (limitLivestream?.getStringValue("message"))!
+                ZypeUtilities.checkDeviceLinkingWithServer()
             } else {
                 print("no zObject Device Linking")
                 ZypeAppSettings.sharedInstance.deviceLinking.isEnabled = false
