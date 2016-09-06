@@ -1,6 +1,6 @@
 # Uncomment this line to define a global platform for your project
 # platform :tvos, '9.0'
-use_frameworks!
+# use_frameworks!
 target 'ZypeAppleTVBase' do
   
 end
