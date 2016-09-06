@@ -20,8 +20,12 @@ public class ZypeUtilities {
             if let _ = objects where objects!.count > 0 {
                //enable device linking in the app
                  ZypeAppSettings.sharedInstance.deviceLinking.isEnabled = true
-                //load url for the client
                 
+                //load url for the client
+                ZypeAppSettings.sharedInstance.limitLivestream.message =  (limitLivestream?.getStringValue("message"))!
+                
+                //check if device is linked
+                 ZypeUtilities.checkDeviceLinkingWithServer()
                 
                 let limitLivestream = objects?.first
                 do {
@@ -34,7 +38,7 @@ public class ZypeUtilities {
                 ZypeAppSettings.sharedInstance.limitLivestream.refreshRate = Int((limitLivestream?.getStringValue("refresh_rate"))!)!
                 
                 ZypeAppSettings.sharedInstance.limitLivestream.message =  (limitLivestream?.getStringValue("message"))!
-                ZypeUtilities.checkDeviceLinkingWithServer()
+               
             } else {
                 print("no zObject Device Linking")
                 ZypeAppSettings.sharedInstance.deviceLinking.isEnabled = false
