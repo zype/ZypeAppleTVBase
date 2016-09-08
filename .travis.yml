@@ -1,4 +1,10 @@
 language: objective-c
 
+rvm:
+  - 2.2
+
+before_install:
+ - gem install cocoapods -v '1.0.1'
+
 script:
   -  xctool test -workspace ZypeAppleTVBase.xcworkspace -scheme ZypeAppleTVBase -sdk appletvsimulator9.2 ONLY_ACTIVE_ARCH=NO
