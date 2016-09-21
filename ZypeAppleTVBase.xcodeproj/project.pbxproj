@@ -57,6 +57,7 @@
 		A12E28811D5CD4FA00E1BAED /* ZypeAppleTVBaseResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A11F0F541D4A55DF00166479 /* ZypeAppleTVBaseResources.bundle */; };
 		A14401641D4A970E006F5621 /* ResourcesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14401631D4A970E006F5621 /* ResourcesTest.swift */; };
 		A14401671D4BD305006F5621 /* ZypeUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14401661D4BD305006F5621 /* ZypeUtilities.swift */; };
+		A19F62021D92DFC300B6AC96 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19F62011D92DFC300B6AC96 /* LoginVC.swift */; };
 		A1ACBDB71D62628C000BD27D /* iconLocked.png in Resources */ = {isa = PBXBuildFile; fileRef = A1ACBDB51D62628C000BD27D /* iconLocked.png */; };
 		A1ACBDB81D62628C000BD27D /* iconUnlocked.png in Resources */ = {isa = PBXBuildFile; fileRef = A1ACBDB61D62628C000BD27D /* iconUnlocked.png */; };
 		A2368A8A1C30899A6B0133CD /* libPods-ZypeAppleTVBaseTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91289C30B7EFBB54AFBA18D8 /* libPods-ZypeAppleTVBaseTests.a */; };
@@ -137,6 +138,7 @@
 		A11F0FFF1D4A858900166479 /* Pods_ZypeAppleTVBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_ZypeAppleTVBase.framework; path = "../../../../Library/Developer/Xcode/DerivedData/ZypeAppleTVBase-flafjsgfhtzdvsdiyicdjprllmrg/Build/Products/Debug-appletvsimulator/Pods_ZypeAppleTVBase.framework"; sourceTree = "<group>"; };
 		A14401631D4A970E006F5621 /* ResourcesTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesTest.swift; sourceTree = "<group>"; };
 		A14401661D4BD305006F5621 /* ZypeUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZypeUtilities.swift; sourceTree = "<group>"; };
+		A19F62011D92DFC300B6AC96 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		A1ACBDB51D62628C000BD27D /* iconLocked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconLocked.png; sourceTree = "<group>"; };
 		A1ACBDB61D62628C000BD27D /* iconUnlocked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconUnlocked.png; sourceTree = "<group>"; };
 		C27AC61475DD0933FD4D02CF /* Pods-ZypeAppleTVBase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZypeAppleTVBase.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZypeAppleTVBase/Pods-ZypeAppleTVBase.debug.xcconfig"; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 			isa = PBXGroup;
 			children = (
 				A11F0FCB1D4A5E5300166479 /* DeviceLinkingVC.swift */,
+				A19F62011D92DFC300B6AC96 /* LoginVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -468,7 +471,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Zype;
 				TargetAttributes = {
 					A11F0F531D4A55DF00166479 = {
@@ -721,6 +724,7 @@
 				A11F0FEE1D4A5E5300166479 /* SettingsModel.swift in Sources */,
 				A11F0FE11D4A5E5300166479 /* QuerySubscriptionsModel.swift in Sources */,
 				A11F0FF01D4A5E5300166479 /* VideoObjectModel.swift in Sources */,
+				A19F62021D92DFC300B6AC96 /* LoginVC.swift in Sources */,
 				A11F0FE61D4A5E5300166479 /* CategoryModel.swift in Sources */,
 				A11F0FD11D4A5E5300166479 /* ZypeErrorConstants.swift in Sources */,
 				A11F0FD21D4A5E5300166479 /* ZypeJSONConstants.swift in Sources */,
@@ -781,7 +785,7 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 2.3;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
@@ -800,7 +804,7 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 2.3;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
@@ -811,6 +815,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -834,6 +839,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -892,8 +898,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -942,8 +950,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -964,6 +974,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = appletvos;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";

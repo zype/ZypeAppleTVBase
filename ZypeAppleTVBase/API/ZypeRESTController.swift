@@ -74,7 +74,7 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
 
     // MARK: OAuth API
 
-    func getTokenWithUsername(username: String, withPassword password: String, withCompletion completion: (jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)
+    func getTokenWithUsername(username: String, withPassword password: String, withCompletion completion: (Dictionary<String, AnyObject>?,NSError?) -> Void)
     {
         let escapedPassword = SSUtils.escapedString(password)
         let bodyString = String(format: kOAuth_GetTokenByLogin, username, escapedPassword, keys.clientId, keys.clientSecret)
@@ -82,18 +82,18 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
         postQuery(URLString, bodyAsString: bodyString, withCompletion: completion)
     }
     
-    func getTokenWithDeviceId(deviceId: String, withPin pin: String, withCompletion completion: (jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)
+    func getTokenWithDeviceId(deviceId: String, withPin pin: String, withCompletion completion: (Dictionary<String, AnyObject>?, NSError?) -> Void)
     {
         let bodyString = String(format: kOAuth_GetTokenByByLoginWithDeviceIdAndPin, deviceId, pin, keys.clientId, keys.clientSecret)
         let URLString = String(format: kOAuth_GetToken, self.keys.tokenDomain)
         postQuery(URLString, bodyAsString: bodyString, withCompletion: completion)
     }
 
-    func getConsumerIdWithToken(accessToken:String, completion:(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)
+    func getConsumerIdWithToken(accessToken:String, completion:(Dictionary<String, AnyObject>?, NSError?) -> Void)
     {
        if (accessToken.isEmpty)
        {
-            completion(jsonDic: nil, error: nil)
+            completion(nil, nil)
             return
         }
         let urlAsString = String(format: kOAuth_GetTokenInfo, self.keys.tokenDomain, accessToken)
@@ -101,13 +101,13 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
 
     }
 
-    func getConsumerInformationWithID(token: String, consumerId: String, withCompletion completion:(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)
+    func getConsumerInformationWithID(token: String, consumerId: String, withCompletion completion:(Dictionary<String, AnyObject>?, NSError?) -> Void)
     {
         let urlAsString = String(format: kAPIConsumerInformation, self.keys.apiDomain, consumerId, token)
         self.getQuery(urlAsString, withCompletion: completion)
     }
 
-    func refreshAccessTokenWithCompletionHandler(refreshToken:String, completion:(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)
+    func refreshAccessTokenWithCompletionHandler(refreshToken:String, completion:(Dictionary<String, AnyObject>?, NSError?) -> Void)
     {
         // Prepare parameters
         if (refreshToken.isEmpty) {
@@ -120,7 +120,7 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
         postQuery(URLString, bodyAsString: bodyString, withCompletion: completion)
     }
 
-    func createConsumer(consumer: ConsumerModel, completion:(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)
+    func createConsumer(consumer: ConsumerModel, completion:(Dictionary<String, AnyObject>?, NSError?) -> Void)
     {
         let urlAsString = String(format: kOAuth_CreateConsumer, self.keys.apiDomain, keys.appKey,
             SSUtils.escapedString(consumer.emailString), SSUtils.escapedString(consumer.nameString), SSUtils.escapedString(consumer.passwordString))
@@ -129,14 +129,14 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
 
     //MARK: Video API
 
-    func getCategories(query: QueryCategoriesModel, completion:(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)
+    func getCategories(query: QueryCategoriesModel, completion:(Dictionary<String, AnyObject>?, NSError?) -> Void)
     {
         let perPage = query.perPage == 0 ? kApiMaxItems : query.perPage
         let urlAsString = String(format: kApiGetCategories, self.keys.apiDomain, keys.appKey, query.page, perPage);
         getQuery(urlAsString, withCompletion: completion)
     }
 
-    func getVideos(query: QueryVideosModel, completion:(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)
+    func getVideos(query: QueryVideosModel, completion:(Dictionary<String, AnyObject>?, NSError?) -> Void)
     {
         let categoryKey:String = SSUtils.escapedString(query.categoryKey)
         let categoryValue:String = SSUtils.escapedString(query.categoryValue)
@@ -160,28 +160,29 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
     }
 
     //MARK:  Favorite API
-    func getFavorites(accessToken: String,consumerId: String, page: Int, completion:(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)
+    func getFavorites(accessToken: String,consumerId: String, page: Int, completion:(Dictionary<String, AnyObject>?, NSError?) -> Void)
     {
         let urlAsString = String(format: kGetFavorites, self.keys.apiDomain, consumerId, accessToken, page)
         getQuery(urlAsString, withCompletion: completion)
     }
 
-    func favoriteObject(accessToken: String,consumerId: String, objectID: String, completion:(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)
+    func favoriteObject(accessToken: String,consumerId: String, objectID: String, completion:(Dictionary<String, AnyObject>?, NSError?) -> Void)
     {
         let urlAsString = String(format: kPostFavorite, self.keys.apiDomain, consumerId, accessToken, objectID)
         postQuery(urlAsString, bodyAsString: "", withCompletion: completion)
     }
 
-    func unfavoriteObject(accessToken: String,consumerId: String, favoriteID: String, completion:(statusCode: Int, error: NSError?) -> Void)
+    func unfavoriteObject(accessToken: String,consumerId: String, favoriteID: String, completion:(Int, NSError?) -> Void)
     {
         let urlAsString = String(format: kDeleteFavorite, self.keys.apiDomain, consumerId, favoriteID, accessToken)
         deleteQuery(urlAsString, withCompletion: {(statusCode: Int, jsonDic: Dictionary<String, AnyObject>?, error: NSError?) in
-            completion(statusCode: statusCode, error: error)
+            completion(statusCode, error)
+
         })
     }
 
     //MARK:  Zobjects
-    func getZobjectTypes(queryModel: QueryZobjectTypesModel, completion:(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)
+    func getZobjectTypes(queryModel: QueryZobjectTypesModel, completion:(Dictionary<String, AnyObject>?, NSError?) -> Void)
     {
         let perPage = queryModel.perPage == 0 ? kApiMaxItems : queryModel.perPage
         let keywords = SSUtils.escapedString(queryModel.keywords)
@@ -189,7 +190,7 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
         getQuery(urlAsString, withCompletion: completion)
     }
 
-    func getZobjects(queryModel: QueryZobjectsModel, completion:(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)
+    func getZobjects(queryModel: QueryZobjectsModel, completion:(Dictionary<String, AnyObject>?, NSError?) -> Void)
     {
         let perPage = queryModel.perPage == 0 ? kApiMaxItems : queryModel.perPage
         let type = SSUtils.escapedString(queryModel.zobjectType)
@@ -199,7 +200,7 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
     }
 
     //MARK: Subscription
-    func getSubscriptions(queryModel: QuerySubscriptionsModel, completion:(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)
+    func getSubscriptions(queryModel: QuerySubscriptionsModel, completion:(Dictionary<String, AnyObject>?, NSError?) -> Void)
     {
         let perPage = queryModel.perPage == 0 ? kApiMaxItems : queryModel.perPage
         let search = SSUtils.escapedString(queryModel.searchString)
@@ -207,30 +208,30 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
         getQuery(urlAsString, withCompletion: completion)
     }
 
-    func createSubscription(consumerID: String, planID: String, completion:(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)
+    func createSubscription(consumerID: String, planID: String, completion:(Dictionary<String, AnyObject>?, NSError?) -> Void)
     {
-        completion(jsonDic: nil, error: NSError(domain: kErrorDomaine, code: kErrorNotImplemented, userInfo: nil))
+        completion(nil, NSError(domain: kErrorDomaine, code: kErrorNotImplemented, userInfo: nil))
 //        let urlAsString = String(format: kCreateSubscription, self.keys.apiDomain, keys.appKey, consumerID, SSUtils.escapedString(consumerID))
 //        postQuery(urlAsString, bodyAsString: "", withCompletion: completion)
     }
 
-    func retrieveSubscription(ID: String, completion:(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)
+    func retrieveSubscription(ID: String, completion:(Dictionary<String, AnyObject>?, NSError?) -> Void)
     {
-        completion(jsonDic: nil, error: NSError(domain: kErrorDomaine, code: kErrorNotImplemented, userInfo: nil))
+        completion(nil, NSError(domain: kErrorDomaine, code: kErrorNotImplemented, userInfo: nil))
     }
 
-    func updateSubscription(consumerID: String, planID: String, completion:(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)
+    func updateSubscription(consumerID: String, planID: String, completion:(Dictionary<String, AnyObject>?, NSError?) -> Void)
     {
-        completion(jsonDic: nil, error: NSError(domain: kErrorDomaine, code: kErrorNotImplemented, userInfo: nil))
+        completion(nil, NSError(domain: kErrorDomaine, code: kErrorNotImplemented, userInfo: nil))
     }
 
-    func removeSubscription(ID: String, completion:(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)
+    func removeSubscription(ID: String, completion:(Dictionary<String, AnyObject>?, NSError?) -> Void)
     {
-        completion(jsonDic: nil, error: NSError(domain: kErrorDomaine, code: kErrorNotImplemented, userInfo: nil))
+        completion(nil, NSError(domain: kErrorDomaine, code: kErrorNotImplemented, userInfo: nil))
     }
 
     //MARK: Playlist
-    func getPlaylists(queryModel: QueryPlaylistsModel, completion:(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)
+    func getPlaylists(queryModel: QueryPlaylistsModel, completion:(Dictionary<String, AnyObject>?, NSError?) -> Void)
     {
         let perPage = queryModel.perPage == 0 ? kApiMaxItems : queryModel.perPage
         let urlAsString = String(format: kGetPlaylists, self.keys.apiDomain, keys.appKey, queryModel.page, perPage,
@@ -239,7 +240,7 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
         getQuery(urlAsString, withCompletion: completion)
     }
 
-    func retrieveVideosInPlaylist(queryModel: QueryRetrieveVideosInPlaylistModel, completion:(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)
+    func retrieveVideosInPlaylist(queryModel: QueryRetrieveVideosInPlaylistModel, completion:(Dictionary<String, AnyObject>?, NSError?) -> Void)
     {
         let perPage = queryModel.perPage == 0 ? kApiMaxItems : queryModel.perPage
         let urlAsString = String(format: kGetRetrieveVideosInPlaylist, self.keys.apiDomain, queryModel.playlistID, keys.appKey, queryModel.page, perPage)
@@ -247,21 +248,21 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
     }
     
     //MARK: App Info
-    func getAppInfo(queryModel: QueryBaseModel, completion:(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)
+    func getAppInfo(queryModel: QueryBaseModel, completion:(Dictionary<String, AnyObject>?, NSError?) -> Void)
     {
         let urlAsString = String(format: kApiGetAppInfo, self.keys.apiDomain, keys.appKey);
         getQuery(urlAsString, withCompletion: completion)
     }
     
     //MARK: Device Linking
-    func getDevicePin(device: String, completion:(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)
+    func getDevicePin(device: String, completion:(Dictionary<String, AnyObject>?, NSError?) -> Void)
     {
         let bodyString = String(format: kGetDevicePinParameters, device)
         let urlAsString = String(format: kApiGetDevicePin, self.keys.apiDomain, keys.appKey);
         postQuery(urlAsString, bodyAsString: bodyString, withCompletion: completion)
     }
     
-    func getLinkedStatus(device: String, completion:(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)
+    func getLinkedStatus(device: String, completion:(Dictionary<String, AnyObject>?, NSError?) -> Void)
     {
         let urlAsString = String(format: kApiGetLinkedStatus, self.keys.apiDomain, keys.appKey, device);
         getQuery(urlAsString, withCompletion: completion)
@@ -270,31 +271,31 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
     
     //private
       private func deleteQuery(urlAsString: String,
-        withCompletion completion:(statusCode: Int, jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)  -> NSURLSessionDataTask
+        withCompletion completion:(Int, Dictionary<String, AnyObject>?, NSError?) -> Void)  -> NSURLSessionDataTask
     {
         return query("DELETE", urlAsString: urlAsString, bodyAsString: "", withCompletion: completion)
     }
 
     func getQuery(urlAsString: String,
-        withCompletion completion:(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)  -> NSURLSessionDataTask
+        withCompletion completion:(Dictionary<String, AnyObject>?, NSError?) -> Void)  -> NSURLSessionDataTask
     {
         return query("GET", urlAsString: urlAsString, bodyAsString: "",
             withCompletion: {(statusCode, jsonDic, error) in
-            completion(jsonDic: jsonDic, error: error)
+            completion(jsonDic, error)
         })
     }
 
     private func postQuery(urlAsString: String, bodyAsString: String,
-        withCompletion completion:(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void)  -> NSURLSessionDataTask
+        withCompletion completion:(Dictionary<String, AnyObject>?, NSError?) -> Void)  -> NSURLSessionDataTask
     {
         return query("POST", urlAsString: urlAsString, bodyAsString: bodyAsString,
             withCompletion: {(statusCode, jsonDic, error) in
-            completion(jsonDic: jsonDic, error: error)
+            completion(jsonDic, error)
         })
     }
 
     private func query(method: String, urlAsString: String, bodyAsString: String,
-        withCompletion completion:(statusCode: Int, jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void) -> NSURLSessionDataTask
+        withCompletion completion:(Int, Dictionary<String, AnyObject>?, NSError?) -> Void) -> NSURLSessionDataTask
     {
         ZypeLog.write("\(method) Query: \(urlAsString) \(bodyAsString)")
         let request = NSMutableURLRequest(URL: NSURL(string: urlAsString)!)
@@ -305,7 +306,7 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
             request.setValue(self.keys.userAgent, forHTTPHeaderField:"User-Agent")
         }
         let task = session!.dataTaskWithRequest(request) {
-            (let data, let response, error) in
+            ( data, response, error) in
             var err = error
             ZypeLog.assert(error == nil, message: "http error: \(err)")
             var statusCode = 0
@@ -327,7 +328,7 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
                     err = NSError(domain: kErrorDomaine, code: kErrorJSONParsing, userInfo: ["data" : dataString!])
                 }
             }
-            completion(statusCode: statusCode, jsonDic: jsonDic, error: err)
+            completion(statusCode, jsonDic, err)
         }
         task.resume()
         return task
