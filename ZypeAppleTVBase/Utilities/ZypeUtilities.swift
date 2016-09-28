@@ -182,6 +182,47 @@ public class ZypeUtilities {
         }
     }
     
+    public static func loginUser() {
+        let email =  NSUserDefaults.standardUserDefaults().objectForKey(kUserEmail) as! String?
+        let password = NSUserDefaults.standardUserDefaults().objectForKey(kUserPassword) as! String?
+
+        if ((email == nil) || (password == nil)){
+              NSUserDefaults.standardUserDefaults().setBool(false, forKey: kDeviceLinkedStatus)
+        } else {
+            ZypeAppleTVBase.sharedInstance.login(email!, passwd: password!, completion:{ (logedIn: Bool, error: NSError?) in
+                print(logedIn)
+                if (error != nil) {
+                    
+                    return
+                }
+                
+                if (logedIn){
+                    NSUserDefaults.standardUserDefaults().setBool(true, forKey: kDeviceLinkedStatus)
+                    
+                } else {
+                    NSUserDefaults.standardUserDefaults().setBool(false, forKey: kDeviceLinkedStatus)
+                }
+                
+            })
+        }
+       
+    }
+    
+    public static func checkInterfaceStyle() {
+        guard(traitCollection.responds(to: #selector(getter: UITraitCollection.userInterfaceStyle)))
+        else { return }
+        
+        let style = traitCollection.userInterfaceStyle
+        
+        switch style {
+        case .light:
+            print("light")
+        case .dark:
+            print("dark")
+        case .unspecified:
+            print("unspecified")
+        }
+    }
     
     
 }

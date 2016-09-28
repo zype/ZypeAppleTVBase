@@ -20,9 +20,22 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.configureView()
+        self.setupText()
         passwordField.addTarget(self, action: #selector(loginClicked(_:)), forControlEvents: UIControlEvents.EditingDidEnd)
     }
 
+    func setupText() {
+        let pageHeaderText = NSUserDefaults.standardUserDefaults().objectForKey(kLoginPageHeader)
+        if (pageHeaderText != nil) {
+           self.loginTitle.text = pageHeaderText as! String
+        }
+        let pageFooterText = NSUserDefaults.standardUserDefaults().objectForKey(kLoginPageFooter)
+        if (pageFooterText != nil) {
+            self.loginFooter.text = pageFooterText as! String
+        }
+
+    }
+    
     func configureView() {
         //configure for Dark Mode:
         self.view.backgroundColor = UIColor.blackColor()
@@ -52,6 +65,10 @@ class LoginVC: UIViewController {
         
         print ("login clicked")
         if (!(self.emailField.text?.isEmpty)! && !(self.passwordField.text?.isEmpty)!) {
+            //store inputs in NSUserDefaults. We will be checking them on each app launch
+            NSUserDefaults.standardUserDefaults().setObject(self.emailField.text!, forKey: kUserEmail)
+            NSUserDefaults.standardUserDefaults().setObject(self.passwordField.text!, forKey: kUserPassword)
+            
             ZypeAppleTVBase.sharedInstance.login(self.emailField.text!, passwd: self.passwordField.text!, completion:{ (logedIn: Bool, error: NSError?) in
                 print(logedIn)
                 if (error != nil) {

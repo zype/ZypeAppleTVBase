@@ -13,3 +13,8 @@ let kOAuthClientId = ""
 
 //NSUserDefaults
 public let kDeviceLinkedStatus = "device_linked"
+public let kUserEmail = "user_email"
+public let kUserPassword = "user_password"
+
+public let kLoginPageHeader = "login_page_header"
+public let kLoginPageFooter = "login_page_footer"
