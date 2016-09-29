@@ -207,22 +207,4 @@ public class ZypeUtilities {
         }
        
     }
-    
-    public static func checkInterfaceStyle() {
-        guard(traitCollection.responds(to: #selector(getter: UITraitCollection.userInterfaceStyle)))
-        else { return }
-        
-        let style = traitCollection.userInterfaceStyle
-        
-        switch style {
-        case .light:
-            print("light")
-        case .dark:
-            print("dark")
-        case .unspecified:
-            print("unspecified")
-        }
-    }
-    
-    
 }
