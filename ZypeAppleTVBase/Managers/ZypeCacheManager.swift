@@ -52,6 +52,14 @@ class ZypeCacheManager: NSObject {
         if (data != nil)
         {
             self.favorites.appendContentsOf(data!)
+            //sync with user defaults
+            let defaults = NSUserDefaults.standardUserDefaults()
+            var favorites = defaults.arrayForKey(kFavoritesKey) as? Array<String> ?? [String]()
+            for favorite in data! {
+               favorites.append(favorite.objectID)
+            }
+            defaults.setObject(favorites, forKey: kFavoritesKey)
+            defaults.synchronize()
         }
     }
     

@@ -72,12 +72,13 @@ class LoginVC: UIViewController {
             ZypeAppleTVBase.sharedInstance.login(self.emailField.text!, passwd: self.passwordField.text!, completion:{ (logedIn: Bool, error: NSError?) in
                 print(logedIn)
                 if (error != nil) {
-                    self.presentAlertWithText((error?.description)!)
+                    self.presentAlertWithText("Invalid Login and Password.")
                     return
                 }
                 
                 if (logedIn){
                      NSUserDefaults.standardUserDefaults().setBool(true, forKey: kDeviceLinkedStatus)
+                      NSNotificationCenter.defaultCenter().postNotificationName(kZypeReloadScreenNotification, object: nil)
                     self.dismissViewControllerAnimated(true, completion: {_ in})
                 } else {
                     NSUserDefaults.standardUserDefaults().setBool(false, forKey: kDeviceLinkedStatus)

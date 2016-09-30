@@ -198,11 +198,15 @@ public class ZypeUtilities {
                 
                 if (logedIn){
                     NSUserDefaults.standardUserDefaults().setBool(true, forKey: kDeviceLinkedStatus)
+                    if ((ZypeAppleTVBase.sharedInstance.consumer?.isLoggedIn) == true){
+                        print("YaY")
+                    } else {
+                        print("Nay :(")
+                    }
                     
                 } else {
                     NSUserDefaults.standardUserDefaults().setBool(false, forKey: kDeviceLinkedStatus)
                 }
-                
             })
         }
        
