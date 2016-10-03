@@ -211,4 +211,25 @@ public class ZypeUtilities {
         }
        
     }
+    
+    public static func getLogoutVC() -> LogoutVC? {
+        let podBundle = NSBundle(forClass: ZypeAppleTVBase.self)
+        
+        if let bundleURL = podBundle.URLForResource("ZypeAppleTVBaseResources", withExtension: "bundle") {
+            
+            if let bundle = NSBundle(URL: bundleURL) {
+                let storyboard = UIStoryboard(name: "DeviceLinking", bundle: bundle)
+                
+                let vc = storyboard.instantiateViewControllerWithIdentifier("LogoutVC") as! LogoutVC
+                return vc
+            }else {
+                assertionFailure("Could not load the bundle")
+            }
+        }else {
+            assertionFailure("Could not create a path to the bundle")
+            
+        }
+        
+        return nil
+    }
 }

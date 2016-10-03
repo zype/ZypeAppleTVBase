@@ -143,6 +143,53 @@
             </objects>
             <point key="canvasLocation" x="35" y="-1324"/>
         </scene>
+        <!--LogoutVC-->
+        <scene sceneID="yjq-pQ-AiJ">
+            <objects>
+                <viewController storyboardIdentifier="LogoutVC" id="7GZ-UB-p6g" customClass="LogoutVC" customModule="ZypeAppleTVBase" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ocg-PD-ujV"/>
+                        <viewControllerLayoutGuide type="bottom" id="Xg4-W7-Cuh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KjC-Pp-P2q">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4bQ-s8-QIb">
+                                <frame key="frameInset" minX="793" minY="531" width="340" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="logoutClicked:" destination="7GZ-UB-p6g" eventType="primaryActionTriggered" id="te7-0D-YT8"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Unlink your device" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F31-LI-G9Q">
+                                <frame key="frameInset" minX="20" minY="277" width="1880" height="85"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You will be logged out from the app and you will not be able to see any video that you've purchased until you log in again." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUf-yV-Hhf">
+                                <frame key="frameInset" minX="193" minY="742" width="1540" height="147"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="logoutButton" destination="4bQ-s8-QIb" id="rmu-ir-ZUX"/>
+                        <outlet property="logoutFooter" destination="fUf-yV-Hhf" id="Vrd-cq-3xB"/>
+                        <outlet property="logoutTitle" destination="F31-LI-G9Q" id="ZBH-JQ-ddS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hVW-Lk-1n8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2266" y="-1324"/>
+        </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <nil key="statusBar"/>
