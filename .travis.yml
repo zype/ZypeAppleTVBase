@@ -11,4 +11,4 @@ before_install:
  - brew outdated xctool || brew upgrade xctool
 
 script:
-  -  xctool test -workspace ZypeAppleTVBase.xcworkspace -scheme ZypeAppleTVBase -sdk appletvsimulator9.2 ONLY_ACTIVE_ARCH=NO
+  -  xctool test -workspace ZypeAppleTVBase.xcworkspace -scheme ZypeAppleTVBase -sdk appletvsimulator10.0 ONLY_ACTIVE_ARCH=NO
