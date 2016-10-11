@@ -182,7 +182,7 @@ public class ZypeUtilities {
         }
     }
     
-    public static func loginUser() {
+    public static func loginUser(completion: (result: String) -> Void) {
         let email =  NSUserDefaults.standardUserDefaults().objectForKey(kUserEmail) as! String?
         let password = NSUserDefaults.standardUserDefaults().objectForKey(kUserPassword) as! String?
 
@@ -192,7 +192,7 @@ public class ZypeUtilities {
             ZypeAppleTVBase.sharedInstance.login(email!, passwd: password!, completion:{ (logedIn: Bool, error: NSError?) in
                 print(logedIn)
                 if (error != nil) {
-                    
+                    completion(result: "error")
                     return
                 }
                 
@@ -207,6 +207,7 @@ public class ZypeUtilities {
                 } else {
                     NSUserDefaults.standardUserDefaults().setBool(false, forKey: kDeviceLinkedStatus)
                 }
+                completion(result: "Completed")
             })
         }
        

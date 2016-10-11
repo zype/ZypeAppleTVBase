@@ -56,7 +56,9 @@ class ZypeCacheManager: NSObject {
             let defaults = NSUserDefaults.standardUserDefaults()
             var favorites = defaults.arrayForKey(kFavoritesKey) as? Array<String> ?? [String]()
             for favorite in data! {
-               favorites.append(favorite.objectID)
+                if !favorites.contains(favorite.objectID){
+                    favorites.append(favorite.objectID)
+                }
             }
             defaults.setObject(favorites, forKey: kFavoritesKey)
             defaults.synchronize()
@@ -67,6 +69,16 @@ class ZypeCacheManager: NSObject {
     {
         ZypeLog.assert(favorites.contains(favoriteObject),message: "can not remove video from favorites")
         favorites.removeAtIndex(favorites.indexOf(favoriteObject)!)
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        var locFavorites = defaults.arrayForKey(kFavoritesKey) as? Array<String> ?? [String]()
+        
+            if locFavorites.contains(favoriteObject.objectID){
+                locFavorites.removeAtIndex(locFavorites.indexOf(favoriteObject.objectID)!)
+            }
+        
+        defaults.setObject(locFavorites, forKey: kFavoritesKey)
+        defaults.synchronize()
     }
     
     func findFavoteForObject(object: BaseModel) -> FavoriteModel?

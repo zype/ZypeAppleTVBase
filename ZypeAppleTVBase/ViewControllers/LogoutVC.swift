@@ -24,11 +24,11 @@ public class LogoutVC: UIViewController {
     }
 
     func setupText() {
-        let pageHeaderText = NSUserDefaults.standardUserDefaults().objectForKey(kLoginPageHeader)
+        let pageHeaderText = NSUserDefaults.standardUserDefaults().objectForKey(kLogoutPageHeader)
         if (pageHeaderText != nil) {
            self.logoutTitle.text = pageHeaderText as? String
         }
-        let pageFooterText = NSUserDefaults.standardUserDefaults().objectForKey(kLoginPageFooter)
+        let pageFooterText = NSUserDefaults.standardUserDefaults().objectForKey(kLogoutPageFooter)
         if (pageFooterText != nil) {
             self.logoutFooter.text = pageFooterText as? String
         }
@@ -38,6 +38,15 @@ public class LogoutVC: UIViewController {
     @IBAction func logoutClicked(sender: UIButton) {
         NSUserDefaults.standardUserDefaults().setBool(false, forKey: kDeviceLinkedStatus)
         ZypeAppleTVBase.sharedInstance.logOut()
+        
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(kUserEmail)
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(kUserPassword)
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let favorites = [String]()
+        defaults.setObject(favorites, forKey: kFavoritesKey)
+        defaults.synchronize()
+        
          NSNotificationCenter.defaultCenter().postNotificationName(kZypeReloadScreenNotification, object: nil)
     }
 }

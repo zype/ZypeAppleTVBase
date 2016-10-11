@@ -63,7 +63,6 @@ class LoginVC: UIViewController {
             return
         }
         
-        print ("login clicked")
         if (!(self.emailField.text?.isEmpty)! && !(self.passwordField.text?.isEmpty)!) {
             //store inputs in NSUserDefaults. We will be checking them on each app launch
             NSUserDefaults.standardUserDefaults().setObject(self.emailField.text!, forKey: kUserEmail)

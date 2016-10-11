@@ -18,6 +18,10 @@ public let kUserPassword = "user_password"
 
 public let kLoginPageHeader = "login_page_header"
 public let kLoginPageFooter = "login_page_footer"
+public let kLogoutPageHeader = "logout_page_header"
+public let kLogoutPageFooter = "logout_page_footer"
+public let kFavoritesMessage = "favorites_message"
+
 
 //Notifications
 public let kZypeReloadScreenNotification = "zype_reload_screen_notification"

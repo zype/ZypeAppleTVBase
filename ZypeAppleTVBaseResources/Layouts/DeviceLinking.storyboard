@@ -109,7 +109,7 @@
                                 <frame key="frameInset" minX="793" minY="531" width="340" height="86"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                <state key="normal" title="Login"/>
+                                <state key="normal" title="Sign In"/>
                                 <connections>
                                     <action selector="loginClicked:" destination="R0N-hP-twv" eventType="primaryActionTriggered" id="05L-92-Xb5"/>
                                 </connections>
@@ -159,7 +159,7 @@
                                 <frame key="frameInset" minX="793" minY="531" width="340" height="86"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                <state key="normal" title="Logout"/>
+                                <state key="normal" title="Sign Out"/>
                                 <connections>
                                     <action selector="logoutClicked:" destination="7GZ-UB-p6g" eventType="primaryActionTriggered" id="te7-0D-YT8"/>
                                 </connections>

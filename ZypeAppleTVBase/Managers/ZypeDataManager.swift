@@ -565,6 +565,8 @@ class ZypeDataManager : NSObject {
                         self.cacheManager.addFavoriteVideos(favorites)
                         
                     })
+                } else {
+                    
                 }
                 if (self.isLastPage(jsonDic) == false)
                 {
