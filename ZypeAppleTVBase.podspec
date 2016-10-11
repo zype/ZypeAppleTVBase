@@ -15,13 +15,13 @@ s.version = "0.3.0"
 s.license = { :type => "MIT", :file => "LICENSE" }
 
 # 4
-s.author = { "Andrey Kasatkin" => "andrey@zypemedia.com" }
+s.author = { "Andrey Kasatkin" => "andrey@zype.com" }
 
 # 5
 s.homepage = "https://github.com/zype/ZypeAppleTVBase.git"
 
 # 6
-s.source = { :git => "https://github.com/zype/ZypeAppleTVBase.git", :tag => "0.2.1"}
+s.source = { :git => "https://github.com/zype/ZypeAppleTVBase.git", :tag => "0.3.0"}
 
 # 7
 s.framework = "UIKit"
