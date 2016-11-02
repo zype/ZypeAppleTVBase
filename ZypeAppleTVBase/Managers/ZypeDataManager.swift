@@ -281,6 +281,28 @@ class ZypeDataManager : NSObject {
          }, update: serviceController.refreshAccessTokenWithCompletionHandler)
     }
 
+    //MARK: MyLibrary
+    func getMyLibrary(completion:(favorites: Array<FavoriteModel>?, error: NSError?) -> Void)
+    {
+        tokenManager.accessToken({ (token) -> Void in
+            self.serviceController.getMyLibrary(token, consumerId: self.consumer.ID, completion:{ (jsonDic, error) -> Void in
+                var err = error
+                if jsonDic != nil
+                {
+                    err = self.isServiceError(jsonDic!)
+                    if (err == nil)
+                    {
+                        print(jsonDic)
+                    }
+                }
+            })
+        
+            }, update: serviceController.refreshAccessTokenWithCompletionHandler)
+        
+       
+    }
+    
+    
     //MARK: zobjects
     func getZobjectTypes(queryModel: QueryZobjectTypesModel, toArray: Array<ZobjectTypeModel> = Array<ZobjectTypeModel>(),
         completion:(objectTypes: Array<ZobjectTypeModel>, error: NSError?) -> Void)

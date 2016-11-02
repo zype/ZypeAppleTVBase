@@ -166,6 +166,19 @@ public class ZypeAppleTVBase: NSObject {
         return dataManager?.cacheManager.findFavoteForObject(object)
     }
     
+    // MARK: MyLibrary
+    public func getMyLibrary(completion:(favorites: Array<FavoriteModel>?, error: NSError?) -> Void)
+    {
+        if self.dataManager == nil {
+            completion(favorites: nil, error: NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil))
+        }  else if self.consumer!.isLoggedIn == false {
+            completion(favorites: nil, error: NSError(domain:kErrorDomaine, code: kErrorConsumerNotLoggedIn, userInfo: nil))
+        } else {
+            dataManager?.getMyLibrary(completion)
+        }
+    }
+    
+    
     // MARK: Zobjects
     public func getZobjectTypes(queryModel: QueryZobjectTypesModel = QueryZobjectTypesModel(), completion:(objectTypes: Array<ZobjectTypeModel>?, error: NSError?) -> Void)
     {
