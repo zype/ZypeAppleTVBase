@@ -22,6 +22,9 @@ public let kLogoutPageHeader = "logout_page_header"
 public let kLogoutPageFooter = "logout_page_footer"
 public let kFavoritesMessage = "favorites_message"
 
+public let kPurchaseFromWebMessageTitle = "purchase_message_title"
+public let kPurchaseFromWebMessage = "purchase_message"
+
 
 //Notifications
 public let kZypeReloadScreenNotification = "zype_reload_screen_notification"

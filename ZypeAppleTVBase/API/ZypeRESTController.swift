@@ -19,7 +19,7 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
     private let kDeleteFavorite = "%@/consumers/%@/video_favorites/%@/?access_token=%@"
     
     //MyLibary
-    private let kGetMyLibrary = "%@/consumers/%@/video_favorites/?access_token=%@"
+    private let kGetMyLibrary = "%@/consumer/videos/?access_token=%@&page=1&per_page=500"
 
     //Zobjects
     private let kGetZobjectTypes = "%@/zobject_types?app_key=%@&page=%d&per_page=%d&keywords=%@"
@@ -187,7 +187,8 @@ class ZypeRESTController: NSObject, NSURLSessionDelegate {
     //MARK:  Library API
     func getMyLibrary(accessToken: String,consumerId: String, completion:(Dictionary<String, AnyObject>?, NSError?) -> Void)
     {
-        let urlAsString = String(format: kGetMyLibrary, self.keys.apiDomain, consumerId, accessToken)
+        print(accessToken)
+        let urlAsString = String(format: kGetMyLibrary, self.keys.apiDomain, accessToken)
         getQuery(urlAsString, withCompletion: completion)
     }
 

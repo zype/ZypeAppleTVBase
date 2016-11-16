@@ -284,6 +284,7 @@ class ZypeDataManager : NSObject {
     //MARK: MyLibrary
     func getMyLibrary(completion:(favorites: Array<FavoriteModel>?, error: NSError?) -> Void)
     {
+     //taken shortcut - will only retrieve first 500 items
         tokenManager.accessToken({ (token) -> Void in
             self.serviceController.getMyLibrary(token, consumerId: self.consumer.ID, completion:{ (jsonDic, error) -> Void in
                 var err = error
@@ -292,14 +293,21 @@ class ZypeDataManager : NSObject {
                     err = self.isServiceError(jsonDic!)
                     if (err == nil)
                     {
-                        print(jsonDic)
+                        let favorites = self.jsonToFavoriteArrayPrivate(jsonDic)
+                        dispatch_async(dispatch_get_main_queue(), {
+                            if (favorites != nil) {
+                                completion(favorites: favorites!, error: nil)
+                            } else {
+                                completion(favorites: nil, error: nil)
+                            }
+                        })
                     }
                 }
             })
         
             }, update: serviceController.refreshAccessTokenWithCompletionHandler)
         
-       
+        
     }
     
     
@@ -576,6 +584,12 @@ class ZypeDataManager : NSObject {
     }
     
     //MARK: Private
+    private func loadLibrary(page: Int = kApiFirstPage)
+    {
+        
+    }
+    
+    
     private func loadFavorites(page: Int = kApiFirstPage)
     {
         tokenManager.accessToken({ (token) -> Void in
