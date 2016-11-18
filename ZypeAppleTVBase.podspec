@@ -9,7 +9,7 @@ s.summary = "ZypeAppleTVBase lets a user use Zype tvOS SDK."
 s.requires_arc = true
 
 # 2
-s.version = "0.3.1"
+s.version = "0.3.2"
 
 # 3
 s.license = { :type => "MIT", :file => "LICENSE" }
@@ -21,7 +21,7 @@ s.author = { "Andrey Kasatkin" => "andrey@zype.com" }
 s.homepage = "https://github.com/zype/ZypeAppleTVBase.git"
 
 # 6
-s.source = { :git => "https://github.com/zype/ZypeAppleTVBase.git", :tag => "0.3.1"}
+s.source = { :git => "https://github.com/zype/ZypeAppleTVBase.git", :tag => "0.3.2"}
 
 # 7
 s.framework = "UIKit"

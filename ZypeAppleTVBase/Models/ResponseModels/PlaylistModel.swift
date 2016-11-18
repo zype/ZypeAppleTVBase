@@ -9,7 +9,7 @@
 import UIKit
 
 public class PlaylistModel: BaseModel {
- 
+    
     private(set) public var pId = ""
     private(set) public var descriptionString = ""
     private(set) public var keywords = Array<String>()
@@ -28,24 +28,84 @@ public class PlaylistModel: BaseModel {
     public init(fromJson: Dictionary<String, AnyObject>)
     {
         super.init(json: fromJson)
-        do
-        {
+        do {
             self.pId = try SSUtils.stringFromDictionary(fromJson, key: kJSON_Id)
+        }
+        catch _ {
+            ZypeLog.error("Exception: PlaylistModel - pId")
+        }
+        
+        do {
             self.descriptionString = try SSUtils.stringFromDictionary(fromJson, key: kJSONDescription)
+            
+        }
+        catch _ {
+            ZypeLog.error("Exception: PlaylistModel - Description")
+        }
+        
+        do {
             self.keywords = fromJson[kJSON_Keywords] as! Array<String>
+        }
+        catch _ {
+            ZypeLog.error("Exception: PlaylistModel - keywords")
+        }
+        
+        do {
             self.active = try SSUtils.boolFromDictionary(fromJson, key: kJSONActive)
+        }
+        catch _ {
+            ZypeLog.error("Exception: PlaylistModel - Active")
+        }
+        
+        do {
             self.priority = try SSUtils.intagerFromDictionary(fromJson, key: kJSONPriority)
+        }
+        catch _ {
+            ZypeLog.error("Exception: PlaylistModel - priority")
+        }
+        
+        do {
             self.createdAt = SSUtils.stringToDate(try SSUtils.stringFromDictionary(fromJson, key: kJSONCreatedAt))
+        }
+        catch _ {
+            ZypeLog.error("Exception: PlaylistModel - created At")
+        }
+        
+        do {
             self.updatedAt = SSUtils.stringToDate(try SSUtils.stringFromDictionary(fromJson, key: kJSONUpdatedAt))
+        }
+        catch _ {
+            ZypeLog.error("Exception: PlaylistModel - updated At")
+        }
+        
+        do {
             self.playlistItemCount = try SSUtils.intagerFromDictionary(fromJson, key: kJSONPlaylistItemCount)
+        }
+        catch _ {
+            ZypeLog.error("Exception: PlaylistModel - Playlist Item Content")
+        }
+        
+        do {
             self.siteID = try SSUtils.stringFromDictionary(fromJson, key: kJSONSiteId)
+        }
+        catch _ {
+            ZypeLog.error("Exception: PlaylistModel - site Id")
+        }
+        
+        do {
             self.relatedVideoIDs = fromJson[kJSONRelatedVideoIds] as! Array <String>
+        }
+        catch _ {
+            ZypeLog.error("Exception: PlaylistModel - related Video Id")
+        }
+        
+        do {
             self.parentId = try SSUtils.stringFromDictionary(fromJson, key: kJSONParentId)
         }
-        catch _
-        {
-            ZypeLog.error("Exception: PlaylistModel")
+        catch _ {
+            ZypeLog.error("Exception: PlaylistModel - Parent Id")
         }
+        
         self.loadThumbnails(fromJson[kJSONThumbnails] as? Array<AnyObject>)
         self.loadImages(fromJson[kJSONImages] as? Array<AnyObject>)
     }
@@ -67,7 +127,7 @@ public class PlaylistModel: BaseModel {
             completion(videos: videos, error: error)
         })
     }
-
+    
     private func loadThumbnails(thumbnails: Array<AnyObject>?)
     {
         do
@@ -90,7 +150,7 @@ public class PlaylistModel: BaseModel {
             ZypeLog.error("Exception: PlaylistModel | Load Thumbnails")
         }
     }
-
+    
     
     private func loadImages(images: Array<AnyObject>?)
     {
