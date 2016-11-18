@@ -43,13 +43,8 @@ public class PlaylistModel: BaseModel {
             ZypeLog.error("Exception: PlaylistModel - Description")
         }
         
-        do {
-            self.keywords = fromJson[kJSON_Keywords] as! Array<String>
-        }
-        catch _ {
-            ZypeLog.error("Exception: PlaylistModel - keywords")
-        }
-        
+        self.keywords = fromJson[kJSON_Keywords] as! Array<String>
+       
         do {
             self.active = try SSUtils.boolFromDictionary(fromJson, key: kJSONActive)
         }
@@ -92,12 +87,7 @@ public class PlaylistModel: BaseModel {
             ZypeLog.error("Exception: PlaylistModel - site Id")
         }
         
-        do {
-            self.relatedVideoIDs = fromJson[kJSONRelatedVideoIds] as! Array <String>
-        }
-        catch _ {
-            ZypeLog.error("Exception: PlaylistModel - related Video Id")
-        }
+        self.relatedVideoIDs = fromJson[kJSONRelatedVideoIds] as! Array <String>
         
         do {
             self.parentId = try SSUtils.stringFromDictionary(fromJson, key: kJSONParentId)
