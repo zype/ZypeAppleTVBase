@@ -10,31 +10,31 @@ import UIKit
 
 class ZypeTokenManager {
     
-    private let kApiKey_AccessToken = "access_token"
-    private let kApiKey_RefreshToken = "refresh_token"
-    private let kApiKey_CreatedAt  = "created_at"
-    private let kApiKey_ExpiresIn = "expires_in"
+    fileprivate let kApiKey_AccessToken = "access_token"
+    fileprivate let kApiKey_RefreshToken = "refresh_token"
+    fileprivate let kApiKey_CreatedAt  = "created_at"
+    fileprivate let kApiKey_ExpiresIn = "expires_in"
     
     let kTokenAcceptableBuffer:Int = 600
     
     var tokenModel = ZypeTokenModel()
     
-    func accessToken(completion: (token: String) ->Void, update:(refreshToken:String, completion:(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void) ->Void)
+    func accessToken(_ completion: @escaping (_ token: String) ->Void, update:(_ refreshToken:String, _ completion:(_ jsonDic: Dictionary<String, AnyObject>?, _ error: NSError?) -> Void) ->Void)
     {
         if tokenModel.refreshToken.isEmpty
         {
             ZypeLog.error("try to use emply refresh token")
-            completion(token: tokenModel.accessToken)
+            completion(tokenModel.accessToken)
         }
         else if isAccessTokenExpired() == false
         {
             print("isAccessTokenExpired() == false")
-            completion(token: tokenModel.accessToken)
+            completion(tokenModel.accessToken)
         }
         else
         {
               print("isAccessTokenExpired() UPDATING")
-            update(refreshToken: tokenModel.refreshToken, completion:{(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void in
+            update(tokenModel.refreshToken, {(jsonDic: Dictionary<String, AnyObject>?, error: NSError?) -> Void in
                 ZypeLog.assert(error == nil && jsonDic != nil, message: "error get new token")
                 if jsonDic != nil
                 {
@@ -43,12 +43,12 @@ class ZypeTokenManager {
                         ZypeLog.error("parse new token error")
                     }
                 }
-                completion(token: self.tokenModel.accessToken)
+                completion(self.tokenModel.accessToken)
             })
         }
     }
     
-    func setLoginAccessTokenData(data: Dictionary<String, AnyObject>) -> NSError?
+    func setLoginAccessTokenData(_ data: Dictionary<String, AnyObject>) -> NSError?
     {
         if setAccessTokenData(data) == false
         {
@@ -61,12 +61,12 @@ class ZypeTokenManager {
     
     func isAccessTokenExpired() -> Bool
     {
-        let currentDate = Int(NSDate().timeIntervalSince1970)
+        let currentDate = Int(Date().timeIntervalSince1970)
         print ("Token will expire in: \(tokenModel.expirationDate - currentDate)")
         return currentDate >= (tokenModel.expirationDate - kTokenAcceptableBuffer)
     }
     
-    private func setAccessTokenData(data: Dictionary<String, AnyObject>) -> Bool?
+    fileprivate func setAccessTokenData(_ data: Dictionary<String, AnyObject>) -> Bool?
     {
         do
         {

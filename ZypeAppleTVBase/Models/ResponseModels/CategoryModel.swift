@@ -8,10 +8,10 @@
 
 import UIKit
 
-public class CategoryModel : BaseModel {
+open class CategoryModel : BaseModel {
     
-    public let keywords: Array<String>
-    private(set) public var valuesArray: Array<CategoryValueModel>? = nil
+    open let keywords: Array<String>
+    fileprivate(set) open var valuesArray: Array<CategoryValueModel>? = nil
         
     init(fromJson: Dictionary<String, AnyObject>)
     {
@@ -20,13 +20,13 @@ public class CategoryModel : BaseModel {
         valuesArray = CategoryModel.getValues(fromJson[kJSONValues] as? Array<AnyObject>, parent: self)
     }
     
-    public func valueByID(ID: String) -> CategoryValueModel?
+    open func valueByID(_ ID: String) -> CategoryValueModel?
     {
         let filteredArray = self.valuesArray!.filter({(item) -> Bool in return item.ID == ID})
         return filteredArray.first
     }
     
-    private static func getKeywords(json: Array<AnyObject>?) -> Array<String>
+    fileprivate static func getKeywords(_ json: Array<AnyObject>?) -> Array<String>
     {
         if (json == nil)
         {
@@ -35,7 +35,7 @@ public class CategoryModel : BaseModel {
         return json as! Array<String>
     }
     
-    private static func getValues(json: Array<AnyObject>?, parent: CategoryModel) -> Array<CategoryValueModel>
+    fileprivate static func getValues(_ json: Array<AnyObject>?, parent: CategoryModel) -> Array<CategoryValueModel>
     {
         var labels = Array<CategoryValueModel>()
         if (json != nil)

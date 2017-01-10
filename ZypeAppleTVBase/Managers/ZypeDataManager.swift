@@ -11,12 +11,12 @@ import UIKit
 class ZypeDataManager : NSObject {
 
     //private
-    private let serviceController: ZypeRESTController
+    fileprivate let serviceController: ZypeRESTController
 
     //public
     internal let cacheManager = ZypeCacheManager()
-    private(set) internal var tokenManager = ZypeTokenManager()
-    private(set) internal var consumer = ConsumerModel()
+    fileprivate(set) internal var tokenManager = ZypeTokenManager()
+    fileprivate(set) internal var consumer = ConsumerModel()
 
     //MARK: initialize
     init(settings: SettingsModel)
@@ -25,30 +25,30 @@ class ZypeDataManager : NSObject {
         super.init()
     }
 
-    func initializeLoadCategories(load: Bool, error: NSError?, completion: (error: NSError?) ->Void)
+    func initializeLoadCategories(_ load: Bool, error: NSError?, completion: @escaping (_ error: NSError?) ->Void)
     {
         if load == false || error != nil
         {
-            completion(error: error)
+            completion(error)
         }
         else
         {
             self.getCategories(QueryCategoriesModel(), completion: { (_, error) -> Void in
-                completion(error: error)
+                completion(error)
             })
         }
     }
 
-    func initializeLoadPlaylists(load: Bool, error: NSError?, completion: (error: NSError?) ->Void)
+    func initializeLoadPlaylists(_ load: Bool, error: NSError?, completion: @escaping (_ error: NSError?) ->Void)
     {
         if load == false || error != nil
         {
-            completion(error: error)
+            completion(error)
         }
         else
         {
             self.getPlaylists(QueryPlaylistsModel(), completion: { (_, error) -> Void in
-                completion(error: error)
+                completion(error)
             })
         }
     }
@@ -61,7 +61,7 @@ class ZypeDataManager : NSObject {
         cacheManager.resetConsumer()
     }
 
-    func login(username: String, passwd: String, completion:(logedIn: Bool, error: NSError?) -> Void)
+    func login(_ username: String, passwd: String, completion:@escaping (_ logedIn: Bool, _ error: NSError?) -> Void)
     {
         serviceController.getTokenWithUsername(username, withPassword: passwd, withCompletion: {(data, error) -> Void in
             if (error != nil)
@@ -87,7 +87,7 @@ class ZypeDataManager : NSObject {
        })
     }
     
-    func login(deviceId: String, pin: String, completion:(logedIn: Bool, error: NSError?) -> Void)
+    func login(_ deviceId: String, pin: String, completion:@escaping (_ logedIn: Bool, _ error: NSError?) -> Void)
     {
         serviceController.getTokenWithDeviceId(deviceId, withPin: pin, withCompletion:{(data, error) -> Void in
             if (error != nil)
@@ -113,7 +113,7 @@ class ZypeDataManager : NSObject {
         })
     }
 
-    func loadConsumer(completion:(success: Bool, error: NSError?) -> Void)
+    func loadConsumer(_ completion:@escaping (_ success: Bool, _ error: NSError?) -> Void)
     {
         if (tokenManager.tokenModel.refreshToken.isEmpty)
         {
@@ -137,7 +137,7 @@ class ZypeDataManager : NSObject {
                                     {
                                         let emailString = try SSUtils.stringFromDictionary(response, key: kJSONEmail)
                                         let nameString = try SSUtils.stringFromDictionary(response, key: kJSONName)
-                                        dispatch_sync(dispatch_get_main_queue(),{
+                                        DispatchQueue.main.sync(execute: {
                                             self.consumer.setData(idString, email: emailString, name: nameString)
                                         })
                                         self.loginCompletion(self.consumer.isLoggedIn, error: error, completion: completion)
@@ -158,10 +158,10 @@ class ZypeDataManager : NSObject {
                 }
                 self.loginCompletion(false, error: error, completion: completion)
             })
-        }, update: serviceController.refreshAccessTokenWithCompletionHandler)
+        }, update: serviceController.refreshAccessTokenWithCompletionHandler as! (String, (Dictionary<String, AnyObject>?, NSError?) -> Void) -> Void)
     }
 
-    func createConsumer(consumer: ConsumerModel, completion:(success: Bool, error: NSError?) -> Void)
+    func createConsumer(_ consumer: ConsumerModel, completion:@escaping (_ success: Bool, _ error: NSError?) -> Void)
     {
         self.serviceController.createConsumer(consumer) { (jsonDic, err) -> Void in
             var success = false
@@ -174,15 +174,15 @@ class ZypeDataManager : NSObject {
                     success = true
                 }
             }
-            dispatch_sync(dispatch_get_main_queue(),{
-                completion(success: success, error: err)
+            DispatchQueue.main.sync(execute: {
+                completion(_: success, err)
             })
         }
     }
 
     //MARK: Categories
-    func getCategories(queryModel: QueryCategoriesModel,  toArray: Array<CategoryModel> = Array<CategoryModel>(),
-        completion:(categories: Array<CategoryModel>, error: NSError?) -> Void)
+    func getCategories(_ queryModel: QueryCategoriesModel,  toArray: Array<CategoryModel> = Array<CategoryModel>(),
+        completion:@escaping (_ categories: Array<CategoryModel>, _ error: NSError?) -> Void)
     {
         var toArr = toArray
         serviceController.getCategories(queryModel, completion: { (jsonDic, error) -> Void in
@@ -210,15 +210,15 @@ class ZypeDataManager : NSObject {
                     }
                 }
             }
-            dispatch_async(dispatch_get_main_queue(), {
-                completion(categories: self.cacheManager.synchronizeCategories(toArr)!, error: err)
+            DispatchQueue.main.async(execute: {
+                completion(self.cacheManager.synchronizeCategories(toArr)!, err)
             })
         })
     }
 
     //MARK: Videos
-    func getVideos(queryModel: QueryVideosModel, returnArray: Array<VideoModel> = Array<VideoModel>(),
-        completion:((videos: Array<VideoModel>?, error: NSError?) -> Void))
+    func getVideos(_ queryModel: QueryVideosModel, returnArray: Array<VideoModel> = Array<VideoModel>(),
+        completion:@escaping ((_ videos: Array<VideoModel>?, _ error: NSError?) -> Void))
     {
         var returnArr = returnArray
         serviceController.getVideos(queryModel, completion:{ (jsonDic, error) -> Void in
@@ -231,7 +231,7 @@ class ZypeDataManager : NSObject {
                     let videos = self.jsonToVideosArrayPrivate(jsonDic)
                     if (videos != nil)
                     {
-                        returnArr.appendContentsOf(videos!)
+                        returnArr.append(contentsOf: videos!)
                     }
                     if (queryModel.perPage == 0 && self.isLastPage(jsonDic) == false)
                     {
@@ -246,27 +246,27 @@ class ZypeDataManager : NSObject {
     }
 
     //TODO need  add subscriptions and test
-    func getVideoObject(video: VideoModel, type: VideoUrlType, completion:(playerObject: VideoObjectModel?, error: NSError?) -> Void)
+    func getVideoObject(_ video: VideoModel, type: VideoUrlType, completion:@escaping (_ playerObject: VideoObjectModel?, _ error: NSError?) -> Void)
     {
         ZypeFactory.videoUrl(type, restController: serviceController)?.getVideoObject(video, completion: {(player, error) in
-            dispatch_async(dispatch_get_main_queue(), {
-                completion(playerObject: player, error: error)
+            DispatchQueue.main.async(execute: {
+                completion(player, error)
             })
         })
     }
 
    //MARK: favorites
-    func getFavorites(completion:(favorites: Array<FavoriteModel>?, error: NSError?) -> Void)
+    func getFavorites(_ completion:(_ favorites: Array<FavoriteModel>?, _ error: NSError?) -> Void)
     {
-        completion(favorites: cacheManager.favorites, error: nil)
+        completion(cacheManager.favorites, nil)
     }
 
-    func setFavorite(object: BaseModel, shouldSet: Bool, completion:(success: Bool, error: NSError?) -> Void)
+    func setFavorite(_ object: BaseModel, shouldSet: Bool, completion:@escaping (_ success: Bool, _ error: NSError?) -> Void)
     {
         let favoriteObject: FavoriteModel? = shouldSet == true ? nil : cacheManager.findFavoteForObject(object)
         if (shouldSet == false && favoriteObject == nil)
         {
-            completion(success: false, error: NSError(domain: kErrorDomaine, code: kErrorItemNotInFavorites, userInfo: nil))
+            completion(false, NSError(domain: kErrorDomaine, code: kErrorItemNotInFavorites, userInfo: nil))
             return
         }
         tokenManager.accessToken({ (token) -> Void in
@@ -278,11 +278,11 @@ class ZypeDataManager : NSObject {
             {
                 self.unfavoriteVideo(token, favoriteObject: favoriteObject!, completion: completion)
             }
-         }, update: serviceController.refreshAccessTokenWithCompletionHandler)
+         }, update: serviceController.refreshAccessTokenWithCompletionHandler as! (String, (Dictionary<String, AnyObject>?, NSError?) -> Void) -> Void)
     }
 
     //MARK: MyLibrary
-    func getMyLibrary(completion:(favorites: Array<FavoriteModel>?, error: NSError?) -> Void)
+    func getMyLibrary(_ completion:@escaping (_ favorites: Array<FavoriteModel>?, _ error: NSError?) -> Void)
     {
      //taken shortcut - will only retrieve first 500 items
         tokenManager.accessToken({ (token) -> Void in
@@ -294,26 +294,26 @@ class ZypeDataManager : NSObject {
                     if (err == nil)
                     {
                         let favorites = self.jsonToFavoriteArrayPrivate(jsonDic)
-                        dispatch_async(dispatch_get_main_queue(), {
+                        DispatchQueue.main.async(execute: {
                             if (favorites != nil) {
-                                completion(favorites: favorites!, error: nil)
+                                completion(favorites!, nil)
                             } else {
-                                completion(favorites: nil, error: nil)
+                                completion(nil, nil)
                             }
                         })
                     }
                 }
             })
         
-            }, update: serviceController.refreshAccessTokenWithCompletionHandler)
+            }, update: serviceController.refreshAccessTokenWithCompletionHandler as! (String, (Dictionary<String, AnyObject>?, NSError?) -> Void) -> Void)
         
         
     }
     
     
     //MARK: zobjects
-    func getZobjectTypes(queryModel: QueryZobjectTypesModel, toArray: Array<ZobjectTypeModel> = Array<ZobjectTypeModel>(),
-        completion:(objectTypes: Array<ZobjectTypeModel>, error: NSError?) -> Void)
+    func getZobjectTypes(_ queryModel: QueryZobjectTypesModel, toArray: Array<ZobjectTypeModel> = Array<ZobjectTypeModel>(),
+        completion:@escaping (_ objectTypes: Array<ZobjectTypeModel>, _ error: NSError?) -> Void)
     {
         var toArr = toArray
         self.serviceController.getZobjectTypes(queryModel) { (jsonDic, error) -> Void in
@@ -336,14 +336,14 @@ class ZypeDataManager : NSObject {
                 self.getZobjectTypes(queryModel, toArray: toArr, completion: completion)
                 return
             }
-            dispatch_async(dispatch_get_main_queue(), {
-                completion(objectTypes: self.cacheManager.synchronizeZobjectTypes(toArr)!, error: err)
+            DispatchQueue.main.async(execute: {
+                completion(self.cacheManager.synchronizeZobjectTypes(toArr)!, err)
             })
         }
     }
 
-    func getZobjects(queryModel: QueryZobjectsModel, toArray: Array<ZobjectModel> = Array<ZobjectModel>(),
-        completion:(objects: Array<ZobjectModel>, error: NSError?) -> Void)
+    func getZobjects(_ queryModel: QueryZobjectsModel, toArray: Array<ZobjectModel> = Array<ZobjectModel>(),
+        completion:@escaping (_ objects: Array<ZobjectModel>, _ error: NSError?) -> Void)
     {
         var toArr = toArray
         self.serviceController.getZobjects(queryModel, completion: {(jsonDic, error) -> Void in
@@ -366,16 +366,16 @@ class ZypeDataManager : NSObject {
                 self.getZobjects(queryModel, toArray: toArr, completion: completion)
                 return
             }
-            dispatch_async(dispatch_get_main_queue(), {
-                completion(objects: self.cacheManager.synchronizeZobjects(toArr)!, error: err)
+            DispatchQueue.main.async(execute: {
+                completion(self.cacheManager.synchronizeZobjects(toArr)!, err)
             })
         })
     }
 
     //MARK: Subscriptions
     //TODO need convert subscription from json to model
-    func getSubscriptions(queryModel: QuerySubscriptionsModel, toArray: Array<SubscriptionModel> = Array<SubscriptionModel>(),
-        completion:(subscriptions: Array<SubscriptionModel>, error: NSError?) -> Void)
+    func getSubscriptions(_ queryModel: QuerySubscriptionsModel, toArray: Array<SubscriptionModel> = Array<SubscriptionModel>(),
+        completion:@escaping (_ subscriptions: Array<SubscriptionModel>, _ error: NSError?) -> Void)
     {
         var toArr = toArray
         self.serviceController.getSubscriptions(queryModel, completion: { (jsonDic, error) -> Void in
@@ -398,14 +398,14 @@ class ZypeDataManager : NSObject {
                     }
                 }
             }
-            dispatch_async(dispatch_get_main_queue(), {
-                completion(subscriptions: toArr, error: err)
+            DispatchQueue.main.async(execute: {
+                completion(toArr, err)
             })
         })
     }
 
     //TODO need api not work
-    func createSubscription(planID: String, completion:(subscription: SubscriptionModel?, error: NSError?) -> Void)
+    func createSubscription(_ planID: String, completion:@escaping (_ subscription: SubscriptionModel?, _ error: NSError?) -> Void)
     {
         self.serviceController.createSubscription(self.consumer.ID, planID: planID, completion:{ (jsonDic, error) -> Void in
             var err = error
@@ -418,13 +418,13 @@ class ZypeDataManager : NSObject {
                     subscription = SubscriptionModel(fromJson: jsonDic![kJSONResponse] as! Dictionary<String, AnyObject>)
                 }
             }
-            dispatch_async(dispatch_get_main_queue(), {
-                completion(subscription: subscription, error: err)
+            DispatchQueue.main.async(execute: {
+                completion(subscription, err)
             })
         })
     }
 
-    func retrieveSubscription(subscription: SubscriptionModel, completion:(subscription: SubscriptionModel?, error: NSError?) -> Void)
+    func retrieveSubscription(_ subscription: SubscriptionModel, completion:@escaping (_ subscription: SubscriptionModel?, _ error: NSError?) -> Void)
     {
         self.serviceController.retrieveSubscription(subscription.ID, completion:{ (jsonDic, error) -> Void in
             var err = error
@@ -437,13 +437,13 @@ class ZypeDataManager : NSObject {
                     subscription = SubscriptionModel(fromJson: jsonDic![kJSONResponse] as! Dictionary<String, AnyObject>)
                 }
             }
-            dispatch_async(dispatch_get_main_queue(), {
-                completion(subscription: subscription, error: err)
+            DispatchQueue.main.async(execute: {
+                completion(subscription, err)
             })
         })
     }
 
-    func updateSubscription(planID: String, completion:(subscription: SubscriptionModel?, error: NSError?) -> Void)
+    func updateSubscription(_ planID: String, completion:@escaping (_ subscription: SubscriptionModel?, _ error: NSError?) -> Void)
     {
         self.serviceController.updateSubscription(self.consumer.ID, planID: planID, completion: {(jsonDic, error) -> Void in
             var err = error
@@ -456,24 +456,24 @@ class ZypeDataManager : NSObject {
                     subscription = SubscriptionModel(fromJson: jsonDic![kJSONResponse] as! Dictionary<String, AnyObject>)
                 }
             }
-            dispatch_async(dispatch_get_main_queue(), {
-                completion(subscription: subscription, error: err)
+            DispatchQueue.main.async(execute: {
+                completion(subscription, err)
             })
         })
     }
 
-    func removeSubscription(subscription: SubscriptionModel, completion:(success: Bool, error: NSError?) -> Void)
+    func removeSubscription(_ subscription: SubscriptionModel, completion:@escaping (_ success: Bool, _ error: NSError?) -> Void)
     {
         self.serviceController.removeSubscription(subscription.ID, completion: { (jsonDic, error) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
-                completion(success: false, error: error)
+            DispatchQueue.main.async(execute: {
+                completion(false, error)
             })
         })
     }
 
     //MARK: play list
-    func getPlaylists(queryModel: QueryPlaylistsModel, toArray: Array<PlaylistModel> = Array<PlaylistModel>(),
-        completion:(playlists: Array<PlaylistModel>, error: NSError?) -> Void)
+    func getPlaylists(_ queryModel: QueryPlaylistsModel, toArray: Array<PlaylistModel> = Array<PlaylistModel>(),
+        completion:@escaping (_ playlists: Array<PlaylistModel>, _ error: NSError?) -> Void)
     {
         var toArr = toArray
         self.serviceController.getPlaylists(queryModel, completion: { (jsonDic, error) -> Void in
@@ -495,14 +495,14 @@ class ZypeDataManager : NSObject {
                     }
                 }
             }
-            dispatch_async(dispatch_get_main_queue(), {
-                completion(playlists: self.cacheManager.synchronizePlaylists(toArr), error: err)
+            DispatchQueue.main.async(execute: {
+                completion(self.cacheManager.synchronizePlaylists(toArr), err)
             })
         })
     }
 
-    func retrieveVideosInPlaylist(queryModel: QueryRetrieveVideosInPlaylistModel, toArray: Array<VideoModel> = Array<VideoModel>(),
-        completion:(videos: Array<VideoModel>?, error: NSError?) -> Void)
+    func retrieveVideosInPlaylist(_ queryModel: QueryRetrieveVideosInPlaylistModel, toArray: Array<VideoModel> = Array<VideoModel>(),
+        completion:@escaping (_ videos: Array<VideoModel>?, _ error: NSError?) -> Void)
     {
         var toArr = toArray
         self.serviceController.retrieveVideosInPlaylist(queryModel, completion: { (jsonDic, error) -> Void in
@@ -515,7 +515,7 @@ class ZypeDataManager : NSObject {
                     let videos = self.jsonToVideosArrayPrivate(jsonDic)
                     if (videos != nil)
                     {
-                        toArr.appendContentsOf(videos!)
+                        toArr.append(contentsOf: videos!)
                     }
                     if (queryModel.perPage == 0 && self.isLastPage(jsonDic) == false)
                     {
@@ -530,45 +530,45 @@ class ZypeDataManager : NSObject {
     }
     
     //MARK: App Info
-    func loadAppInfo(queryModel: QueryBaseModel, completion:(backgroundUrl: String?, error: NSError?) -> Void)
+    func loadAppInfo(_ queryModel: QueryBaseModel, completion:@escaping (_ backgroundUrl: String?, _ error: NSError?) -> Void)
     {
-        self.serviceController.getAppInfo(queryModel, completion: { (jsonDic, let error) -> Void in
+        self.serviceController.getAppInfo(queryModel, completion: { (jsonDic, error) -> Void in
             if jsonDic != nil {
                 let response = jsonDic![kJSONResponse] as! NSDictionary
-                let backgroundImageUrl = response .valueForKey("background_url") as? String
+                let backgroundImageUrl = response .value(forKey: "background_url") as? String
                 
-                completion(backgroundUrl: backgroundImageUrl, error:nil)
+                completion(backgroundImageUrl, nil)
                 
             }
         })
     }
     
     //MARK: Device Linking
-    func getDevicePin(device: String, completion:(devicepPin: String?, error: NSError?) -> Void)
+    func getDevicePin(_ device: String, completion:@escaping (_ devicepPin: String?, _ error: NSError?) -> Void)
     {
-        self.serviceController.getDevicePin(device, completion: { (jsonDic, let error) -> Void in
+        self.serviceController.getDevicePin(device, completion: { (jsonDic, error) -> Void in
             if jsonDic != nil {
                 let response = jsonDic![kJSONResponse] as! NSDictionary
-                let devicepPin = response .valueForKey("pin") as? String
+                let devicepPin = response .value(forKey: "pin") as? String
                 
-                completion(devicepPin: devicepPin, error:nil)
+                completion(devicepPin, nil)
                 
             }
         })
     }
 
-    func getLinkedStatus(device: String, completion:(linked: Bool?,pin: String?, error: NSError?) -> Void)
+    func getLinkedStatus(_ device: String, completion:@escaping (_ linked: Bool?,_ pin: String?, _ error: NSError?) -> Void)
     {
-        self.serviceController.getLinkedStatus(device, completion: { (jsonDic, let error) -> Void in
+        self.serviceController.getLinkedStatus(device, completion: { (jsonDic, error) -> Void in
             if jsonDic != nil {
                 let message = jsonDic!["message"] as? String
                 if (message == "Invalid Device Pin.") {
-                    completion(linked: false, pin:nil, error:nil)
+                    completion(false, nil, nil)
                 } else {
                 let response = jsonDic![kJSONResponse] as? NSDictionary
-                let linkedStatus = response!.valueForKey("linked") as? Bool
-                let pin = response!.valueForKey("pin") as? String
-                    completion(linked: linkedStatus, pin: pin, error:nil)
+                let linkedStatus = response!.value(forKey: "linked") as? Bool
+                let pin = response!.value(forKey: "pin") as? String
+                    completion(linkedStatus, pin, nil)
                 }
                 
             }
@@ -576,28 +576,28 @@ class ZypeDataManager : NSObject {
     }
     
     //MARK: Token
-    func getToken(completion:(token: String?, error: NSError?) -> Void)
+    func getToken(_ completion:@escaping (_ token: String?, _ error: NSError?) -> Void)
     {
         tokenManager.accessToken({ (token) -> Void in
-            completion(token: token, error: nil)
-            }, update: serviceController.refreshAccessTokenWithCompletionHandler)
+            completion(token, nil)
+            }, update: serviceController.refreshAccessTokenWithCompletionHandler as! (String, (Dictionary<String, AnyObject>?, NSError?) -> Void) -> Void)
     }
     
     //MARK: Private
-    private func loadLibrary(page: Int = kApiFirstPage)
+    fileprivate func loadLibrary(_ page: Int = kApiFirstPage)
     {
         
     }
     
     
-    private func loadFavorites(page: Int = kApiFirstPage)
+    fileprivate func loadFavorites(_ page: Int = kApiFirstPage)
     {
         tokenManager.accessToken({ (token) -> Void in
             self.serviceController.getFavorites(token, consumerId: self.consumer.ID, page: page, completion: { (jsonDic, error) -> Void in
                 let favorites = self.jsonToFavoriteArrayPrivate(jsonDic)
                 if (favorites != nil)
                 {
-                    dispatch_async(dispatch_get_main_queue(),{
+                    DispatchQueue.main.async(execute: {
                         self.cacheManager.addFavoriteVideos(favorites)
                         
                     })
@@ -609,10 +609,10 @@ class ZypeDataManager : NSObject {
                     self.loadFavorites(page + 1)
                 }
             })
-            }, update: serviceController.refreshAccessTokenWithCompletionHandler)
+            }, update: serviceController.refreshAccessTokenWithCompletionHandler as! (String, (Dictionary<String, AnyObject>?, NSError?) -> Void) -> Void)
     }
     
-    private func favoriteVideo(token: String, object: BaseModel, completion:(success: Bool, error: NSError?) -> Void)
+    fileprivate func favoriteVideo(_ token: String, object: BaseModel, completion:@escaping (_ success: Bool, _ error: NSError?) -> Void)
     {
         self.serviceController.favoriteObject(token, consumerId: self.consumer.ID, objectID: object.ID, completion: { (jsonDic, error) -> Void in
             var err = error
@@ -622,33 +622,33 @@ class ZypeDataManager : NSObject {
             {
                  err = NSError(domain: kErrorDomaine, code: kErrorServiceError, userInfo: jsonDic as? Dictionary<String, String>)
             }
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 if (success == true)
                 {
                     self.cacheManager.addFavoriteVideos(favorites)
                 }
-                completion(success: success, error: err)
+                completion(success, err)
             })
         })
     }
 
-    private func unfavoriteVideo(token: String, favoriteObject: FavoriteModel, completion:(success: Bool, error: NSError?) -> Void)
+    fileprivate func unfavoriteVideo(_ token: String, favoriteObject: FavoriteModel, completion:@escaping (_ success: Bool, _ error: NSError?) -> Void)
     {
         self.serviceController.unfavoriteObject(token, consumerId: self.consumer.ID, favoriteID: favoriteObject.ID, completion: { (statusCode, error) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 if (statusCode == kHTTPCodeNoContent)
                 {
                     self.cacheManager.removeFromFavorites(favoriteObject)
                 }
-                completion(success: statusCode == kHTTPCodeNoContent, error: error)
+                completion(statusCode == kHTTPCodeNoContent, error)
             })
         })
     }
 
-    private func loginCompletion(logedIn: Bool, error: NSError?, completion:(logedIn: Bool, error: NSError?) -> Void)
+    fileprivate func loginCompletion(_ logedIn: Bool, error: NSError?, completion:@escaping (_ logedIn: Bool, _ error: NSError?) -> Void)
     {
-        dispatch_async(dispatch_get_main_queue(),{
-            completion(logedIn: logedIn, error: error)
+        DispatchQueue.main.async(execute: {
+            completion(logedIn, error)
         })
         if (logedIn == true)
         {
@@ -656,14 +656,14 @@ class ZypeDataManager : NSObject {
         }
     }
 
-    private func videoCompletion(videos: Array<VideoModel>?, error: NSError? ,completion:(videos: Array<VideoModel>?, error: NSError?) -> Void)
+    fileprivate func videoCompletion(_ videos: Array<VideoModel>?, error: NSError? ,completion:@escaping (_ videos: Array<VideoModel>?, _ error: NSError?) -> Void)
     {
-        dispatch_async(dispatch_get_main_queue(), {
-            completion(videos: self.cacheManager.synchronizeVideos(videos), error: error)
+        DispatchQueue.main.async(execute: {
+            completion(self.cacheManager.synchronizeVideos(videos), error)
         })
     }
 
-    private func jsonToFavoriteArrayPrivate(jsonDic: Dictionary<String, AnyObject>?) -> Array<FavoriteModel>?
+    fileprivate func jsonToFavoriteArrayPrivate(_ jsonDic: Dictionary<String, AnyObject>?) -> Array<FavoriteModel>?
     {
         if (jsonDic != nil)
         {
@@ -688,7 +688,7 @@ class ZypeDataManager : NSObject {
         return nil
     }
 
-    private func jsonToVideosArrayPrivate(jsonDic: Dictionary<String, AnyObject>?) -> Array<VideoModel>?
+    fileprivate func jsonToVideosArrayPrivate(_ jsonDic: Dictionary<String, AnyObject>?) -> Array<VideoModel>?
     {
         if (jsonDic != nil)
         {
@@ -706,7 +706,7 @@ class ZypeDataManager : NSObject {
         return nil
     }
 
-    private func isServiceError(jsonDic: Dictionary<String, AnyObject>, shouldContainsField: String = kJSONResponse) -> NSError?
+    fileprivate func isServiceError(_ jsonDic: Dictionary<String, AnyObject>, shouldContainsField: String = kJSONResponse) -> NSError?
     {
         let response = jsonDic[shouldContainsField]
         if (response != nil)
@@ -716,7 +716,7 @@ class ZypeDataManager : NSObject {
         return NSError(domain: kErrorDomaine, code: kErrorServiceError, userInfo: jsonDic as? Dictionary<String, String>)
     }
 
-    private func isLastPage(jsonDic:Dictionary<String, AnyObject>?) -> Bool
+    fileprivate func isLastPage(_ jsonDic:Dictionary<String, AnyObject>?) -> Bool
     {
         do
         {

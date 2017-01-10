@@ -8,10 +8,10 @@
 
 import UIKit
 
-public class FavoriteModel : NSObject {
+open class FavoriteModel : NSObject {
 
-    private (set) public var ID = ""
-    private (set) public var objectID = ""
+    fileprivate (set) open var ID = ""
+    fileprivate (set) open var objectID = ""
     
     init(json: Dictionary<String, AnyObject>)
     {

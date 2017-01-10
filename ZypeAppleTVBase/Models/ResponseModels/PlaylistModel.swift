@@ -8,22 +8,22 @@
 
 import UIKit
 
-public class PlaylistModel: BaseModel {
+open class PlaylistModel: BaseModel {
     
-    private(set) public var pId = ""
-    private(set) public var descriptionString = ""
-    private(set) public var keywords = Array<String>()
-    private(set) public var active = false
-    private(set) public var priority = 0
-    private(set) public var createdAt: NSDate?
-    private(set) public var updatedAt: NSDate?
-    private(set) public var playlistItemCount = 0
-    private(set) public var siteID = ""
-    private(set) public var relatedVideoIDs = Array<String>()
-    private(set) public var parentId = ""
+    fileprivate(set) open var pId = ""
+    fileprivate(set) open var descriptionString = ""
+    fileprivate(set) open var keywords = Array<String>()
+    fileprivate(set) open var active = false
+    fileprivate(set) open var priority = 0
+    fileprivate(set) open var createdAt: Date?
+    fileprivate(set) open var updatedAt: Date?
+    fileprivate(set) open var playlistItemCount = 0
+    fileprivate(set) open var siteID = ""
+    fileprivate(set) open var relatedVideoIDs = Array<String>()
+    fileprivate(set) open var parentId = ""
     
-    private(set) public var thumbnails = Array<ThumbnailModel>()
-    private(set) public var images = Array<ThumbnailModel>()
+    fileprivate(set) open var thumbnails = Array<ThumbnailModel>()
+    fileprivate(set) open var images = Array<ThumbnailModel>()
     
     public init(fromJson: Dictionary<String, AnyObject>)
     {
@@ -100,25 +100,25 @@ public class PlaylistModel: BaseModel {
         self.loadImages(fromJson[kJSONImages] as? Array<AnyObject>)
     }
     
-    public func getVideos(loadedSince: NSDate = NSDate(), completion:(videos: Array<VideoModel>?, error: NSError?) -> Void)
+    open func getVideos(_ loadedSince: Date = Date(), completion:@escaping (_ videos: Array<VideoModel>?, _ error: NSError?) -> Void)
     {
         let videos = self.userData["videos"]
         if (videos != nil)
         {
-            if(loadedSince.compare(self.userData["date"] as! NSDate) == NSComparisonResult.OrderedAscending)
+            if(loadedSince.compare(self.userData["date"] as! Date) == ComparisonResult.orderedAscending)
             {
-                completion(videos: videos as? Array<VideoModel>, error: nil)
+                completion(videos as? Array<VideoModel>, nil)
                 return
             }
         }
         ZypeAppleTVBase.sharedInstance.retrieveVideosInPlaylist(QueryRetrieveVideosInPlaylistModel(playlist: self), completion:{(videos, error) -> Void in
-            self.userData["videos"] = videos
-            self.userData["date"] = NSDate()
-            completion(videos: videos, error: error)
+            self.userData["videos"] = videos as AnyObject?
+            self.userData["date"] = Date() as AnyObject?
+            completion(videos, error)
         })
     }
     
-    private func loadThumbnails(thumbnails: Array<AnyObject>?)
+    fileprivate func loadThumbnails(_ thumbnails: Array<AnyObject>?)
     {
         do
         {
@@ -142,7 +142,7 @@ public class PlaylistModel: BaseModel {
     }
     
     
-    private func loadImages(images: Array<AnyObject>?)
+    fileprivate func loadImages(_ images: Array<AnyObject>?)
     {
         do
         {

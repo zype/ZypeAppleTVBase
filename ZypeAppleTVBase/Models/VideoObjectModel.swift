@@ -8,13 +8,13 @@
 
 import UIKit
 
-public class VideoObjectModel: NSObject {
+open class VideoObjectModel: NSObject {
 
-    internal(set) public var videoURL = ""
+    internal(set) open var videoURL = ""
     
-     internal(set) public var videoId = ""
+     internal(set) open var videoId = ""
     
-    internal(set) public var json: Dictionary <String, AnyObject>?
+    internal(set) open var json: Dictionary <String, AnyObject>?
     
     
 }

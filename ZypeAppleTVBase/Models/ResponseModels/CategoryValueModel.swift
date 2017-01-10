@@ -8,9 +8,9 @@
 
 import UIKit
 
-public class CategoryValueModel: BaseModel {
+open class CategoryValueModel: BaseModel {
 
-    private (set) internal weak var parent:CategoryModel?
+    fileprivate (set) internal weak var parent:CategoryModel?
     
     init(name: String, parent: CategoryModel)
     {
@@ -18,39 +18,39 @@ public class CategoryValueModel: BaseModel {
         self.parent = parent
     }
  
-    public func getVideos(loadedSince: NSDate = NSDate(), completion:(videos: Array<VideoModel>?, error: NSError?) -> Void)
+    open func getVideos(_ loadedSince: Date = Date(), completion:@escaping (_ videos: Array<VideoModel>?, _ error: NSError?) -> Void)
     {
         let videos = self.userData["videos"]
         if (videos != nil)
         {
-            if(loadedSince.compare(self.userData["videos_date"] as! NSDate) == NSComparisonResult.OrderedAscending)
+            if(loadedSince.compare(self.userData["videos_date"] as! Date) == ComparisonResult.orderedAscending)
             {
-                completion(videos: videos as? Array<VideoModel>, error: nil)
+                completion(videos as? Array<VideoModel>, nil)
                 return
             }
         }
         ZypeAppleTVBase.sharedInstance.getVideos({ (videos, error) -> Void in
-            self.userData["videos"] = videos
-            self.userData["videos_date"] = NSDate()
-            completion(videos: videos, error: error)
+            self.userData["videos"] = videos as AnyObject?
+            self.userData["videos_date"] = Date() as AnyObject?
+            completion(videos, error)
         }, categoryValue: self)
     }
     
-    public func getPlaylists(loadedSince: NSDate = NSDate(), completion:(playlists: Array<PlaylistModel>?, error: NSError?) -> Void)
+    open func getPlaylists(_ loadedSince: Date = Date(), completion:@escaping (_ playlists: Array<PlaylistModel>?, _ error: NSError?) -> Void)
     {
         let lists = self.userData["playlists"]
         if lists != nil
         {
-            if(loadedSince.compare(self.userData["playlists_date"] as! NSDate) == NSComparisonResult.OrderedAscending)
+            if(loadedSince.compare(self.userData["playlists_date"] as! Date) == ComparisonResult.orderedAscending)
             {
-                completion(playlists: lists as? Array<PlaylistModel>, error: nil)
+                completion(lists as? Array<PlaylistModel>, nil)
                 return
             }
         }
         ZypeAppleTVBase.sharedInstance.getPlaylists(QueryPlaylistsModel(category: self), completion: { (playlists, error) -> Void in
-            self.userData["playlists"] = playlists
-            self.userData["playlists_date"] = NSDate()
-            completion(playlists: playlists, error: error)
+            self.userData["playlists"] = playlists as AnyObject?
+            self.userData["playlists_date"] = Date() as AnyObject?
+            completion(playlists, error)
         })
     }
 

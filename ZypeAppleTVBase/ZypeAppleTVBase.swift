@@ -8,14 +8,14 @@
 
 import UIKit
 
-public class ZypeAppleTVBase: NSObject {
+open class ZypeAppleTVBase: NSObject {
 
-    public static let sharedInstance = ZypeAppleTVBase()
-    public static var debug = true
+    open static let sharedInstance = ZypeAppleTVBase()
+    open static var debug = true
     
-    private var dataManager: ZypeDataManager?
+    fileprivate var dataManager: ZypeDataManager?
     
-    public var consumer: ConsumerModel? {
+    open var consumer: ConsumerModel? {
         return dataManager?.consumer
     }
     
@@ -23,10 +23,10 @@ public class ZypeAppleTVBase: NSObject {
         super.init()
     }
     
-    public func initialize(settings: SettingsModel = SettingsModel(),
+    open func initialize(_ settings: SettingsModel = SettingsModel(),
         loadCategories: Bool = false,
         loadPlaylists: Bool = false,
-        completion:(error: NSError?) -> Void)
+        completion:@escaping (_ error: NSError?) -> Void)
     {
         dataManager = ZypeDataManager(settings: settings)
         dataManager!.initializeLoadCategories(loadCategories, error: nil) { (error) -> Void in
@@ -34,66 +34,66 @@ public class ZypeAppleTVBase: NSObject {
         }
     }
     
-    public func reset()
+    open func reset()
     {
         self.dataManager = nil
     }
     
     //MARK:login
-    public func login(username: String, passwd: String, completion:((logedIn: Bool, error: NSError?) -> Void), token: ZypeTokenModel = ZypeTokenModel())
+    open func login(_ username: String, passwd: String, completion:@escaping ((_ logedIn: Bool, _ error: NSError?) -> Void), token: ZypeTokenModel = ZypeTokenModel())
     {
         dataManager?.tokenManager.tokenModel = token
-        dataManager == nil ? completion(logedIn: false, error: NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
+        dataManager == nil ? completion(false, NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
         dataManager?.login(username, passwd: passwd, completion: completion)
     }
     
-    public func login(deviceId: String, pin: String, completion:((logedIn: Bool, error: NSError?) -> Void), token: ZypeTokenModel = ZypeTokenModel())
+    open func login(_ deviceId: String, pin: String, completion:@escaping ((_ logedIn: Bool, _ error: NSError?) -> Void), token: ZypeTokenModel = ZypeTokenModel())
     {
         dataManager?.tokenManager.tokenModel = token
-        dataManager == nil ? completion(logedIn: false, error: NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
+        dataManager == nil ? completion(false, NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
         dataManager?.login(deviceId, pin: pin, completion: completion)
         
     }
     
-    public func login(completion:((logedIn: Bool, error: NSError?) -> Void), token: ZypeTokenModel = ZypeTokenModel())
+    open func login(_ completion:@escaping ((_ logedIn: Bool, _ error: NSError?) -> Void), token: ZypeTokenModel = ZypeTokenModel())
     {
         dataManager?.tokenManager.tokenModel = token
-        dataManager == nil ? completion(logedIn: false, error: NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
+        dataManager == nil ? completion(false, NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
         dataManager?.loadConsumer(completion)
     }
     
-    public func createConsumer(consumer: ConsumerModel, completion:(success: Bool, error: NSError?) -> Void)
+    open func createConsumer(_ consumer: ConsumerModel, completion:@escaping (_ success: Bool, _ error: NSError?) -> Void)
     {
-        dataManager == nil ? completion(success: false, error: NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
+        dataManager == nil ? completion(false, NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
             dataManager?.createConsumer(consumer, completion: completion)
     }
     
-    public func logOut()
+    open func logOut()
     {
         dataManager?.logOut()
     }
     
     // MARK:Category
-    public func getCategories(queryModel: QueryCategoriesModel = QueryCategoriesModel(), completion:(catgories: Array<CategoryModel>?, error: NSError?) -> Void)
+    open func getCategories(_ queryModel: QueryCategoriesModel = QueryCategoriesModel(), completion:@escaping (_ catgories: Array<CategoryModel>?, _ error: NSError?) -> Void)
     {
-        dataManager == nil ? completion(catgories: nil, error: NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
+        dataManager == nil ? completion(nil, NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
         dataManager?.getCategories(queryModel, completion: completion)
     }
     
-    public func getStoredCategories() -> Array<CategoryModel>?
+    open func getStoredCategories() -> Array<CategoryModel>?
     {
         return dataManager == nil ? nil :
             Array(dataManager!.cacheManager.loadedCategories.values)
     }
     
     // MARK:Video
-    public func getVideos(queryModel: QueryVideosModel, completion:(videos: Array<VideoModel>?, error: NSError?) -> Void)
+    open func getVideos(_ queryModel: QueryVideosModel, completion:@escaping (_ videos: Array<VideoModel>?, _ error: NSError?) -> Void)
     {
-        dataManager == nil ? completion(videos: nil, error: NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
+        dataManager == nil ? completion(nil, NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
         dataManager?.getVideos(queryModel, completion: completion)
     }
     
-    public func getVideos(completion:((videos: Array<VideoModel>?, error: NSError?) -> Void),
+    open func getVideos(_ completion:@escaping ((_ videos: Array<VideoModel>?, _ error: NSError?) -> Void),
         categoryValue: CategoryValueModel? = nil,
         searchString: String = "",
         keyword: String = "",
@@ -110,16 +110,16 @@ public class ZypeAppleTVBase: NSObject {
         self.getVideos(queryModel, completion: completion)
     }
     
-    public func getStoredVideos() -> Array<VideoModel>?
+    open func getStoredVideos() -> Array<VideoModel>?
     {
         return dataManager == nil ? nil :
             Array(dataManager!.cacheManager.loadedVideos.values)
     }
     
-    internal func getVideoObject(video: VideoModel,  type: VideoUrlType, completion:(playerObject: VideoObjectModel?, error: NSError?) -> Void)
+    internal func getVideoObject(_ video: VideoModel,  type: VideoUrlType, completion:@escaping (_ playerObject: VideoObjectModel?, _ error: NSError?) -> Void)
     {
         if self.dataManager == nil {
-            completion(playerObject: nil, error: NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil))
+            completion(nil, NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil))
 //        }  else if self.consumer!.isLoggedIn == false {
 //            completion(url: "", error: NSError(domain:kErrorDomaine, code: kErrorConsumerNotLoggedIn, userInfo: nil))
         } else {
@@ -128,51 +128,51 @@ public class ZypeAppleTVBase: NSObject {
     }
     
      // MARK: Favorite
-    public func getFavorites(completion:(favorites: Array<FavoriteModel>?, error: NSError?) -> Void)
+    open func getFavorites(_ completion:(_ favorites: Array<FavoriteModel>?, _ error: NSError?) -> Void)
     {
         if self.dataManager == nil {
-            completion(favorites: nil, error: NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil))
+            completion(nil, NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil))
         }  else if self.consumer!.isLoggedIn == false {
-            completion(favorites: nil, error: NSError(domain:kErrorDomaine, code: kErrorConsumerNotLoggedIn, userInfo: nil))
+            completion(nil, NSError(domain:kErrorDomaine, code: kErrorConsumerNotLoggedIn, userInfo: nil))
         } else {
             dataManager?.getFavorites(completion)
         }
     }
     
-    public func getVideoByFavoriteModel(favorite: FavoriteModel, completion:((video: VideoModel?, error: NSError?) -> Void),
+    open func getVideoByFavoriteModel(_ favorite: FavoriteModel, completion:@escaping ((_ video: VideoModel?, _ error: NSError?) -> Void),
         active: Bool = true)
     {
         let queryModel = QueryVideosModel()
         queryModel.perPage = 1
         queryModel.videoID = favorite.objectID
         self.getVideos(queryModel, completion:{(videos, error) in
-                completion(video: videos?.first, error: error)
+                completion(videos?.first, error)
         })
     }
     
-    public func setFavorite(object: BaseModel, shouldSet: Bool, completion:(success: Bool, error: NSError?) -> Void)
+    open func setFavorite(_ object: BaseModel, shouldSet: Bool, completion:@escaping (_ success: Bool, _ error: NSError?) -> Void)
     {
         if self.dataManager == nil {
-            completion(success: false, error: NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil))
+            completion(false, NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil))
         }  else if self.consumer!.isLoggedIn == false {
-            completion(success: false, error: NSError(domain:kErrorDomaine, code: kErrorConsumerNotLoggedIn, userInfo: nil))
+            completion(false, NSError(domain:kErrorDomaine, code: kErrorConsumerNotLoggedIn, userInfo: nil))
         } else {
             dataManager?.setFavorite(object, shouldSet: shouldSet, completion: completion)
         }
     }
     
-    public func getFavoriteModel(object: BaseModel) -> FavoriteModel?
+    open func getFavoriteModel(_ object: BaseModel) -> FavoriteModel?
     {
         return dataManager?.cacheManager.findFavoteForObject(object)
     }
     
     // MARK: MyLibrary
-    public func getMyLibrary(completion:(favorites: Array<FavoriteModel>?, error: NSError?) -> Void)
+    open func getMyLibrary(_ completion:@escaping (_ favorites: Array<FavoriteModel>?, _ error: NSError?) -> Void)
     {
         if self.dataManager == nil {
-            completion(favorites: nil, error: NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil))
+            completion(nil, NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil))
         }  else if self.consumer!.isLoggedIn == false {
-            completion(favorites: nil, error: NSError(domain:kErrorDomaine, code: kErrorConsumerNotLoggedIn, userInfo: nil))
+            completion(nil, NSError(domain:kErrorDomaine, code: kErrorConsumerNotLoggedIn, userInfo: nil))
         } else {
             dataManager?.getMyLibrary(completion)
         }
@@ -180,125 +180,125 @@ public class ZypeAppleTVBase: NSObject {
     
     
     // MARK: Zobjects
-    public func getZobjectTypes(queryModel: QueryZobjectTypesModel = QueryZobjectTypesModel(), completion:(objectTypes: Array<ZobjectTypeModel>?, error: NSError?) -> Void)
+    open func getZobjectTypes(_ queryModel: QueryZobjectTypesModel = QueryZobjectTypesModel(), completion:@escaping (_ objectTypes: Array<ZobjectTypeModel>?, _ error: NSError?) -> Void)
     {
-        dataManager == nil ? completion(objectTypes: nil, error: NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
+        dataManager == nil ? completion(nil, NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
         dataManager?.getZobjectTypes(queryModel, completion: completion)
     }
     
-    public func getStoredZobjectTypes() -> Array<ZobjectTypeModel>?
+    open func getStoredZobjectTypes() -> Array<ZobjectTypeModel>?
     {
         return dataManager == nil ? nil :
             Array(dataManager!.cacheManager.loadedZobjectTypes.values)
     }
 
-    public func getZobjects(queryModel: QueryZobjectsModel = QueryZobjectsModel(), completion:(objects: Array<ZobjectModel>?, error: NSError?) -> Void)
+    open func getZobjects(_ queryModel: QueryZobjectsModel = QueryZobjectsModel(), completion:@escaping (_ objects: Array<ZobjectModel>?, _ error: NSError?) -> Void)
     {
-        dataManager == nil ? completion(objects: nil, error: NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
+        dataManager == nil ? completion(nil, NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
         dataManager?.getZobjects(queryModel, completion: completion)
     }
     
-    public func getStoredZobjects() -> Array<ZobjectModel>?
+    open func getStoredZobjects() -> Array<ZobjectModel>?
     {
         return dataManager == nil ? nil :
             Array(dataManager!.cacheManager.loadedZobjects.values)
     }
     
     //MARK: Subscriptions
-    public func getSubscriptions(queryModel: QuerySubscriptionsModel = QuerySubscriptionsModel(), completion:(subscriptions: Array<SubscriptionModel>?, error: NSError?) -> Void)
+    open func getSubscriptions(_ queryModel: QuerySubscriptionsModel = QuerySubscriptionsModel(), completion:@escaping (_ subscriptions: Array<SubscriptionModel>?, _ error: NSError?) -> Void)
     {
         if self.dataManager == nil {
-            completion(subscriptions: nil, error: NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil))
+            completion(nil, NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil))
         }  else if self.consumer!.isLoggedIn == false {
-            completion(subscriptions: nil, error: NSError(domain:kErrorDomaine, code: kErrorConsumerNotLoggedIn, userInfo: nil))
+            completion(nil, NSError(domain:kErrorDomaine, code: kErrorConsumerNotLoggedIn, userInfo: nil))
         } else {
             dataManager?.getSubscriptions(queryModel, completion: completion)
         }
     }
     
-    public func createSubscription(planID: String, completion:(subscription: SubscriptionModel?, error: NSError?) -> Void)
+    open func createSubscription(_ planID: String, completion:@escaping (_ subscription: SubscriptionModel?, _ error: NSError?) -> Void)
     {
         if self.dataManager == nil {
-            completion(subscription: nil, error: NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil))
+            completion(nil, NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil))
         }  else if self.consumer!.isLoggedIn == false {
-            completion(subscription: nil, error: NSError(domain:kErrorDomaine, code: kErrorConsumerNotLoggedIn, userInfo: nil))
+            completion(nil, NSError(domain:kErrorDomaine, code: kErrorConsumerNotLoggedIn, userInfo: nil))
         } else {
             dataManager?.createSubscription(planID, completion: completion)
         }
     }
     
-    public func retrieveSubscription(subscription: SubscriptionModel, completion:(subscription: SubscriptionModel?, error: NSError?) -> Void)
+    open func retrieveSubscription(_ subscription: SubscriptionModel, completion:@escaping (_ subscription: SubscriptionModel?, _ error: NSError?) -> Void)
     {
         if self.dataManager == nil {
-            completion(subscription: nil, error: NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil))
+            completion(nil, NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil))
         }  else if self.consumer!.isLoggedIn == false {
-            completion(subscription: nil, error: NSError(domain:kErrorDomaine, code: kErrorConsumerNotLoggedIn, userInfo: nil))
+            completion(nil, NSError(domain:kErrorDomaine, code: kErrorConsumerNotLoggedIn, userInfo: nil))
         } else {
             dataManager?.retrieveSubscription(subscription, completion: completion)
         }
     }
     
-    public func updateSubscription(planID: String, completion:(subscription: SubscriptionModel?, error: NSError?) -> Void)
+    open func updateSubscription(_ planID: String, completion:@escaping (_ subscription: SubscriptionModel?, _ error: NSError?) -> Void)
     {
         if self.dataManager == nil {
-            completion(subscription: nil, error: NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil))
+            completion(nil, NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil))
         }  else if self.consumer!.isLoggedIn == false {
-            completion(subscription: nil, error: NSError(domain:kErrorDomaine, code: kErrorConsumerNotLoggedIn, userInfo: nil))
+            completion(nil, NSError(domain:kErrorDomaine, code: kErrorConsumerNotLoggedIn, userInfo: nil))
         } else {
             dataManager?.updateSubscription(planID, completion: completion)
         }
     }
     
-    public func removeSubscription(subscription: SubscriptionModel, completion:(success: Bool, error: NSError?) -> Void)
+    open func removeSubscription(_ subscription: SubscriptionModel, completion:@escaping (_ success: Bool, _ error: NSError?) -> Void)
     {
-        dataManager == nil ? completion(success: false, error: NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
+        dataManager == nil ? completion(false, NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
             dataManager?.removeSubscription(subscription, completion: completion)
     }
     
     //MARK: play list
-    public func getPlaylists(queryModel: QueryPlaylistsModel = QueryPlaylistsModel(), completion:(playlists: Array<PlaylistModel>?, error: NSError?) -> Void)
+    open func getPlaylists(_ queryModel: QueryPlaylistsModel = QueryPlaylistsModel(), completion:@escaping (_ playlists: Array<PlaylistModel>?, _ error: NSError?) -> Void)
     {
-        dataManager == nil ? completion(playlists: nil, error: NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
+        dataManager == nil ? completion(nil, NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
             dataManager?.getPlaylists(queryModel, completion: completion)
     }
     
-    public func retrieveVideosInPlaylist(queryModel: QueryRetrieveVideosInPlaylistModel, completion:(videos: Array<VideoModel>?, error: NSError?) -> Void)
+    open func retrieveVideosInPlaylist(_ queryModel: QueryRetrieveVideosInPlaylistModel, completion:@escaping (_ videos: Array<VideoModel>?, _ error: NSError?) -> Void)
     {
-        dataManager == nil ? completion(videos: nil, error: NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
+        dataManager == nil ? completion(nil, NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
             dataManager?.retrieveVideosInPlaylist(queryModel, completion: completion)
     }
     
-    public func getStoredPlaylists() -> Array<PlaylistModel>?
+    open func getStoredPlaylists() -> Array<PlaylistModel>?
     {
         return dataManager == nil ? nil :
             Array(dataManager!.cacheManager.loadedPlaylists.values)
     }
     
-    public func getStoredPlaylist(playlistID: String) -> PlaylistModel?
+    open func getStoredPlaylist(_ playlistID: String) -> PlaylistModel?
     {
         return dataManager == nil ? nil :
             dataManager!.cacheManager.loadedPlaylists[playlistID]
     }
     
     //MARK: get app info
-    public func getAppInfo(queryModel: QueryBaseModel,  completion:(backgroundUrl: String?, error: NSError?) -> Void) {
+    open func getAppInfo(_ queryModel: QueryBaseModel,  completion:@escaping (_ backgroundUrl: String?, _ error: NSError?) -> Void) {
         dataManager?.loadAppInfo(queryModel, completion: completion)
     }
     
     //MARK:Device Linking
-    public func createDevicePin(device: String,  completion:(devicepPin: String?, error: NSError?) -> Void) {
+    open func createDevicePin(_ device: String,  completion:@escaping (_ devicepPin: String?, _ error: NSError?) -> Void) {
         dataManager?.getDevicePin(device, completion: completion)
     }
     
-    public func getLinkedStatus(device: String,  completion:(linked: Bool?, pin: String?, error: NSError?) -> Void) {
+    open func getLinkedStatus(_ device: String,  completion:@escaping (_ linked: Bool?, _ pin: String?, _ error: NSError?) -> Void) {
         dataManager?.getLinkedStatus(device, completion: completion)
     }
     
     //MARK: Token
-    public func getToken(completion:(token: String?, error: NSError?) -> Void) {
+    open func getToken(_ completion:@escaping (_ token: String?, _ error: NSError?) -> Void) {
         let tokenManager = dataManager?.tokenManager
         if (!tokenManager!.isAccessTokenExpired()){
-            completion(token: tokenManager?.tokenModel.accessToken, error: nil)
+            completion(tokenManager?.tokenModel.accessToken, nil)
         } else {
             print("Check if this is returns a new token..")
              dataManager?.getToken(completion)

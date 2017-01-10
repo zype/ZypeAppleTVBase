@@ -15,12 +15,12 @@ public enum VideoUrlType {
 
 protocol VideoUrl
 {
-    func getVideoObject(video: VideoModel, completion:(playerObject: VideoObjectModel, error: NSError?) -> Void)
+    func getVideoObject(_ video: VideoModel, completion:@escaping (_ playerObject: VideoObjectModel, _ error: NSError?) -> Void)
 }
 
 class ZypeFactory
 {
-    static func videoUrl(type: VideoUrlType, restController: ZypeRESTController) -> VideoUrl?
+    static func videoUrl(_ type: VideoUrlType, restController: ZypeRESTController) -> VideoUrl?
     {
         switch type
         {

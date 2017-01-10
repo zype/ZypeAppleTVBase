@@ -8,42 +8,42 @@
 
 import UIKit
 
-public class ZobjectModel: BaseModel {
+open class ZobjectModel: BaseModel {
 
-    private(set) public var json: Dictionary<String, AnyObject>
+    fileprivate(set) open var json: Dictionary<String, AnyObject>
     
-    public var descriptionString: String
+    open var descriptionString: String
     {
        return self.getStringValue(kJSONDescription)
     }
-    public var keywords:Array<String>
+    open var keywords:Array<String>
     {
         return self.json[kJSONKeywords] as! Array<String>
     }
-    public var active:Bool
+    open var active:Bool
     {
         return self.getBoolValue(kJSONActive)
     }
-    private(set) public var createdAt: NSDate?
-    private(set) public var updatedAt: NSDate?
-    public var siteID:String
+    fileprivate(set) open var createdAt: Date?
+    fileprivate(set) open var updatedAt: Date?
+    open var siteID:String
     {
         return self.getStringValue(kJSONSiteId)
     }
-    public var videoIds: Array<String>?
+    open var videoIds: Array<String>?
     {
         return self.json[kJSONVideoIds] as? Array<String>
     }
-    public var zobjectTypeId: String
+    open var zobjectTypeId: String
     {
         return self.getStringValue(kJSONZobjectTypeId)
     }
-    public var zobjectTypeTitle: String
+    open var zobjectTypeTitle: String
     {
         return self.getStringValue(kJSONZobjectTypeTitle)
     }
 
-    private(set) public var pictures = Array<ContentModel>()
+    fileprivate(set) open var pictures = Array<ContentModel>()
     
     init(fromJson: Dictionary<String, AnyObject>)
     {
@@ -68,7 +68,7 @@ public class ZobjectModel: BaseModel {
         }
     }
     
-    public func getStringValue(key: String) -> String
+    open func getStringValue(_ key: String) -> String
     {
         do
         {
@@ -81,7 +81,7 @@ public class ZobjectModel: BaseModel {
         return ""
     }
     
-    public func getBoolValue(key: String) -> Bool
+    open func getBoolValue(_ key: String) -> Bool
     {
         do
         {

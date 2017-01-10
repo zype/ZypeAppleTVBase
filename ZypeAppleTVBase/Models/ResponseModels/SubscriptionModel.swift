@@ -7,9 +7,9 @@
 //
 
 
-public class SubscriptionModel: NSObject {
+open class SubscriptionModel: NSObject {
 
-    private(set) public var ID: String = ""
+    fileprivate(set) open var ID: String = ""
     
     init(fromJson: Dictionary<String, AnyObject>)
     {

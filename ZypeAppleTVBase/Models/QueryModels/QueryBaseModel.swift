@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class QueryBaseModel: NSObject  {
+open class QueryBaseModel: NSObject  {
 
     init(page: Int = kApiFirstPage,
         perPage: Int = 0)
@@ -18,7 +18,7 @@ public class QueryBaseModel: NSObject  {
         self.perPage = perPage
     }
     
-    public var page: Int = kApiFirstPage
-    public var perPage: Int = 0
+    open var page: Int = kApiFirstPage
+    open var perPage: Int = 0
     
 }

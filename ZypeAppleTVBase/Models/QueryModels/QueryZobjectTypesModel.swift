@@ -8,8 +8,8 @@
 
 import UIKit
 
-public class QueryZobjectTypesModel: QueryBaseModel {
+open class QueryZobjectTypesModel: QueryBaseModel {
 
-    public var keywords: String = ""
+    open var keywords: String = ""
     
 }

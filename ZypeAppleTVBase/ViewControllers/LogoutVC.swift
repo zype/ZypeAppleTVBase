@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class LogoutVC: UIViewController {
+open class LogoutVC: UIViewController {
 
  
     @IBOutlet weak var logoutButton: UIButton!
@@ -17,36 +17,36 @@ public class LogoutVC: UIViewController {
     
     @IBOutlet weak var logoutFooter: UILabel!
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         //self.configureView()
         self.setupText()
     }
 
     func setupText() {
-        let pageHeaderText = NSUserDefaults.standardUserDefaults().objectForKey(kLogoutPageHeader)
+        let pageHeaderText = UserDefaults.standard.object(forKey: kLogoutPageHeader)
         if (pageHeaderText != nil) {
            self.logoutTitle.text = pageHeaderText as? String
         }
-        let pageFooterText = NSUserDefaults.standardUserDefaults().objectForKey(kLogoutPageFooter)
+        let pageFooterText = UserDefaults.standard.object(forKey: kLogoutPageFooter)
         if (pageFooterText != nil) {
             self.logoutFooter.text = pageFooterText as? String
         }
 
     }
     
-    @IBAction func logoutClicked(sender: UIButton) {
-        NSUserDefaults.standardUserDefaults().setBool(false, forKey: kDeviceLinkedStatus)
+    @IBAction func logoutClicked(_ sender: UIButton) {
+        UserDefaults.standard.set(false, forKey: kDeviceLinkedStatus)
         ZypeAppleTVBase.sharedInstance.logOut()
         
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(kUserEmail)
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(kUserPassword)
+        UserDefaults.standard.removeObject(forKey: kUserEmail)
+        UserDefaults.standard.removeObject(forKey: kUserPassword)
         
-        let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = UserDefaults.standard
         let favorites = [String]()
-        defaults.setObject(favorites, forKey: kFavoritesKey)
+        defaults.set(favorites, forKey: kFavoritesKey)
         defaults.synchronize()
         
-         NSNotificationCenter.defaultCenter().postNotificationName(kZypeReloadScreenNotification, object: nil)
+         NotificationCenter.default.post(name: Notification.Name(rawValue: kZypeReloadScreenNotification), object: nil)
     }
 }

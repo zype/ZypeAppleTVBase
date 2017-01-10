@@ -8,6 +8,6 @@
 
 import UIKit
 
-public class QueryCategoriesModel: QueryBaseModel {
+open class QueryCategoriesModel: QueryBaseModel {
 
 }

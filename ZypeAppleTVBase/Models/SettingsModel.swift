@@ -7,7 +7,7 @@
 //
 
 
-public class SettingsModel: NSObject
+open class SettingsModel: NSObject
 {
     //keys
     internal let appKey: String

@@ -8,10 +8,10 @@
 
 import UIKit
 
-public class ContentModel: BaseModel {
+open class ContentModel: BaseModel {
     
-    private(set) public var contentType = ""
-    private(set) public var url = ""
+    fileprivate(set) open var contentType = ""
+    fileprivate(set) open var url = ""
     
     override init(json: Dictionary<String, AnyObject>) {
         super.init(json: json)

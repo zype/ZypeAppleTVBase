@@ -8,9 +8,9 @@
 
 import UIKit
 
-public class QueryRetrieveVideosInPlaylistModel: QueryBaseModel {
+open class QueryRetrieveVideosInPlaylistModel: QueryBaseModel {
     
-    public var playlistID = ""
+    open var playlistID = ""
     
     public init(playlist: PlaylistModel? = nil)
     {

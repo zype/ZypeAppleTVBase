@@ -8,14 +8,14 @@
 
 import UIKit
 
-public class QueryPlaylistsModel: QueryBaseModel {
+open class QueryPlaylistsModel: QueryBaseModel {
     
-    public var categoryKey: String = ""
-    public var categoryValue: String = ""
-    public var active: Bool = true
-    public var keyword: String = ""
-    public var parentId: String = ""
-    public var ordering: String = "asc"
+    open var categoryKey: String = ""
+    open var categoryValue: String = ""
+    open var active: Bool = true
+    open var keyword: String = ""
+    open var parentId: String = ""
+    open var ordering: String = "asc"
     
     public init(category: CategoryValueModel? = nil,
         active: Bool = true,

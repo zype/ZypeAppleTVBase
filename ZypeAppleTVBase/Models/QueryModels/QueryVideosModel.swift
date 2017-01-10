@@ -8,29 +8,29 @@
 
 import UIKit
 
-public class QueryVideosModel: QueryBaseModel {
+open class QueryVideosModel: QueryBaseModel {
 
-    public var categoryKey: String = ""
-    public var categoryValue: String = ""
-    public var exceptCategoryKey: String = ""
-    public var exceptCategoryValue: String = ""
-    public var searchString: String = ""
-    public var keyword: String = ""
-    public var active: Bool = true
-    public var status: String = ""
-    public var type: String = ""
-    public var videoID: String = ""
-    public var exceptVideoID: String = ""
-    public var zObjectID: String = ""
-    public var exceptZObjectID: String = ""
-    public var createdDate: NSDate? = nil
-    public var publishedDate: NSDate? = nil
-    public var dpt: Bool = true
+    open var categoryKey: String = ""
+    open var categoryValue: String = ""
+    open var exceptCategoryKey: String = ""
+    open var exceptCategoryValue: String = ""
+    open var searchString: String = ""
+    open var keyword: String = ""
+    open var active: Bool = true
+    open var status: String = ""
+    open var type: String = ""
+    open var videoID: String = ""
+    open var exceptVideoID: String = ""
+    open var zObjectID: String = ""
+    open var exceptZObjectID: String = ""
+    open var createdDate: Date? = nil
+    open var publishedDate: Date? = nil
+    open var dpt: Bool = true
 //    public var sortBy: String = ""
-    public var onAir: Bool = false
-    public var sort: String?
-    public var ascending: Bool = false
-    public var anyQueryString: String = "" //something like &category[video_type]=Film
+    open var onAir: Bool = false
+    open var sort: String?
+    open var ascending: Bool = false
+    open var anyQueryString: String = "" //something like &category[video_type]=Film
     
     public init(categoryValue: CategoryValueModel? = nil,
         exceptCategoryValue: CategoryValueModel? = nil,

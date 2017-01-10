@@ -39,11 +39,11 @@ class ZypeAppleTVBaseTests: XCTestCase {
     
     func endTest()
     {
-        XCTAssertTrue(NSThread.isMainThread())
+        XCTAssertTrue(Thread.isMainThread)
         waitingCount = waitingCount - 1
     }
     
-    func initLib(complition:() -> Void)
+    func initLib(_ complition:@escaping () -> Void)
     {
         ZypeAppleTVBase.sharedInstance.reset()
         ZypeAppleTVBase.sharedInstance.initialize(settings, completion:{(error) in
@@ -64,7 +64,7 @@ class ZypeAppleTVBaseTests: XCTestCase {
         })
     }*/
     
-    func videos(complition:(videos: Array<VideoModel>?)->Void)
+    func videos(_ complition:(_ videos: Array<VideoModel>?)->Void)
     {
         initLib { () -> Void in
             ZypeAppleTVBase.sharedInstance.getVideos({ (videos, error) -> Void in

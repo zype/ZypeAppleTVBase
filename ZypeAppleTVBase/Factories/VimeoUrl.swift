@@ -12,7 +12,7 @@ class VimeoUrl: BaseUrl, VideoUrl {
 
     // add check here to see if user is logged in and if he is change url with access token
     
-    private var kPlayerGetVideo:String {
+    fileprivate var kPlayerGetVideo:String {
         if ((ZypeAppleTVBase.sharedInstance.consumer?.isLoggedIn) == true){
             return "%@/embed/%@.json?access_token=%@&dvr=false"
         } else {
@@ -21,7 +21,7 @@ class VimeoUrl: BaseUrl, VideoUrl {
     }
     
 
-     func getVideoObject(video: VideoModel, completion:(playerObject: VideoObjectModel, error: NSError?) -> Void)
+     func getVideoObject(_ video: VideoModel, completion:@escaping (_ playerObject: VideoObjectModel, _ error: NSError?) -> Void)
      {
         if ((ZypeAppleTVBase.sharedInstance.consumer?.isLoggedIn) == true){
             //call with access token
@@ -37,7 +37,7 @@ class VimeoUrl: BaseUrl, VideoUrl {
         }
     }
     
-    func callVideoObject(url: String, completion:(playerObject: VideoObjectModel, error: NSError?) -> Void)
+    func callVideoObject(_ url: String, completion:@escaping (_ playerObject: VideoObjectModel, _ error: NSError?) -> Void)
     {
         self.controller!.getQuery(url, withCompletion: { (jsonDic, error) -> Void in
             let player = VideoObjectModel()
@@ -45,13 +45,13 @@ class VimeoUrl: BaseUrl, VideoUrl {
             let response = jsonDic?[kJSONResponse]
             if response != nil
             {
-                let outputs = response?[kJSONBody]?![kJSONOutputs] as? Array <Dictionary<String, String> >
+              /*  let outputs = response![kJSONBody][kJSONOutputs] as? Array <Dictionary<String, String> >
                 if outputs?.first != nil
                 {
                     player.videoURL = outputs!.first![kJSONUrl]!
-                }
+                }*/
             }
-            completion(playerObject: player, error: error)
+            completion(player, error)
         })
     }
     

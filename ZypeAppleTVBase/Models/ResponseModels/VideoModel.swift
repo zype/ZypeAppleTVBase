@@ -9,33 +9,33 @@
 import UIKit
 
 
-public class VideoModel: BaseModel {
+open class VideoModel: BaseModel {
     
-    private(set) internal var videoId = ""
-    private(set) internal var videoURL = ""
-    private(set) public var descriptionString: String = ""
+    fileprivate(set) internal var videoId = ""
+    fileprivate(set) internal var videoURL = ""
+    fileprivate(set) open var descriptionString: String = ""
     
-    private(set) public var durationValue = 0
+    fileprivate(set) open var durationValue = 0
     
-    private(set) public var ratingValue = 0.0
-    private(set) public var purchasePrice: String = ""
-    private(set) public var purchaseRequired: Bool = false
-    private(set) public var rentalDuration: Int = 0
-    private(set) public var rentalPrice: String = ""
-    private(set) public var rentalRequired = false
-    private(set) public var subscriptionRequired = false
-    private(set) public var onAir = false
+    fileprivate(set) open var ratingValue = 0.0
+    fileprivate(set) open var purchasePrice: String = ""
+    fileprivate(set) open var purchaseRequired: Bool = false
+    fileprivate(set) open var rentalDuration: Int = 0
+    fileprivate(set) open var rentalPrice: String = ""
+    fileprivate(set) open var rentalRequired = false
+    fileprivate(set) open var subscriptionRequired = false
+    fileprivate(set) open var onAir = false
     
-    private(set) public var episode: Int = 0
-    private(set) public var series: Int = 0
+    fileprivate(set) open var episode: Int = 0
+    fileprivate(set) open var series: Int = 0
     
-    private(set) public var categoryValueIDs = Array<String>()
-    private(set) public var categories = Dictionary<String, Array<String> >()
+    fileprivate(set) open var categoryValueIDs = Array<String>()
+    fileprivate(set) open var categories = Dictionary<String, Array<String> >()
     
-    private(set) public var thumbnails = Array<ThumbnailModel>()
-    private(set) public var images = Array<ThumbnailModel>()
+    fileprivate(set) open var thumbnails = Array<ThumbnailModel>()
+    fileprivate(set) open var images = Array<ThumbnailModel>()
     
-    private(set) public var fullJson = Dictionary<String, AnyObject>()
+    fileprivate(set) open var fullJson = Dictionary<String, AnyObject>()
     
     init(fromJson: Dictionary<String, AnyObject>)
     {
@@ -102,7 +102,7 @@ public class VideoModel: BaseModel {
         self.loadCategories(fromJson[kJSONCategories] as? Array<AnyObject>)
     }
     
-    public func getThumbnailByHeight(height: Int) -> ThumbnailModel?
+    open func getThumbnailByHeight(_ height: Int) -> ThumbnailModel?
     {
         var value = thumbnails.first
         for thumbnail in self.thumbnails
@@ -116,12 +116,12 @@ public class VideoModel: BaseModel {
         return value
     }
     
-    public func getVideoObject(type: VideoUrlType, completion:(playerObject: VideoObjectModel?, error: NSError?) -> Void)
+    open func getVideoObject(_ type: VideoUrlType, completion:@escaping (_ playerObject: VideoObjectModel?, _ error: NSError?) -> Void)
     {
         ZypeAppleTVBase.sharedInstance.getVideoObject(self, type: type, completion: completion)
     }
     
-    private func loadThumbnails(thumbnails: Array<AnyObject>?)
+    fileprivate func loadThumbnails(_ thumbnails: Array<AnyObject>?)
     {
         do
         {
@@ -144,7 +144,7 @@ public class VideoModel: BaseModel {
         }
     }
     
-    private func loadImages(images: Array<AnyObject>?)
+    fileprivate func loadImages(_ images: Array<AnyObject>?)
     {
         do
         {
@@ -165,7 +165,7 @@ public class VideoModel: BaseModel {
         }
     }
     
-    private func loadCategories(categories: Array<AnyObject>?)
+    fileprivate func loadCategories(_ categories: Array<AnyObject>?)
     {
         do
         {
@@ -193,7 +193,7 @@ public class VideoModel: BaseModel {
         }
     }
     
-    private func loadPrices(fromJson: Dictionary<String, AnyObject>)
+    fileprivate func loadPrices(_ fromJson: Dictionary<String, AnyObject>)
     {
         do {
             purchasePrice = try SSUtils.stringFromDictionary(fromJson, key: kJSONPurchasePrice)
@@ -208,15 +208,15 @@ public class VideoModel: BaseModel {
         }
     }
     
-    public func getId() -> String{
+    open func getId() -> String{
         return videoId
     }
     
-    public func getUrl() -> String{
+    open func getUrl() -> String{
         return videoURL
     }
     
-    public func changeTitle(title: String) {
+    open func changeTitle(_ title: String) {
         self.titleString = title
     }
 }

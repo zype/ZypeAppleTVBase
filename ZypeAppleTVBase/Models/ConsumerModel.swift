@@ -8,12 +8,12 @@
 
 import UIKit
 
-public class ConsumerModel: NSObject {
+open class ConsumerModel: NSObject {
 
-    private (set) public var ID:String = ""
-    private (set) public var emailString:String = ""
-    private (set) public var nameString:String = ""
-    private (set) internal var passwordString: String = ""
+    fileprivate (set) open var ID:String = ""
+    fileprivate (set) open var emailString:String = ""
+    fileprivate (set) open var nameString:String = ""
+    fileprivate (set) internal var passwordString: String = ""
     
     public init(name: String = "", email: String = "", password: String = "")
     {
@@ -23,11 +23,11 @@ public class ConsumerModel: NSObject {
         self.passwordString = password
     }
     
-    public var isLoggedIn: Bool {
+    open var isLoggedIn: Bool {
         return ID.isEmpty == false
     }
     
-    func setData(consumerId: String, email: String, name: String)
+    func setData(_ consumerId: String, email: String, name: String)
     {
         ID = consumerId
         emailString = email

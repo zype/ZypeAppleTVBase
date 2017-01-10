@@ -8,16 +8,16 @@
 
 import UIKit
 
-public class ZobjectTypeModel: BaseModel {
+open class ZobjectTypeModel: BaseModel {
     
-    private(set) public var keywords = Array<String>()
-    private(set) public var createdAt: NSDate?
-    private(set) public var updatedAt: NSDate?
-    private(set) public var descriptionString = ""
-    private(set) public var videosEnabled = true
-    private(set) public var zobjectCount = 0
-    private(set) public var siteIdString = ""
-    private(set) public var zobjectAttributes: Array<AnyObject>?
+    fileprivate(set) open var keywords = Array<String>()
+    fileprivate(set) open var createdAt: Date?
+    fileprivate(set) open var updatedAt: Date?
+    fileprivate(set) open var descriptionString = ""
+    fileprivate(set) open var videosEnabled = true
+    fileprivate(set) open var zobjectCount = 0
+    fileprivate(set) open var siteIdString = ""
+    fileprivate(set) open var zobjectAttributes: Array<AnyObject>?
 
     init(fromJson: Dictionary<String, AnyObject>)
     {
@@ -43,21 +43,21 @@ public class ZobjectTypeModel: BaseModel {
         }
     }
     
-    public func getZobjects(loadedSince: NSDate = NSDate(), completion:(zobjects: Array<ZobjectModel>?, error: NSError?) -> Void)
+    open func getZobjects(_ loadedSince: Date = Date(), completion:@escaping (_ zobjects: Array<ZobjectModel>?, _ error: NSError?) -> Void)
     {
         let zobjects = self.userData["zobjects"]
         if zobjects != nil
         {
-            if(loadedSince.compare(self.userData["zobjects_date"] as! NSDate) == NSComparisonResult.OrderedAscending)
+            if(loadedSince.compare(self.userData["zobjects_date"] as! Date) == ComparisonResult.orderedAscending)
             {
-                completion(zobjects: zobjects as? Array<ZobjectModel>, error: nil)
+                completion(zobjects as? Array<ZobjectModel>, nil)
                 return
             }
         }
         ZypeAppleTVBase.sharedInstance.getZobjects(QueryZobjectsModel(objectType: self), completion: { (objects, error) -> Void in
-            self.userData["zobjects"] = objects
-            self.userData["zobjects_date"] = NSDate()
-            completion(zobjects: objects, error: error)
+            self.userData["zobjects"] = objects as AnyObject?
+            self.userData["zobjects_date"] = Date() as AnyObject?
+            completion(objects, error)
         })
     }
     

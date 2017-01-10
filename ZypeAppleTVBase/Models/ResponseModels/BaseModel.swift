@@ -8,10 +8,10 @@
 
 import UIKit
 
-public class BaseModel : NSObject  {
+open class BaseModel : NSObject  {
         
-    public var titleString: String = ""
-    private(set) public var ID: String = ""
+    open var titleString: String = ""
+    fileprivate(set) open var ID: String = ""
     
     var userData = Dictionary<String, AnyObject>()
     

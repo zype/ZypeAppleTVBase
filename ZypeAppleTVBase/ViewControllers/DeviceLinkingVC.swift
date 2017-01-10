@@ -13,7 +13,7 @@ class DeviceLinkingVC: UIViewController {
     var deviceLinkingUrl: String?
     @IBOutlet weak var firstLineLabel: UILabel!
     @IBOutlet weak var pinLabel: UILabel!
-    var timer = NSTimer()
+    var timer = Timer()
     lazy var deviceString = ZypeAppSettings.sharedInstance.deviceId()
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -22,13 +22,13 @@ class DeviceLinkingVC: UIViewController {
         if (deviceLinkingUrl != nil) {
             firstLineLabel .text = "From your computer or mobile device, go to \(deviceLinkingUrl!)"
         }
-        UIButton.appearance().setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
+        UIButton.appearance().setTitleColor(UIColor.darkGray, for: UIControlState())
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         ZypeAppleTVBase.sharedInstance.createDevicePin(deviceString, completion:{(devicepPin: String?, error: NSError?) in
-            dispatch_async(dispatch_get_main_queue(),{
+            DispatchQueue.main.async(execute: {
                 self.activityIndicator.stopAnimating()
                 self.pinLabel.text = devicepPin
                 self.startTimer()
@@ -36,29 +36,29 @@ class DeviceLinkingVC: UIViewController {
         })
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         timer.invalidate()
     }
 
-    private func startTimer() {
-        timer = NSTimer.scheduledTimerWithTimeInterval(5, target:self, selector: #selector(DeviceLinkingVC.checkDeviceStatus), userInfo: nil, repeats: true)
+    fileprivate func startTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 5, target:self, selector: #selector(DeviceLinkingVC.checkDeviceStatus), userInfo: nil, repeats: true)
     }
     
     func checkDeviceStatus(){
         ZypeAppleTVBase.sharedInstance.getLinkedStatus(deviceString, completion: {(status: Bool?, pin: String?, error: NSError?) in
             if status == true {
-                NSUserDefaults.standardUserDefaults().setBool(true, forKey: kDeviceLinkedStatus)
+                UserDefaults.standard.set(true, forKey: kDeviceLinkedStatus)
                 ZypeUtilities.loginConsumerToGetToken(self.deviceString, pin: pin)
-                self.dismissViewControllerAnimated(true, completion: nil)
+                self.dismiss(animated: true, completion: nil)
             } else {
-                NSUserDefaults.standardUserDefaults().setBool(false, forKey: kDeviceLinkedStatus)
+                UserDefaults.standard.set(false, forKey: kDeviceLinkedStatus)
                 ZypeAppleTVBase.sharedInstance.logOut()
             }
         })
     }
     
-    @IBAction func browseContentButtonClicked(sender: UIButton) {
-        self.dismissViewControllerAnimated(true, completion: {_ in})
+    @IBAction func browseContentButtonClicked(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: {_ in})
     }
 }

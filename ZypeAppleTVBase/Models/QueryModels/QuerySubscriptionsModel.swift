@@ -6,10 +6,10 @@
 //  Copyright © 2015 Ilya Sorokin. All rights reserved.
 //
 
-public class QuerySubscriptionsModel: QueryBaseModel {
+open class QuerySubscriptionsModel: QueryBaseModel {
 
-    public var ID: String = ""
-    public var exceptID: String = ""
-    public var searchString: String = ""
+    open var ID: String = ""
+    open var exceptID: String = ""
+    open var searchString: String = ""
     
 }

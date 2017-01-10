@@ -13,7 +13,7 @@ public struct LimitLivestream {
     public var played: Int = 0
     public var message: String = ""
     public var refreshRate: Int = 0
-    public var starts: NSTimeInterval = 0
+    public var starts: TimeInterval = 0
     public var isSet = false
 }
 
@@ -24,28 +24,28 @@ public struct DeviceLinking {
 
 private let sharedInstance = ZypeAppSettings()
 
-public class ZypeAppSettings {
+open class ZypeAppSettings {
     
-    public static let sharedInstance = ZypeAppSettings()
+    open static let sharedInstance = ZypeAppSettings()
     
-    public var appVersion = "1.0.0"
+    open var appVersion = "1.0.0"
     
-    public var limitLivestream = LimitLivestream()
+    open var limitLivestream = LimitLivestream()
     
-    public var deviceLinking = DeviceLinking()
+    open var deviceLinking = DeviceLinking()
     
-    private init() {
+    fileprivate init() {
         
     }
     
     
-    public func deviceId() -> String {
-        var deviceID = NSUserDefaults().valueForKey("device")
+    open func deviceId() -> String {
+        var deviceID = UserDefaults().value(forKey: "device")
         
         if(deviceID == nil) {
-            deviceID = UIDevice.currentDevice().identifierForVendor!.UUIDString
+            deviceID = UIDevice.current.identifierForVendor!.uuidString
             print(deviceID)
-            NSUserDefaults().setValue(deviceID, forKey: "device")
+            UserDefaults().setValue(deviceID, forKey: "device")
         }
         
         return deviceID as! String

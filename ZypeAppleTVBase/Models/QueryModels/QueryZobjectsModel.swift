@@ -8,11 +8,11 @@
 
 import UIKit
 
-public class QueryZobjectsModel: QueryBaseModel {
+open class QueryZobjectsModel: QueryBaseModel {
 
-    public var zobjectType = ""
-    public var keywords = ""
-    public var anyQueryString = ""
+    open var zobjectType = ""
+    open var keywords = ""
+    open var anyQueryString = ""
     
     public init (objectType: ZobjectTypeModel? = nil)
     {

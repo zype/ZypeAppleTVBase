@@ -10,78 +10,78 @@ import UIKit
 
 class ZypeCacheManager: NSObject {
     
-    private(set) internal var loadedVideos = Dictionary<String, VideoModel>()
-    private(set) var favorites = Array<FavoriteModel>()
-    private(set) internal var loadedPlaylists = Dictionary<String, PlaylistModel>()
-    private(set) internal var loadedCategories = Dictionary<String, CategoryModel>()
-    private(set) internal var loadedZobjectTypes = Dictionary<String, ZobjectTypeModel>()
-    private(set) internal var loadedZobjects = Dictionary<String, ZobjectModel>()
+    fileprivate(set) internal var loadedVideos = Dictionary<String, VideoModel>()
+    fileprivate(set) var favorites = Array<FavoriteModel>()
+    fileprivate(set) internal var loadedPlaylists = Dictionary<String, PlaylistModel>()
+    fileprivate(set) internal var loadedCategories = Dictionary<String, CategoryModel>()
+    fileprivate(set) internal var loadedZobjectTypes = Dictionary<String, ZobjectTypeModel>()
+    fileprivate(set) internal var loadedZobjects = Dictionary<String, ZobjectModel>()
     
     func resetConsumer()
     {
         favorites.removeAll()
     }
     
-    func synchronizePlaylists(playlists: Array<PlaylistModel>) -> Array<PlaylistModel>
+    func synchronizePlaylists(_ playlists: Array<PlaylistModel>) -> Array<PlaylistModel>
     {
         return self.synchronizeObjects(&loadedPlaylists, addObjects: playlists)!
     }
     
-    func synchronizeVideos(videos: Array<VideoModel>?) -> Array<VideoModel>?
+    func synchronizeVideos(_ videos: Array<VideoModel>?) -> Array<VideoModel>?
     {
        return self.synchronizeObjects(&loadedVideos, addObjects: videos)
     }
     
-    func synchronizeCategories(categories: Array<CategoryModel>?) -> Array<CategoryModel>?
+    func synchronizeCategories(_ categories: Array<CategoryModel>?) -> Array<CategoryModel>?
     {
         return self.synchronizeObjects(&loadedCategories, addObjects: categories)
     }
     
-    func synchronizeZobjectTypes(zobjectType: Array<ZobjectTypeModel>?) -> Array<ZobjectTypeModel>?
+    func synchronizeZobjectTypes(_ zobjectType: Array<ZobjectTypeModel>?) -> Array<ZobjectTypeModel>?
     {
         return self.synchronizeObjects(&loadedZobjectTypes, addObjects: zobjectType)
     }
     
-    func synchronizeZobjects(zobjects: Array<ZobjectModel>?) -> Array<ZobjectModel>?
+    func synchronizeZobjects(_ zobjects: Array<ZobjectModel>?) -> Array<ZobjectModel>?
     {
         return self.synchronizeObjects(&loadedZobjects, addObjects: zobjects)
     }
     
-    func addFavoriteVideos(data: Array<FavoriteModel>?)
+    func addFavoriteVideos(_ data: Array<FavoriteModel>?)
     {
         if (data != nil)
         {
-            self.favorites.appendContentsOf(data!)
+            self.favorites.append(contentsOf: data!)
             //sync with user defaults
-            let defaults = NSUserDefaults.standardUserDefaults()
-            var favorites = defaults.arrayForKey(kFavoritesKey) as? Array<String> ?? [String]()
+            let defaults = UserDefaults.standard
+            var favorites = defaults.array(forKey: kFavoritesKey) as? Array<String> ?? [String]()
             for favorite in data! {
                 if !favorites.contains(favorite.objectID){
                     favorites.append(favorite.objectID)
                 }
             }
-            defaults.setObject(favorites, forKey: kFavoritesKey)
+            defaults.set(favorites, forKey: kFavoritesKey)
             defaults.synchronize()
         }
     }
     
-    func removeFromFavorites(favoriteObject: FavoriteModel)
+    func removeFromFavorites(_ favoriteObject: FavoriteModel)
     {
         ZypeLog.assert(favorites.contains(favoriteObject),message: "can not remove video from favorites")
-        favorites.removeAtIndex(favorites.indexOf(favoriteObject)!)
+        favorites.remove(at: favorites.index(of: favoriteObject)!)
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-        var locFavorites = defaults.arrayForKey(kFavoritesKey) as? Array<String> ?? [String]()
+        let defaults = UserDefaults.standard
+        var locFavorites = defaults.array(forKey: kFavoritesKey) as? Array<String> ?? [String]()
         
             if locFavorites.contains(favoriteObject.objectID){
-                locFavorites.removeAtIndex(locFavorites.indexOf(favoriteObject.objectID)!)
+                locFavorites.remove(at: locFavorites.index(of: favoriteObject.objectID)!)
             }
         
-        defaults.setObject(locFavorites, forKey: kFavoritesKey)
+        defaults.set(locFavorites, forKey: kFavoritesKey)
         defaults.synchronize()
     }
     
-    func findFavoteForObject(object: BaseModel) -> FavoriteModel?
+    func findFavoteForObject(_ object: BaseModel) -> FavoriteModel?
     {
         let filteredArray = favorites.filter({(item) -> Bool in
             return item.objectID == object.ID
@@ -89,7 +89,7 @@ class ZypeCacheManager: NSObject {
         return filteredArray.first
     }
     
-    private func synchronizeObjects<T>(inout loaded: Dictionary<String, T>, addObjects: Array<T>?) -> Array<T>?
+    fileprivate func synchronizeObjects<T>(_ loaded: inout Dictionary<String, T>, addObjects: Array<T>?) -> Array<T>?
     {
         if addObjects != nil
         {

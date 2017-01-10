@@ -8,12 +8,12 @@
 
 import UIKit
 
-public class ThumbnailModel: NSObject {
+open class ThumbnailModel: NSObject {
     
-    public let height: Int
-    public let width: Int
-    public let imageURL: String
-    public let name: String
+    open let height: Int
+    open let width: Int
+    open let imageURL: String
+    open let name: String
     
     init(height: Int, width: Int, url:String, name: String) {
         self.height = height

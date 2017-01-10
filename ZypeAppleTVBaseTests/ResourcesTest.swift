@@ -23,10 +23,10 @@ class ResourcesTest: XCTestCase {
     }
     
     func testResourceBundle() {
-        let podBundle = NSBundle(forClass: ZypeAppleTVBase.self)
-        if let bundleURL = podBundle.URLForResource("ZypeAppleTVBaseResources", withExtension: "bundle") {
+        let podBundle = Bundle(for: ZypeAppleTVBase.self)
+        if let bundleURL = podBundle.url(forResource: "ZypeAppleTVBaseResources", withExtension: "bundle") {
             
-            if let bundle = NSBundle(URL: bundleURL) {
+            if let bundle = Bundle(url: bundleURL) {
                 XCTAssertNotNil(bundle)
             }else {
                 assertionFailure("Could not load the bundle")
@@ -38,13 +38,13 @@ class ResourcesTest: XCTestCase {
 
 
     func testGetStoryboard() {
-        let podBundle = NSBundle(forClass: ZypeAppleTVBase.self)
-        if let bundleURL = podBundle.URLForResource("ZypeAppleTVBaseResources", withExtension: "bundle") {
+        let podBundle = Bundle(for: ZypeAppleTVBase.self)
+        if let bundleURL = podBundle.url(forResource: "ZypeAppleTVBaseResources", withExtension: "bundle") {
             
-            if let bundle = NSBundle(URL: bundleURL) {
+            if let bundle = Bundle(url: bundleURL) {
                 let storyboard = UIStoryboard(name: "DeviceLinking", bundle: bundle)
                 
-                let vc = storyboard.instantiateViewControllerWithIdentifier("DeviceLinkingVC")
+                let vc = storyboard.instantiateViewController(withIdentifier: "DeviceLinkingVC")
                 XCTAssertNotNil(vc)
             }else {
                 assertionFailure("Could not load the bundle")
@@ -56,7 +56,7 @@ class ResourcesTest: XCTestCase {
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock {
+        self.measure {
             // Put the code you want to measure the time of here.
         }
     }

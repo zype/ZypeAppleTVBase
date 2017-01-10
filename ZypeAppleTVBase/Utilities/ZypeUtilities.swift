@@ -8,16 +8,16 @@
 
 import Foundation
 
-public class ZypeUtilities {
+open class ZypeUtilities {
     
     //MARK: - Device Linking zObject. 
     //Needs to be configured in admin panel for device linking to work
 
-    public static func loadDeviceLinkingZObject() {
+    open static func loadDeviceLinkingZObject() {
         let type = QueryZobjectsModel()
         type.zobjectType = "device_linking"
         ZypeAppleTVBase.sharedInstance.getZobjects(type, completion: {(objects: Array<ZobjectModel>?, error: NSError?) in
-            if let _ = objects where objects!.count > 0 {
+            if let _ = objects, objects!.count > 0 {
                //enable device linking in the app
                  ZypeAppSettings.sharedInstance.deviceLinking.isEnabled = true
                 
@@ -36,16 +36,16 @@ public class ZypeUtilities {
     }
     
     //MARK: - Device Linking
-    public static func presentFrameworkVC(caller: UIViewController) {
-        let podBundle = NSBundle(forClass: ZypeAppleTVBase.self)
+    open static func presentFrameworkVC(_ caller: UIViewController) {
+        let podBundle = Bundle(for: ZypeAppleTVBase.self)
         
-        if let bundleURL = podBundle.URLForResource("ZypeAppleTVBaseResources", withExtension: "bundle") {
+        if let bundleURL = podBundle.url(forResource: "ZypeAppleTVBaseResources", withExtension: "bundle") {
             
-            if let bundle = NSBundle(URL: bundleURL) {
+            if let bundle = Bundle(url: bundleURL) {
                 let storyboard = UIStoryboard(name: "DeviceLinking", bundle: bundle)
                 
-                let vc = storyboard.instantiateViewControllerWithIdentifier("DeviceLinkingVC")
-                caller.presentViewController(vc, animated: true, completion: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "DeviceLinkingVC")
+                caller.present(vc, animated: true, completion: nil)
             }else {
                 assertionFailure("Could not load the bundle")
                 }
@@ -55,17 +55,17 @@ public class ZypeUtilities {
         }
     }
     
-    public static func presentDeviceLinkingVC(caller: UIViewController, deviceLinkingUrl: String) {
-        let podBundle = NSBundle(forClass: ZypeAppleTVBase.self)
+    open static func presentDeviceLinkingVC(_ caller: UIViewController, deviceLinkingUrl: String) {
+        let podBundle = Bundle(for: ZypeAppleTVBase.self)
         
-        if let bundleURL = podBundle.URLForResource("ZypeAppleTVBaseResources", withExtension: "bundle") {
+        if let bundleURL = podBundle.url(forResource: "ZypeAppleTVBaseResources", withExtension: "bundle") {
             
-            if let bundle = NSBundle(URL: bundleURL) {
+            if let bundle = Bundle(url: bundleURL) {
                 let storyboard = UIStoryboard(name: "DeviceLinking", bundle: bundle)
                 
-                let vc = storyboard.instantiateViewControllerWithIdentifier("DeviceLinkingVC") as! DeviceLinkingVC
+                let vc = storyboard.instantiateViewController(withIdentifier: "DeviceLinkingVC") as! DeviceLinkingVC
                 vc.deviceLinkingUrl = deviceLinkingUrl
-                caller.presentViewController(vc, animated: true, completion: nil)
+                caller.present(vc, animated: true, completion: nil)
             }else {
                 assertionFailure("Could not load the bundle")
             }
@@ -75,25 +75,25 @@ public class ZypeUtilities {
         }
     }
     
-    public static func isDeviceLinked() -> Bool {
-        return NSUserDefaults.standardUserDefaults().boolForKey(kDeviceLinkedStatus)
+    open static func isDeviceLinked() -> Bool {
+        return UserDefaults.standard.bool(forKey: kDeviceLinkedStatus)
     }
     
-    public static func checkDeviceLinkingWithServer() {
+    open static func checkDeviceLinkingWithServer() {
         let deviceString = ZypeAppSettings.sharedInstance.deviceId()
         ZypeAppleTVBase.sharedInstance.getLinkedStatus(deviceString, completion: {(status: Bool?, pin: String?, error: NSError?) in
             if status == true {
-                NSUserDefaults.standardUserDefaults().setBool(true, forKey: kDeviceLinkedStatus)
+                UserDefaults.standard.set(true, forKey: kDeviceLinkedStatus)
                 loginConsumerToGetToken(deviceString, pin: pin)
             } else {
-                NSUserDefaults.standardUserDefaults().setBool(false, forKey: kDeviceLinkedStatus)
+                UserDefaults.standard.set(false, forKey: kDeviceLinkedStatus)
                 ZypeAppleTVBase.sharedInstance.logOut()
             }
         })
     }
     
     //MARK: - Login with token
-    public static func loginConsumerToGetToken(deviceId: String, pin: String?) {
+    open static func loginConsumerToGetToken(_ deviceId: String, pin: String?) {
         if (pin != nil) {
             ZypeAppleTVBase.sharedInstance.login(deviceId, pin: pin!, completion: {(loggedIn: Bool?, error: NSError?) in
                 if loggedIn == true {
@@ -105,11 +105,11 @@ public class ZypeUtilities {
         }
     }
     
-    public static func imageFromResourceBundle(imageName: String) -> UIImage? {
-        let podBundle = NSBundle(forClass: ZypeAppleTVBase.self)
-        if let bundleURL = podBundle.URLForResource("ZypeAppleTVBaseResources", withExtension: "bundle") {
-            if let bundle = NSBundle(URL: bundleURL) {
-                let imagePath = bundle.pathForResource(imageName, ofType: "")
+    open static func imageFromResourceBundle(_ imageName: String) -> UIImage? {
+        let podBundle = Bundle(for: ZypeAppleTVBase.self)
+        if let bundleURL = podBundle.url(forResource: "ZypeAppleTVBaseResources", withExtension: "bundle") {
+            if let bundle = Bundle(url: bundleURL) {
+                let imagePath = bundle.path(forResource: imageName, ofType: "")
                 if imagePath != nil {
                     return UIImage(contentsOfFile: imagePath!)!
                 }
@@ -119,11 +119,11 @@ public class ZypeUtilities {
     }
     
     //MARK: - Limit Livestream
-    public static func loadLimitLivestreamZObject() {
+    open static func loadLimitLivestreamZObject() {
         let type = QueryZobjectsModel()
         type.zobjectType = "limit_livestream"
         ZypeAppleTVBase.sharedInstance.getZobjects(type, completion: {(objects: Array<ZobjectModel>?, error: NSError?) in
-            if let _ = objects where objects!.count > 0 {
+            if let _ = objects, objects!.count > 0 {
                 let limitLivestream = objects?.first
                 do {
                     ZypeAppSettings.sharedInstance.limitLivestream.limit = try SSUtils.intagerFromDictionary(limitLivestream?.json, key: "limit")
@@ -139,17 +139,17 @@ public class ZypeUtilities {
         })
     }
     
-    public static func livestreamStarts() {
-        ZypeAppSettings.sharedInstance.limitLivestream.starts = NSDate().timeIntervalSince1970
+    open static func livestreamStarts() {
+        ZypeAppSettings.sharedInstance.limitLivestream.starts = Date().timeIntervalSince1970
     }
     
-    public static func livestreamStopped() {
-        let playedForDuration = Int(NSDate().timeIntervalSince1970 - ZypeAppSettings.sharedInstance.limitLivestream.starts)
+    open static func livestreamStopped() {
+        let playedForDuration = Int(Date().timeIntervalSince1970 - ZypeAppSettings.sharedInstance.limitLivestream.starts)
          ZypeAppSettings.sharedInstance.limitLivestream.played = ZypeAppSettings.sharedInstance.limitLivestream.played + playedForDuration
         print("stopped playing: \(ZypeAppSettings.sharedInstance.limitLivestream.played)")
     }
     
-    public static func livestreamLimitReached() -> Bool {
+    open static func livestreamLimitReached() -> Bool {
        //if limit livestream not set return false
         if (!ZypeAppSettings.sharedInstance.limitLivestream.isSet){
             return false
@@ -163,16 +163,16 @@ public class ZypeUtilities {
     }
     
     //MARK: - Login
-    public static func presentLoginVC(caller: UIViewController) {
-        let podBundle = NSBundle(forClass: ZypeAppleTVBase.self)
+    open static func presentLoginVC(_ caller: UIViewController) {
+        let podBundle = Bundle(for: ZypeAppleTVBase.self)
         
-        if let bundleURL = podBundle.URLForResource("ZypeAppleTVBaseResources", withExtension: "bundle") {
+        if let bundleURL = podBundle.url(forResource: "ZypeAppleTVBaseResources", withExtension: "bundle") {
             
-            if let bundle = NSBundle(URL: bundleURL) {
+            if let bundle = Bundle(url: bundleURL) {
                 let storyboard = UIStoryboard(name: "DeviceLinking", bundle: bundle)
                 
-                let vc = storyboard.instantiateViewControllerWithIdentifier("LoginVC") as! LoginVC
-                caller.presentViewController(vc, animated: true, completion: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+                caller.present(vc, animated: true, completion: nil)
             }else {
                 assertionFailure("Could not load the bundle")
             }
@@ -182,22 +182,22 @@ public class ZypeUtilities {
         }
     }
     
-    public static func loginUser(completion: (result: String) -> Void) {
-        let email =  NSUserDefaults.standardUserDefaults().objectForKey(kUserEmail) as! String?
-        let password = NSUserDefaults.standardUserDefaults().objectForKey(kUserPassword) as! String?
+    open static func loginUser(_ completion: @escaping (_ result: String) -> Void) {
+        let email =  UserDefaults.standard.object(forKey: kUserEmail) as! String?
+        let password = UserDefaults.standard.object(forKey: kUserPassword) as! String?
 
         if ((email == nil) || (password == nil)){
-              NSUserDefaults.standardUserDefaults().setBool(false, forKey: kDeviceLinkedStatus)
+              UserDefaults.standard.set(false, forKey: kDeviceLinkedStatus)
         } else {
             ZypeAppleTVBase.sharedInstance.login(email!, passwd: password!, completion:{ (logedIn: Bool, error: NSError?) in
                 print(logedIn)
                 if (error != nil) {
-                    completion(result: "error")
+                    completion("error")
                     return
                 }
                 
                 if (logedIn){
-                    NSUserDefaults.standardUserDefaults().setBool(true, forKey: kDeviceLinkedStatus)
+                    UserDefaults.standard.set(true, forKey: kDeviceLinkedStatus)
                     if ((ZypeAppleTVBase.sharedInstance.consumer?.isLoggedIn) == true){
                         print("YaY")
                     } else {
@@ -205,23 +205,23 @@ public class ZypeUtilities {
                     }
                     
                 } else {
-                    NSUserDefaults.standardUserDefaults().setBool(false, forKey: kDeviceLinkedStatus)
+                    UserDefaults.standard.set(false, forKey: kDeviceLinkedStatus)
                 }
-                completion(result: "Completed")
+                completion("Completed")
             })
         }
        
     }
     
-    public static func getLogoutVC() -> LogoutVC? {
-        let podBundle = NSBundle(forClass: ZypeAppleTVBase.self)
+    open static func getLogoutVC() -> LogoutVC? {
+        let podBundle = Bundle(for: ZypeAppleTVBase.self)
         
-        if let bundleURL = podBundle.URLForResource("ZypeAppleTVBaseResources", withExtension: "bundle") {
+        if let bundleURL = podBundle.url(forResource: "ZypeAppleTVBaseResources", withExtension: "bundle") {
             
-            if let bundle = NSBundle(URL: bundleURL) {
+            if let bundle = Bundle(url: bundleURL) {
                 let storyboard = UIStoryboard(name: "DeviceLinking", bundle: bundle)
                 
-                let vc = storyboard.instantiateViewControllerWithIdentifier("LogoutVC") as! LogoutVC
+                let vc = storyboard.instantiateViewController(withIdentifier: "LogoutVC") as! LogoutVC
                 return vc
             }else {
                 assertionFailure("Could not load the bundle")

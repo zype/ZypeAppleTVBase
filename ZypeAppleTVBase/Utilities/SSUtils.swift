@@ -8,121 +8,121 @@
 
 import UIKit
 
-enum UtilError: ErrorType {
-    case InvalidArgument
+enum UtilError: Error {
+    case invalidArgument
 }
 
 internal let kApiDateFromeStringFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZ"
 internal let kApiDateToStringFormat = "yyyy-MM-dd"
 
-public class SSUtils {
+open class SSUtils {
     
-    public static func dateToString(date: NSDate?, format: String = kApiDateToStringFormat) -> String
+    open static func dateToString(_ date: Date?, format: String = kApiDateToStringFormat) -> String
     {
         if date == nil
         {
             return ""
         }
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
-        let dateString: String = dateFormatter.stringFromDate(date!)
+        let dateString: String = dateFormatter.string(from: date!)
         return dateString
     }
     
-    public static func stringToDate(string: String, format: String = kApiDateFromeStringFormat) -> NSDate?
+    open static func stringToDate(_ string: String, format: String = kApiDateFromeStringFormat) -> Date?
     {
         if string.isEmpty
         {
             return nil
         }
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
-        return dateFormatter.dateFromString(string)
+        return dateFormatter.date(from: string)
     }
     
-    public static func stringFromDictionary(dic: Dictionary<String, AnyObject>?, key: String) throws -> String
+    open static func stringFromDictionary(_ dic: Dictionary<String, AnyObject>?, key: String) throws -> String
     {
         if (dic == nil)
         {
-            throw UtilError.InvalidArgument
+            throw UtilError.invalidArgument
         }
         let value = dic![key]
         if (value == nil)
         {
-            throw UtilError.InvalidArgument
+            throw UtilError.invalidArgument
         }
         if ((value as? String) == nil)
         {
-             throw UtilError.InvalidArgument
+             throw UtilError.invalidArgument
         }
         return value as! String
     }
     
-    public static func intagerFromDictionary(dic: Dictionary<String, AnyObject>?, key: String) throws -> Int
+    open static func intagerFromDictionary(_ dic: Dictionary<String, AnyObject>?, key: String) throws -> Int
     {
         if (dic == nil)
         {
-            throw UtilError.InvalidArgument
+            throw UtilError.invalidArgument
         }
         let value = dic![key]
         if (value == nil)
         {
-            throw UtilError.InvalidArgument
+            throw UtilError.invalidArgument
         }
         if ((value as? Int) == nil)
         {
-            throw UtilError.InvalidArgument
+            throw UtilError.invalidArgument
         }
         return value as! Int
     }
 
-    public static func doubleFromDictionary(dic: Dictionary<String, AnyObject>?, key: String) throws -> Double
+    open static func doubleFromDictionary(_ dic: Dictionary<String, AnyObject>?, key: String) throws -> Double
     {
         if (dic == nil)
         {
-            throw UtilError.InvalidArgument
+            throw UtilError.invalidArgument
         }
         let value = dic![key]
         if (value == nil)
         {
-            throw UtilError.InvalidArgument
+            throw UtilError.invalidArgument
         }
         if ((value as? Double) == nil)
         {
-            throw UtilError.InvalidArgument
+            throw UtilError.invalidArgument
         }
         return value as! Double
     }
     
-    public static func boolFromDictionary(dic: Dictionary<String, AnyObject>?, key: String) throws -> Bool
+    open static func boolFromDictionary(_ dic: Dictionary<String, AnyObject>?, key: String) throws -> Bool
     {
         if (dic == nil)
         {
-            throw UtilError.InvalidArgument
+            throw UtilError.invalidArgument
         }
         let value = dic![key]
         if (value == nil)
         {
-            throw UtilError.InvalidArgument
+            throw UtilError.invalidArgument
         }
         if ((value as? Bool) == nil)
         {
-            throw UtilError.InvalidArgument
+            throw UtilError.invalidArgument
         }
         return value as! Bool
     }
 
-    static func categoryToId(categoryKey: String, categoryValue: String) -> String
+    static func categoryToId(_ categoryKey: String, categoryValue: String) -> String
     {
         let categoryId = escapedString(categoryKey + categoryValue)
         return categoryId
     }
     
     //TODO refactoring remove stringByReplacingOccurrencesOfString
-    static func escapedString(string: String) -> String
+    static func escapedString(_ string: String) -> String
     {
-        let value = string.stringByAddingPercentEncodingWithAllowedCharacters(.URLPathAllowedCharacterSet())
-        return value!.stringByReplacingOccurrencesOfString("&", withString: "%26")
+        let value = string.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)
+        return value!.replacingOccurrences(of: "&", with: "%26")
     }
     
 }

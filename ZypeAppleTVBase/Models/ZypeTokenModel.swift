@@ -8,19 +8,19 @@
 
 import UIKit
 
-public class ZypeTokenModel: NSObject {
+open class ZypeTokenModel: NSObject {
 
-    private let kDefaultsKeyAccessToken = "kDefaultsKeyAccessToken"
-    private let kDefaultsKeyRefreshToken = "kDefaultsKeyRefreshToken"
-    private let kDefaultsKeyExpirationDate = "kDefaultsKeyExpirationDate"
+    fileprivate let kDefaultsKeyAccessToken = "kDefaultsKeyAccessToken"
+    fileprivate let kDefaultsKeyRefreshToken = "kDefaultsKeyRefreshToken"
+    fileprivate let kDefaultsKeyExpirationDate = "kDefaultsKeyExpirationDate"
     
-    public var refreshToken: String {
+    open var refreshToken: String {
         set  {
-            NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: kDefaultsKeyRefreshToken)
-            NSUserDefaults.standardUserDefaults().synchronize()
+            UserDefaults.standard.setValue(newValue, forKey: kDefaultsKeyRefreshToken)
+            UserDefaults.standard.synchronize()
         }
         get {
-            let token = NSUserDefaults.standardUserDefaults().valueForKey(kDefaultsKeyRefreshToken)
+            let token = UserDefaults.standard.value(forKey: kDefaultsKeyRefreshToken)
             if (token == nil)
             {
                 return ""
@@ -29,13 +29,13 @@ public class ZypeTokenModel: NSObject {
         }
     }
     
-    public var expirationDate: Int {
+    open var expirationDate: Int {
             set {
-                NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: kDefaultsKeyExpirationDate)
-                NSUserDefaults.standardUserDefaults().synchronize()
+                UserDefaults.standard.setValue(newValue, forKey: kDefaultsKeyExpirationDate)
+                UserDefaults.standard.synchronize()
             }
             get {
-            let date = NSUserDefaults.standardUserDefaults().valueForKey(kDefaultsKeyExpirationDate)
+            let date = UserDefaults.standard.value(forKey: kDefaultsKeyExpirationDate)
             if (date == nil)
             {
                 return 0
@@ -44,13 +44,13 @@ public class ZypeTokenModel: NSObject {
         }
     }
     
-    public var accessToken: String {
+    open var accessToken: String {
         set {
-            NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: kDefaultsKeyAccessToken)
-            NSUserDefaults.standardUserDefaults().synchronize()
+            UserDefaults.standard.setValue(newValue, forKey: kDefaultsKeyAccessToken)
+            UserDefaults.standard.synchronize()
         }
         get {
-            let token = NSUserDefaults.standardUserDefaults().valueForKey(kDefaultsKeyAccessToken)
+            let token = UserDefaults.standard.value(forKey: kDefaultsKeyAccessToken)
             if (token == nil)
             {
                 return ""
