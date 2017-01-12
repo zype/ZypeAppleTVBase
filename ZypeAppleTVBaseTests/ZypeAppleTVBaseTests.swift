@@ -64,14 +64,14 @@ class ZypeAppleTVBaseTests: XCTestCase {
         })
     }*/
     
-    func videos(_ complition:(_ videos: Array<VideoModel>?)->Void)
+    func videos(_ complition:@escaping (_ videos: Array<VideoModel>?)->Void)
     {
         initLib { () -> Void in
             ZypeAppleTVBase.sharedInstance.getVideos({ (videos, error) -> Void in
                 XCTAssertNil(error)
                 XCTAssertNotNil(videos)
                 XCTAssertFalse(videos!.isEmpty)
-                complition(videos: videos)
+                complition(videos)
             })
         }
     }
