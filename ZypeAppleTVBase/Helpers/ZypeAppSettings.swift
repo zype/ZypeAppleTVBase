@@ -44,7 +44,6 @@ open class ZypeAppSettings {
         
         if(deviceID == nil) {
             deviceID = UIDevice.current.identifierForVendor!.uuidString
-            print(deviceID)
             UserDefaults().setValue(deviceID, forKey: "device")
         }
         

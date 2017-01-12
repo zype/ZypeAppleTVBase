@@ -39,7 +39,7 @@ class VimeoUrl: BaseUrl, VideoUrl {
     
     func callVideoObject(_ url: String, completion:@escaping (_ playerObject: VideoObjectModel, _ error: NSError?) -> Void)
     {
-        self.controller!.getQuery(url, withCompletion:{ (jsonDic, error) -> Void in
+        _ = self.controller!.getQuery(url, withCompletion:{ (jsonDic, error) -> Void in
             let player = VideoObjectModel()
             player.json = jsonDic
             if let response = jsonDic?[kJSONResponse] as? NSDictionary

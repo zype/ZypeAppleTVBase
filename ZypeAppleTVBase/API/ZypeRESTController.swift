@@ -281,13 +281,13 @@ class ZypeRESTController: NSObject, URLSessionDelegate {
 
     
     //private
-      fileprivate func deleteQuery(_ urlAsString: String,
+    @discardableResult fileprivate func deleteQuery(_ urlAsString: String,
         withCompletion completion:@escaping (Int, Dictionary<String, AnyObject>?, NSError?) -> Void)  -> URLSessionDataTask
     {
         return query("DELETE", urlAsString: urlAsString, bodyAsString: "", withCompletion: completion)
     }
 
-    func getQuery(_ urlAsString: String,
+    @discardableResult func getQuery(_ urlAsString: String,
         withCompletion completion:@escaping (Dictionary<String, AnyObject>?, NSError?) -> Void)  -> URLSessionDataTask
     {
         return query("GET", urlAsString: urlAsString, bodyAsString: "",
@@ -296,7 +296,7 @@ class ZypeRESTController: NSObject, URLSessionDelegate {
         })
     }
 
-    fileprivate func postQuery(_ urlAsString: String, bodyAsString: String,
+    @discardableResult fileprivate func postQuery(_ urlAsString: String, bodyAsString: String,
         withCompletion completion:@escaping (Dictionary<String, AnyObject>?, NSError?) -> Void)  -> URLSessionDataTask
     {
         return query("POST", urlAsString: urlAsString, bodyAsString: bodyAsString,
