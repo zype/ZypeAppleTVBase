@@ -158,7 +158,7 @@ class ZypeDataManager : NSObject {
                 }
                 self.loginCompletion(false, error: error, completion: completion)
             })
-        }, update: serviceController.refreshAccessTokenWithCompletionHandler as! (String, (Dictionary<String, AnyObject>?, NSError?) -> Void) -> Void)
+        }, update: serviceController.refreshAccessTokenWithCompletionHandler)
     }
 
     func createConsumer(_ consumer: ConsumerModel, completion:@escaping (_ success: Bool, _ error: NSError?) -> Void)
@@ -278,7 +278,7 @@ class ZypeDataManager : NSObject {
             {
                 self.unfavoriteVideo(token, favoriteObject: favoriteObject!, completion: completion)
             }
-         }, update: serviceController.refreshAccessTokenWithCompletionHandler as! (String, (Dictionary<String, AnyObject>?, NSError?) -> Void) -> Void)
+         }, update: serviceController.refreshAccessTokenWithCompletionHandler)
     }
 
     //MARK: MyLibrary
@@ -305,7 +305,7 @@ class ZypeDataManager : NSObject {
                 }
             })
         
-            }, update: serviceController.refreshAccessTokenWithCompletionHandler as! (String, (Dictionary<String, AnyObject>?, NSError?) -> Void) -> Void)
+            }, update: serviceController.refreshAccessTokenWithCompletionHandler)
         
         
     }
@@ -580,7 +580,7 @@ class ZypeDataManager : NSObject {
     {
         tokenManager.accessToken({ (token) -> Void in
             completion(token, nil)
-            }, update: serviceController.refreshAccessTokenWithCompletionHandler as! (String, (Dictionary<String, AnyObject>?, NSError?) -> Void) -> Void)
+            }, update: serviceController.refreshAccessTokenWithCompletionHandler)
     }
     
     //MARK: Private
@@ -609,7 +609,7 @@ class ZypeDataManager : NSObject {
                     self.loadFavorites(page + 1)
                 }
             })
-            }, update: serviceController.refreshAccessTokenWithCompletionHandler as! (String, (Dictionary<String, AnyObject>?, NSError?) -> Void) -> Void)
+            }, update: serviceController.refreshAccessTokenWithCompletionHandler)
     }
     
     fileprivate func favoriteVideo(_ token: String, object: BaseModel, completion:@escaping (_ success: Bool, _ error: NSError?) -> Void)

@@ -19,7 +19,7 @@ class ZypeTokenManager {
     
     var tokenModel = ZypeTokenModel()
     
-    func accessToken(_ completion: @escaping (_ token: String) ->Void, update:(_ refreshToken:String, _ completion:(_ jsonDic: Dictionary<String, AnyObject>?, _ error: NSError?) -> Void) ->Void)
+    func accessToken(_ completion: @escaping (_ token: String) ->Void, update:(_ refreshToken:String, _ completion: @escaping(_ jsonDic: Dictionary<String, AnyObject>?, _ error: NSError?) -> Void) ->Void)
     {
         if tokenModel.refreshToken.isEmpty
         {
