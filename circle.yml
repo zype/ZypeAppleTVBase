@@ -1,7 +1,0 @@
-machine:
-  xcode:
-    version: "7.3.1"
-
-test:
-  override:
-    -xcodebuild -workspace ZypeAppleTVBase.xcworkspace -scheme ZypeAppleTVBase -configuration Debug build test -sdk appletvsimulator
