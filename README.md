@@ -49,7 +49,7 @@ Please read submit pull requests to us.
 
 ## Versioning
 
-For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+For the versions available, see the [tags on this repository](https://github.com/zype/ZypeAppleTVBase/tags). 
 For Swift 2.3 vesion of Swift use 0.3.2 version of the ZypeAppleTVBase
 
 ## Authors
