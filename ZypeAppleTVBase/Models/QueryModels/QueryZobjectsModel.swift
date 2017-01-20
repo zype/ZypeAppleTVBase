@@ -14,6 +14,10 @@ open class QueryZobjectsModel: QueryBaseModel {
     open var keywords = ""
     open var anyQueryString = ""
     
+    public init () {
+        super.init()
+    }
+    
     public init (objectType: ZobjectTypeModel? = nil)
     {
         super.init()

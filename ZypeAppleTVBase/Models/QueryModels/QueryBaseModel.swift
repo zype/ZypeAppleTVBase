@@ -10,7 +10,7 @@ import UIKit
 
 open class QueryBaseModel: NSObject  {
 
-    init(page: Int = kApiFirstPage,
+    public init(page: Int = kApiFirstPage,
         perPage: Int = 0)
     {
         super.init()

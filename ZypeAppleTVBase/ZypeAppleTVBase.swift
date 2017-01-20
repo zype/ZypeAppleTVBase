@@ -281,7 +281,7 @@ open class ZypeAppleTVBase: NSObject {
     }
     
     //MARK: get app info
-    open func getAppInfo(_ queryModel: QueryBaseModel,  completion:@escaping (_ backgroundUrl: String?, _ error: NSError?) -> Void) {
+    open func getAppInfo(_ queryModel: QueryBaseModel,  completion:@escaping (_ backgroundUrl: String?,_ featuredPlaylistId: String?, _ error: NSError?) -> Void) {
         dataManager?.loadAppInfo(queryModel, completion: completion)
     }
     

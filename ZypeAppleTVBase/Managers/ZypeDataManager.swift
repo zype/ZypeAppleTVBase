@@ -530,14 +530,14 @@ class ZypeDataManager : NSObject {
     }
     
     //MARK: App Info
-    func loadAppInfo(_ queryModel: QueryBaseModel, completion:@escaping (_ backgroundUrl: String?, _ error: NSError?) -> Void)
+    func loadAppInfo(_ queryModel: QueryBaseModel, completion:@escaping (_ backgroundUrl: String?, _ featuredPlaylistId: String?, _ error: NSError?) -> Void)
     {
         self.serviceController.getAppInfo(queryModel, completion: { (jsonDic, error) -> Void in
             if jsonDic != nil {
                 let response = jsonDic![kJSONResponse] as! NSDictionary
                 let backgroundImageUrl = response .value(forKey: "background_url") as? String
-                
-                completion(backgroundImageUrl, nil)
+                let featuredPlaylistId = response.value(forKey: "featured_playlist_id") as? String
+                completion(backgroundImageUrl, featuredPlaylistId, nil)
                 
             }
         })
