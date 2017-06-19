@@ -51,16 +51,8 @@ class VimeoUrl: BaseUrl, VideoUrl {
                     {
                         player.videoURL = outputs!.first![kJSONUrl]!
                     }
-                    let analytics = jsonBody[kJSONAnalytics] as? Dictionary<String, AnyObject>
-                    let dimensions = analytics?[kJSONDimensions] as? Dictionary<String, String>
-                    if dimensions != nil
-                    {
-                        player.siteId = (dimensions?[kJSONSiteId])!
-                        player.playerId = (dimensions?[kJSONPlayerId])!
-                        player.device = (dimensions?[kJSONDevice])!
-                        player.consumerId = (dimensions?[kJSONConsumerId])!
-                    }
                 }
+                
             }
             completion(player, error)
         })
