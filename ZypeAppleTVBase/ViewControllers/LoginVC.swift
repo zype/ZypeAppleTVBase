@@ -27,11 +27,11 @@ class LoginVC: UIViewController {
     func setupText() {
         let pageHeaderText = UserDefaults.standard.object(forKey: kLoginPageHeader)
         if pageHeaderText != nil {
-           self.loginTitle.text = pageHeaderText as! String
+           self.loginTitle.text = pageHeaderText as? String
         }
         let pageFooterText = UserDefaults.standard.object(forKey: kLoginPageFooter)
         if pageFooterText != nil {
-            self.loginFooter.text = pageFooterText as! String
+            self.loginFooter.text = pageFooterText as? String
         }
 
     }
