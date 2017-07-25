@@ -13,7 +13,6 @@ class LoginVC: UIViewController {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var registerButton: UIButton!
 
     @IBOutlet weak var loginTitle: UILabel!
     @IBOutlet weak var loginFooter: UILabel!

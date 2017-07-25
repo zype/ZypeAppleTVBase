@@ -132,15 +132,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s38-6a-EB5">
-                                <rect key="frame" x="793" y="632" width="340" height="86"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                <state key="normal" title="Register"/>
-                                <connections>
-                                    <action selector="registerClicked:" destination="R0N-hP-twv" eventType="primaryActionTriggered" id="Ydd-dA-czH"/>
-                                </connections>
-                            </button>
                         </subviews>
                     </view>
                     <connections>
@@ -149,7 +140,6 @@
                         <outlet property="loginFooter" destination="lMC-oD-e8j" id="Ncf-sl-oiN"/>
                         <outlet property="loginTitle" destination="Kqv-sV-T1P" id="DGt-GN-lqe"/>
                         <outlet property="passwordField" destination="YMv-mo-4RI" id="baF-nC-73W"/>
-                        <outlet property="registerButton" destination="s38-6a-EB5" id="BtQ-oo-tJi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KF6-gC-fIT" userLabel="First Responder" sceneMemberID="firstResponder"/>
