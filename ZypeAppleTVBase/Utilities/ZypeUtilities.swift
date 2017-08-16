@@ -163,25 +163,6 @@ open class ZypeUtilities {
     }
     
     // MARK: - Login
-    /*
-    open static func presentLoginMethodVC(_ caller: UIViewController) {
-        let podBundle = Bundle(for: ZypeAppleTVBase.self)
-        
-        guard let bundleURL = podBundle.url(forResource: "ZypeAppleTVBaseResources", withExtension: "bundle") else {
-            assertionFailure("Could not create a path to the bundle")
-            return
-        }
-        guard let bundle = Bundle(url: bundleURL) else {
-            assertionFailure("Could not load the bundle")
-            return
-        }
-        
-        
-        let storyboard = UIStoryboard(name: "DeviceLinking", bundle: bundle)
-        let vc = storyboard.instantiateViewController(withIdentifier: "LoginMethodVC") as! LoginMethodVC
-        caller.present(vc, animated: true, completion: nil)
-    }
-    */
     
     open static func presentLoginVC(_ caller: UIViewController) {
         let podBundle = Bundle(for: ZypeAppleTVBase.self)
