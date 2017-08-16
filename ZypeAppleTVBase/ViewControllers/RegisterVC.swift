@@ -12,14 +12,54 @@ class RegisterVC: UIViewController {
     
     // MARK: - Properties
     
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var accountLabel: UILabel!
+    @IBOutlet weak var loginButton: UIButton!
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        logoImageView.image = UIImage(named: "Logo")
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setupUserLogin()
+    }
+    
+    // MARK: - Setup
+    
+    fileprivate func setupUserLogin() {
+        if ZypeUtilities.isDeviceLinked() {
+            setupLoggedInUser()
+        }
+        else {
+            setupLoggedOutUser()
+        }
+    }
+    
+    fileprivate func setupLoggedInUser() {
+        let defaults = UserDefaults.standard
+        let kEmail = defaults.object(forKey: kUserEmail)
+        guard let email = kEmail else { return }
+        
+        let loggedInString = NSMutableAttributedString(string: "Logged in as: \(String(describing: email))", attributes: nil)
+        let buttonRange = (loggedInString.string as NSString).range(of: "\(String(describing: email))")
+        loggedInString.addAttribute(NSFontAttributeName, value: UIFont.boldSystemFont(ofSize: 38.0), range: buttonRange)
+        
+        accountLabel.attributedText = loggedInString
+        accountLabel.textAlignment = .center
+        
+        loginButton.isHidden = true
+    }
+    
+    fileprivate func setupLoggedOutUser() {
+        accountLabel.attributedText = NSMutableAttributedString(string: "Already have an account?")
+        loginButton.isHidden = false
     }
     
     // MARK: - Actions
@@ -34,6 +74,10 @@ class RegisterVC: UIViewController {
         ZypeAppleTVBase.sharedInstance.createConsumer(consumer) { (success, error) in
             
             if success {
+                //store inputs in NSUserDefaults. We will be checking them on each app launch
+                UserDefaults.standard.set(self.emailTextField.text!, forKey: kUserEmail)
+                UserDefaults.standard.set(self.passwordTextField.text!, forKey: kUserPassword)
+                
                 ZypeAppleTVBase.sharedInstance.login(consumer.emailString, passwd: consumer.passwordString, completion: { (loggedIn, error) in
                     if loggedIn {
                         UserDefaults.standard.set(true, forKey: kDeviceLinkedStatus)
@@ -61,6 +105,16 @@ class RegisterVC: UIViewController {
                 }
             }
         }
+    }
+    
+    @IBAction func onLogin(_ sender: UIButton) {
+//        let vc = self.presentingViewController
+//        self.dismiss(animated: true, completion: {
+//            ZypeUtilities.presentLoginMethodVC(vc!)
+//        })
+        ZypeUtilities.presentLoginMethodVC(self)
+        
+        //self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Utilities

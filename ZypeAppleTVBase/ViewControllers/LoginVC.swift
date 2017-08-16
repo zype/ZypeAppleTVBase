@@ -9,31 +9,39 @@
 import Foundation
 
 class LoginVC: UIViewController {
-
+    
+    // MARK: - Properties
+    
+    @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
-
+    
     @IBOutlet weak var loginTitle: UILabel!
     @IBOutlet weak var loginFooter: UILabel!
+    
+    // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.configureView()
         self.setupText()
         passwordField.addTarget(self, action: #selector(loginClicked(_:)), for: UIControlEvents.editingDidEnd)
+        logoImageView.image = UIImage(named: "Logo")
     }
-
+    
+    // MARK: - Setup
+    
     func setupText() {
         let pageHeaderText = UserDefaults.standard.object(forKey: kLoginPageHeader)
         if pageHeaderText != nil {
-           self.loginTitle.text = pageHeaderText as? String
+            self.loginTitle.text = pageHeaderText as? String
         }
         let pageFooterText = UserDefaults.standard.object(forKey: kLoginPageFooter)
         if pageFooterText != nil {
             self.loginFooter.text = pageFooterText as? String
         }
-
+        
     }
     
     func configureView() {
@@ -41,7 +49,7 @@ class LoginVC: UIViewController {
         self.view.backgroundColor = UIColor.black
         
         self.emailField.backgroundColor =  UIColor.init(colorLiteralRed: 191.0, green: 191.0, blue: 231.0, alpha: 0.3)
-
+        
         self.emailField.textColor = UIColor.black
         self.emailField.tintColor = UIColor.green
         self.emailField.keyboardAppearance = UIKeyboardAppearance.dark
@@ -53,6 +61,8 @@ class LoginVC: UIViewController {
         self.passwordField.keyboardAppearance = UIKeyboardAppearance.dark
     }
     
+    // MARK: - Actions
+    
     @IBAction func loginClicked(_ sender: UIButton) {
         if self.emailField.text?.isEmpty == true {
             self.presentAlertWithText("Please enter your Email.")
@@ -63,6 +73,7 @@ class LoginVC: UIViewController {
             return
         }
         
+        resetUser()
         if !(self.emailField.text?.isEmpty)! && !(self.passwordField.text?.isEmpty)! {
             //store inputs in NSUserDefaults. We will be checking them on each app launch
             UserDefaults.standard.set(self.emailField.text!, forKey: kUserEmail)
@@ -76,9 +87,13 @@ class LoginVC: UIViewController {
                 }
                 
                 if loggedIn {
-                     UserDefaults.standard.set(true, forKey: kDeviceLinkedStatus)
-                      NotificationCenter.default.post(name: Notification.Name(rawValue: kZypeReloadScreenNotification), object: nil)
-                    self.dismiss(animated: true, completion: { _ in })
+                    UserDefaults.standard.set(true, forKey: kDeviceLinkedStatus)
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: kZypeReloadScreenNotification), object: nil)
+                    
+                    let vc = self.presentingViewController
+                    self.dismiss(animated: true, completion: {
+                        vc?.dismiss(animated: true, completion: nil)
+                    })
                 }
                 else {
                     UserDefaults.standard.set(false, forKey: kDeviceLinkedStatus)
@@ -92,13 +107,33 @@ class LoginVC: UIViewController {
         ZypeUtilities.presentRegisterVC(self)
     }
     
-    func presentAlertWithText(_ message : String){
+    fileprivate func presentAlertWithText(_ message : String){
         let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         let ignoreAction = UIAlertAction(title: "Ok", style: .cancel) { _ in
             
         }
         alertController.addAction(ignoreAction)
-
+        
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    fileprivate func resetUser() {
+        UserDefaults.standard.set(false, forKey: kDeviceLinkedStatus)
+        ZypeAppleTVBase.sharedInstance.logOut()
+        
+        UserDefaults.standard.removeObject(forKey: kUserEmail)
+        UserDefaults.standard.removeObject(forKey: kUserPassword)
+        
+        let defaults = UserDefaults.standard
+        
+        if let favorites = defaults.object(forKey: "favoritesViaAPI") as? Bool {
+            if favorites {
+                let favorites = [String]()
+                defaults.set(favorites, forKey: kFavoritesKey)
+                defaults.synchronize()
+            }
+        }
+        
+        NotificationCenter.default.post(name: Notification.Name(rawValue: kZypeReloadScreenNotification), object: nil)
     }
 }

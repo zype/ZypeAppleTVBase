@@ -140,6 +140,7 @@ class ZypeDataManager : NSObject {
                                         DispatchQueue.main.sync(execute: {
                                             self.consumer.setData(idString, email: emailString, name: nameString)
                                         })
+                                        UserDefaults.standard.set(self.consumer.ID, forKey: "kConsumerId")
                                         self.loginCompletion(self.consumer.isLoggedIn, error: error, completion: completion)
                                         return
                                     }
@@ -160,7 +161,7 @@ class ZypeDataManager : NSObject {
             })
         }, update: serviceController.refreshAccessTokenWithCompletionHandler)
     }
-
+    
     func createConsumer(_ consumer: ConsumerModel, completion:@escaping (_ success: Bool, _ error: NSError?) -> Void)
     {
         self.serviceController.createConsumer(consumer) { (jsonDic, err) -> Void in

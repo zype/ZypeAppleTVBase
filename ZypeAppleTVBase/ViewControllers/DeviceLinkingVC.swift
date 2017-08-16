@@ -59,6 +59,9 @@ class DeviceLinkingVC: UIViewController {
     }
     
     @IBAction func browseContentButtonClicked(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: {_ in})
+        let vc = self.presentedViewController
+        self.dismiss(animated: true, completion: {
+            vc?.dismiss(animated: true, completion: nil)
+        })
     }
 }
