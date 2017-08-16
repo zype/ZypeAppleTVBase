@@ -223,6 +223,7 @@ open class ZypeUtilities {
         let password = UserDefaults.standard.object(forKey: kUserPassword) as! String?
         
         if email == nil || password == nil {
+            completion("Not logged in")
             UserDefaults.standard.set(false, forKey: kDeviceLinkedStatus)
         }
         else {
