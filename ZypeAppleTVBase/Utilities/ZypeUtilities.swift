@@ -36,6 +36,7 @@ open class ZypeUtilities {
     }
     
     //MARK: - Device Linking
+    
     open static func presentFrameworkVC(_ caller: UIViewController) {
         let podBundle = Bundle(for: ZypeAppleTVBase.self)
         
@@ -93,6 +94,7 @@ open class ZypeUtilities {
     }
     
     //MARK: - Login with token
+    
     open static func loginConsumerToGetToken(_ deviceId: String, pin: String?) {
         if (pin != nil) {
             ZypeAppleTVBase.sharedInstance.login(deviceId, pin: pin!, completion: {(loggedIn: Bool?, error: NSError?) in
@@ -119,6 +121,7 @@ open class ZypeUtilities {
     }
     
     //MARK: - Limit Livestream
+    
     open static func loadLimitLivestreamZObject() {
         let type = QueryZobjectsModel()
         type.zobjectType = "limit_livestream"
@@ -163,8 +166,7 @@ open class ZypeUtilities {
     }
     
     // MARK: - Login
-<<<<<<< HEAD
-    /*
+    
     open static func presentLoginMethodVC(_ caller: UIViewController) {
         let podBundle = Bundle(for: ZypeAppleTVBase.self)
         
@@ -182,9 +184,6 @@ open class ZypeUtilities {
         let vc = storyboard.instantiateViewController(withIdentifier: "LoginMethodVC") as! LoginMethodVC
         caller.present(vc, animated: true, completion: nil)
     }
- */
-=======
->>>>>>> 4359c1ab76cd3b7d61bcac567334bb02ecc9a265
     
     open static func presentLoginVC(_ caller: UIViewController) {
         let podBundle = Bundle(for: ZypeAppleTVBase.self)
