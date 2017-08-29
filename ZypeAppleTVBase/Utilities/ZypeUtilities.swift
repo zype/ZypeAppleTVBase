@@ -231,7 +231,7 @@ open class ZypeUtilities {
             UserDefaults.standard.set(false, forKey: kDeviceLinkedStatus)
         }
         else {
-            ZypeAppleTVBase.sharedInstance.login(email!, passwd: password!, completion:{ (loggedIn: Bool, error: NSError?) in
+            ZypeAppleTVBase.sharedInstance.login(email!, passwd: password!, completion: { (loggedIn: Bool, error: NSError?) in
                 if error != nil {
                     completion("error")
                     return

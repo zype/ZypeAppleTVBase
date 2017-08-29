@@ -9,14 +9,19 @@
 import UIKit
 
 class DeviceLinkingVC: UIViewController {
-
-    var deviceLinkingUrl: String?
+    
+    // MARK: - Properties
+    
     @IBOutlet weak var firstLineLabel: UILabel!
     @IBOutlet weak var pinLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    var deviceLinkingUrl: String?
     var timer = Timer()
     lazy var deviceString = ZypeAppSettings.sharedInstance.deviceId()
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    // MARK: - View Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if (deviceLinkingUrl != nil) {
@@ -40,7 +45,9 @@ class DeviceLinkingVC: UIViewController {
         super.viewWillDisappear(animated)
         timer.invalidate()
     }
-
+    
+    // MARK: - Device Linking Methods
+    
     fileprivate func startTimer() {
         timer = Timer.scheduledTimer(timeInterval: 5, target:self, selector: #selector(DeviceLinkingVC.checkDeviceStatus), userInfo: nil, repeats: true)
     }
@@ -58,10 +65,9 @@ class DeviceLinkingVC: UIViewController {
         })
     }
     
+    // MARK: - Actions
+    
     @IBAction func browseContentButtonClicked(_ sender: UIButton) {
-        let vc = self.presentedViewController
-        self.dismiss(animated: true, completion: {
-            vc?.dismiss(animated: true, completion: nil)
-        })
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "kPurchaseCompleted"), object: nil)
     }
 }

@@ -80,7 +80,6 @@ class LoginVC: UIViewController {
             UserDefaults.standard.set(self.passwordField.text!, forKey: kUserPassword)
             
             ZypeAppleTVBase.sharedInstance.login(self.emailField.text!, passwd: self.passwordField.text!, completion:{ (loggedIn: Bool, error: NSError?) in
-                print(loggedIn)
                 if error != nil {
                     self.presentAlertWithText("Invalid Login and Password.")
                     return
@@ -89,11 +88,7 @@ class LoginVC: UIViewController {
                 if loggedIn {
                     UserDefaults.standard.set(true, forKey: kDeviceLinkedStatus)
                     NotificationCenter.default.post(name: Notification.Name(rawValue: kZypeReloadScreenNotification), object: nil)
-                    
-                    let vc = self.presentingViewController
-                    self.dismiss(animated: true, completion: {
-                        vc?.dismiss(animated: true, completion: nil)
-                    })
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "kPurchaseCompleted"), object: nil)
                 }
                 else {
                     UserDefaults.standard.set(false, forKey: kDeviceLinkedStatus)
@@ -101,10 +96,6 @@ class LoginVC: UIViewController {
                 }
             })
         }
-    }
-    
-    @IBAction func registerClicked(_ sender: UIButton) {
-        ZypeUtilities.presentRegisterVC(self)
     }
     
     fileprivate func presentAlertWithText(_ message : String){
@@ -133,7 +124,7 @@ class LoginVC: UIViewController {
                 defaults.synchronize()
             }
         }
-        
         NotificationCenter.default.post(name: Notification.Name(rawValue: kZypeReloadScreenNotification), object: nil)
     }
+
 }

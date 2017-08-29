@@ -22,13 +22,16 @@ class RegisterVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         logoImageView.image = UIImage(named: "Logo")
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         setupUserLogin()
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "kPurchaseCompelted"), object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
     }
     
     // MARK: - Setup
@@ -108,13 +111,15 @@ class RegisterVC: UIViewController {
     }
     
     @IBAction func onLogin(_ sender: UIButton) {
-//        let vc = self.presentingViewController
-//        self.dismiss(animated: true, completion: {
-//            ZypeUtilities.presentLoginMethodVC(vc!)
-//        })
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(onPurchased),
+                                               name: NSNotification.Name(rawValue: "kPurchaseCompleted"),
+                                               object: nil)
         ZypeUtilities.presentLoginMethodVC(self)
-        
-        //self.dismiss(animated: true, completion: nil)
+    }
+    
+    func onPurchased() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Utilities
@@ -137,7 +142,7 @@ class RegisterVC: UIViewController {
             
             return true
         }
-        print("Field no valid")
+        print("Field not valid")
         return false
     }
     
@@ -154,4 +159,5 @@ class RegisterVC: UIViewController {
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: email)
     }
+    
 }

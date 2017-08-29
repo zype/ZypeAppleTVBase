@@ -136,10 +136,15 @@ class ZypeDataManager : NSObject {
                                     if (response != nil)
                                     {
                                         let emailString = try SSUtils.stringFromDictionary(response, key: kJSONEmail)
-                                        let nameString = try SSUtils.stringFromDictionary(response, key: kJSONName)
+                                        print("----------")
+                                        print(emailString)
+                                        print("----------")
+                                        let nameString = try? SSUtils.stringFromDictionary(response, key: kJSONName)
+                                        let subscriptionCount = try? SSUtils.intagerFromDictionary(response, key: kJSONSubscriptionCount)
                                         DispatchQueue.main.sync(execute: {
-                                            self.consumer.setData(idString, email: emailString, name: nameString)
+                                            self.consumer.setData(idString, email: emailString, name: nameString ?? "", subscription: subscriptionCount ?? 0)
                                         })
+
                                         UserDefaults.standard.set(self.consumer.ID, forKey: "kConsumerId")
                                         self.loginCompletion(self.consumer.isLoggedIn, error: error, completion: completion)
                                         return
@@ -180,7 +185,7 @@ class ZypeDataManager : NSObject {
             })
         }
     }
-
+    
     //MARK: Categories
     func getCategories(_ queryModel: QueryCategoriesModel,  toArray: Array<CategoryModel> = Array<CategoryModel>(),
         completion:@escaping (_ categories: Array<CategoryModel>, _ error: NSError?) -> Void)
