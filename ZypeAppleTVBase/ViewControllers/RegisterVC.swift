@@ -86,9 +86,10 @@ class RegisterVC: UIViewController {
                         UserDefaults.standard.set(true, forKey: kDeviceLinkedStatus)
                         NotificationCenter.default.post(name: Notification.Name(rawValue: kZypeReloadScreenNotification), object: nil)
                         
-                        let presentingViewController = self.presentingViewController
+                        // let presentingViewController = self.presentingViewController
                         self.dismiss(animated: false, completion: {
-                            presentingViewController!.dismiss(animated: true)
+                            // presentingViewController!.dismiss(animated: true)
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: "kRegisterCompleted"), object: nil)
                         })
                     }
                     else {
