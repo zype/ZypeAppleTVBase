@@ -21,6 +21,7 @@ open class PlaylistModel: BaseModel {
     fileprivate(set) open var siteID = ""
     fileprivate(set) open var relatedVideoIDs = Array<String>()
     fileprivate(set) open var parentId = ""
+    fileprivate(set) open var thumbnailLayout: LayoutOrientation?
     
     fileprivate(set) open var thumbnails = Array<ThumbnailModel>()
     fileprivate(set) open var images = Array<ThumbnailModel>()
@@ -38,6 +39,14 @@ open class PlaylistModel: BaseModel {
         do {
             self.descriptionString = try SSUtils.stringFromDictionary(fromJson, key: kJSONDescription)
             
+        }
+        catch _ {
+            ZypeLog.error("Exception: PlaylistModel - Description")
+        }
+        
+        do {
+            let layoutValue = try SSUtils.stringFromDictionary(fromJson, key: kJSONThumbnailLayout)
+            self.thumbnailLayout = LayoutOrientation.init(rawValue: layoutValue)
         }
         catch _ {
             ZypeLog.error("Exception: PlaylistModel - Description")
@@ -130,8 +139,10 @@ open class PlaylistModel: BaseModel {
                     let width = try SSUtils.intagerFromDictionary(value as? Dictionary<String, AnyObject>, key: kJSONWidth)
                     let url = try SSUtils.stringFromDictionary(value as? Dictionary<String, AnyObject>, key: kJSONUrl)
                     let nameValue = value[kJSONName]
+                    let layoutValue = value[kJSONLayout]
+                    let layout = ((layoutValue as? String) != nil) ? LayoutOrientation.init(rawValue: (layoutValue as! String)) : nil
                     let name = ((nameValue as? String) != nil) ? (nameValue as! String) : ""
-                    self.thumbnails.append(ThumbnailModel(height: height, width: width, url: url, name: name))
+                    self.thumbnails.append(ThumbnailModel(height: height, width: width, url: url, name: name, layout: layout))
                 }
             }
         }
@@ -152,8 +163,10 @@ open class PlaylistModel: BaseModel {
                 {
                     let url = try SSUtils.stringFromDictionary(value as? Dictionary<String, AnyObject>, key: kJSONUrl)
                     let nameValue = value[kJSONTitle]
+                    let layoutValue = value[kJSONLayout]
+                    let layout = ((layoutValue as? String) != nil) ? LayoutOrientation.init(rawValue: (layoutValue as! String)) : nil
                     let name = ((nameValue as? String) != nil) ? (nameValue as! String) : ""
-                    self.images.append(ThumbnailModel(height: 0, width: 0, url: url, name: name))
+                    self.images.append(ThumbnailModel(height: 0, width: 0, url: url, name: name, layout: layout))
                 }
             }
         }

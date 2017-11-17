@@ -132,8 +132,10 @@ open class VideoModel: BaseModel {
                     let width = try SSUtils.intagerFromDictionary(value as? Dictionary<String, AnyObject>, key: kJSONWidth)
                     let url = try SSUtils.stringFromDictionary(value as? Dictionary<String, AnyObject>, key: kJSONUrl)
                     let nameValue = value[kJSONName]
+                    let layoutValue = value[kJSONLayout]
+                    let layout = ((layoutValue as? String) != nil) ? LayoutOrientation.init(rawValue: (layoutValue as! String)) : nil
                     let name = ((nameValue as? String) != nil) ? (nameValue as! String) : ""
-                    self.thumbnails.append(ThumbnailModel(height: height, width: width, url: url, name: name))
+                    self.thumbnails.append(ThumbnailModel(height: height, width: width, url: url, name: name, layout: layout))
                 }
             }
         }
@@ -153,8 +155,10 @@ open class VideoModel: BaseModel {
                 {
                     let url = try SSUtils.stringFromDictionary(value as? Dictionary<String, AnyObject>, key: kJSONUrl)
                     let nameValue = value[kJSONTitle]
+                    let layoutValue = value[kJSONLayout]
+                    let layout = ((layoutValue as? String) != nil) ? LayoutOrientation.init(rawValue: (layoutValue as! String)) : nil
                     let name = ((nameValue as? String) != nil) ? (nameValue as! String) : ""
-                    self.images.append(ThumbnailModel(height: 0, width: 0, url: url, name: name))
+                    self.images.append(ThumbnailModel(height: 0, width: 0, url: url, name: name, layout: layout))
                 }
             }
         }
