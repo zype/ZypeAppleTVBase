@@ -40,6 +40,8 @@ internal let kJSONThumbnails = "thumbnails"
 internal let kJSONImages = "images"
 internal let kJSONCategories = "categories"
 internal let kJSONParentId = "parent_id"
+internal let kJSONLayout = "layout"
+internal let kJSONThumbnailLayout = "thumbnail_layout"
 
 internal let kJSONCreatedAt = "created_at"
 internal let kJSONUpdatedAt = "updated_at"
