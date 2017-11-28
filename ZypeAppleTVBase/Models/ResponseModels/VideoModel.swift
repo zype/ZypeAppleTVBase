@@ -24,6 +24,7 @@ open class VideoModel: BaseModel {
     fileprivate(set) open var rentalPrice: String = ""
     fileprivate(set) open var rentalRequired = false
     fileprivate(set) open var subscriptionRequired = false
+    fileprivate(set) open var passPlanRequired = false
     fileprivate(set) open var onAir = false
     
     fileprivate(set) open var episode: Int = 0
@@ -199,15 +200,34 @@ open class VideoModel: BaseModel {
     fileprivate func loadPrices(_ fromJson: Dictionary<String, AnyObject>)
     {
         do {
-            purchasePrice = try SSUtils.stringFromDictionary(fromJson, key: kJSONPurchasePrice)
             purchaseRequired = try SSUtils.boolFromDictionary(fromJson, key: kJSONPurchaseRequired)
+        }
+        catch _ {
+            ZypeLog.error("Exception: VideoModel | Purchase Required")
+        }
+        
+        do {
+            rentalRequired = try SSUtils.boolFromDictionary(fromJson, key: kJSONRentalRequired)
+        }
+        catch _ {
+            ZypeLog.error("Exception: VideoModel | Rental Required")
+        }
+        
+        do {
+            passPlanRequired = try SSUtils.boolFromDictionary(fromJson, key: kJSONPassPlanRequired)
+        }
+        catch _ {
+            ZypeLog.error("Exception: VideoModel | Pass Plan Required")
+        }
+        
+        do {
+            purchasePrice = try SSUtils.stringFromDictionary(fromJson, key: kJSONPurchasePrice)
             rentalDuration = try SSUtils.intagerFromDictionary(fromJson, key: kJSONRentalDuration)
             rentalPrice = try SSUtils.stringFromDictionary(fromJson, key: kJSONRentalPrice)
-            rentalRequired = try SSUtils.boolFromDictionary(fromJson, key: kJSONRentalRequired)
         }
         catch _
         {
-          //  ZypeLog.error("Exception: VideoModel | Load Prices")
+            ZypeLog.error("Exception: VideoModel | Load Prices")
         }
     }
     

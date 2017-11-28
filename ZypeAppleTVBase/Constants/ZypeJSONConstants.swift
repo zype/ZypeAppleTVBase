@@ -64,5 +64,6 @@ internal let kJSONPurchaseRequired = "purchase_required"
 internal let kJSONRentalDuration = "rental_duration"
 internal let kJSONRentalPrice = "rental_price"
 internal let kJSONRentalRequired = "rental_required"
+internal let kJSONPassPlanRequired = "pass_plan"
 
 internal let kJSONContentType = "content_type"
