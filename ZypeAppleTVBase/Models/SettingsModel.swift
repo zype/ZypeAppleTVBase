@@ -10,7 +10,7 @@
 open class SettingsModel: NSObject
 {
     //keys
-    internal let appKey: String
+    open let appKey: String
     internal let clientId: String
     internal let clientSecret: String
 
