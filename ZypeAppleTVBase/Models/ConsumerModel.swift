@@ -9,7 +9,7 @@
 import UIKit
 
 open class ConsumerModel: NSObject {
-
+    
     fileprivate (set) open var ID:String = ""
     fileprivate (set) open var emailString:String = ""
     fileprivate (set) open var nameString:String = ""
@@ -46,3 +46,4 @@ open class ConsumerModel: NSObject {
     }
     
 }
+

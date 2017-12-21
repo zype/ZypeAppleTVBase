@@ -136,15 +136,12 @@ class ZypeDataManager : NSObject {
                                     if (response != nil)
                                     {
                                         let emailString = try SSUtils.stringFromDictionary(response, key: kJSONEmail)
-                                        print("----------")
-                                        print(emailString)
-                                        print("----------")
                                         let nameString = try? SSUtils.stringFromDictionary(response, key: kJSONName)
                                         let subscriptionCount = try? SSUtils.intagerFromDictionary(response, key: kJSONSubscriptionCount)
                                         DispatchQueue.main.sync(execute: {
                                             self.consumer.setData(idString, email: emailString, name: nameString ?? "", subscription: subscriptionCount ?? 0)
                                         })
-
+                                      
                                         UserDefaults.standard.set(self.consumer.ID, forKey: "kConsumerId")
                                         self.loginCompletion(self.consumer.isLoggedIn, error: error, completion: completion)
                                         return
