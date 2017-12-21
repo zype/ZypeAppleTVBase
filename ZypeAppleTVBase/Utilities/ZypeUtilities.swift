@@ -181,6 +181,7 @@ open class ZypeUtilities {
         
         
         let storyboard = UIStoryboard(name: "DeviceLinking", bundle: bundle)
+        
         let vc = storyboard.instantiateViewController(withIdentifier: "LoginMethodVC") as! LoginMethodVC
         caller.present(vc, animated: true, completion: nil)
     }

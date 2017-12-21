@@ -76,8 +76,6 @@ class LoginVC: UIViewController {
         resetUser()
         if !(self.emailField.text?.isEmpty)! && !(self.passwordField.text?.isEmpty)! {
             //store inputs in NSUserDefaults. We will be checking them on each app launch
-            UserDefaults.standard.set(self.emailField.text!, forKey: kUserEmail)
-            UserDefaults.standard.set(self.passwordField.text!, forKey: kUserPassword)
             
             ZypeAppleTVBase.sharedInstance.login(self.emailField.text!, passwd: self.passwordField.text!, completion:{ (loggedIn: Bool, error: NSError?) in
                 if error != nil {
@@ -87,6 +85,8 @@ class LoginVC: UIViewController {
                 
                 if loggedIn {
                     UserDefaults.standard.set(true, forKey: kDeviceLinkedStatus)
+                    UserDefaults.standard.set(self.emailField.text!, forKey: kUserEmail)
+                    UserDefaults.standard.set(self.passwordField.text!, forKey: kUserPassword)
                     NotificationCenter.default.post(name: Notification.Name(rawValue: kZypeReloadScreenNotification), object: nil)
                     NotificationCenter.default.post(name: Notification.Name(rawValue: "kPurchaseCompleted"), object: nil)
                 }

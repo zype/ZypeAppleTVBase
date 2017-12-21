@@ -78,12 +78,12 @@ class RegisterVC: UIViewController {
             
             if success {
                 //store inputs in NSUserDefaults. We will be checking them on each app launch
-                UserDefaults.standard.set(self.emailTextField.text!, forKey: kUserEmail)
-                UserDefaults.standard.set(self.passwordTextField.text!, forKey: kUserPassword)
                 
                 ZypeAppleTVBase.sharedInstance.login(consumer.emailString, passwd: consumer.passwordString, completion: { (loggedIn, error) in
                     if loggedIn {
                         UserDefaults.standard.set(true, forKey: kDeviceLinkedStatus)
+                        UserDefaults.standard.set(self.emailTextField.text!, forKey: kUserEmail)
+                        UserDefaults.standard.set(self.passwordTextField.text!, forKey: kUserPassword)
                         NotificationCenter.default.post(name: Notification.Name(rawValue: kZypeReloadScreenNotification), object: nil)
                         
                         // let presentingViewController = self.presentingViewController
