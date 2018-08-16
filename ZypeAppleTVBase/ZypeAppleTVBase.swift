@@ -95,6 +95,7 @@ open class ZypeAppleTVBase: NSObject {
     
     open func getVideos(_ completion:@escaping ((_ videos: Array<VideoModel>?, _ error: NSError?) -> Void),
         categoryValue: CategoryValueModel? = nil,
+        playlistId: String = "",
         searchString: String = "",
         keyword: String = "",
         active: Bool = true,
@@ -103,6 +104,7 @@ open class ZypeAppleTVBase: NSObject {
     {
         let queryModel = QueryVideosModel(categoryValue: categoryValue)
         queryModel.searchString = searchString
+        queryModel.playlistId = playlistId
         queryModel.keyword = keyword
         queryModel.active = active
         queryModel.page = page
