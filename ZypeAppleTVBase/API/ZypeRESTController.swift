@@ -47,7 +47,7 @@ class ZypeRESTController: NSObject, URLSessionDelegate {
 
     //get content
     fileprivate let kApiGetCategories = "%@/categories?app_key=%@&page=%d&per_page=%d"
-    fileprivate let kApiGetListVideos = "%@/videos?app_key=%@&active=%@&on_air=%@&page=%d&per_page=%d" +
+    fileprivate let kApiGetListVideos = "%@/videos?app_key=%@&playlist_id.inclusive=%@&active=%@&on_air=%@&page=%d&per_page=%d" +
         "&category[%@]=%@&category![%@]=%@" +
         "&q=%@&keyword=%@&id=%@&id!=%@&status=%@" +
         "&zobject_id=%@&zobject_id!=%@" +
@@ -142,6 +142,7 @@ class ZypeRESTController: NSObject, URLSessionDelegate {
 
     func getVideos(_ query: QueryVideosModel, completion:@escaping (Dictionary<String, AnyObject>?, NSError?) -> Void)
     {
+        let playlistId:String = SSUtils.escapedString(query.playlistId)
         let categoryKey:String = SSUtils.escapedString(query.categoryKey)
         let categoryValue:String = SSUtils.escapedString(query.categoryValue)
         let exceptCategoryKey:String = SSUtils.escapedString(query.exceptCategoryKey)
@@ -153,7 +154,7 @@ class ZypeRESTController: NSObject, URLSessionDelegate {
         let createdDate:String = SSUtils.dateToString(query.createdDate)
         let publishedDate:String = SSUtils.dateToString(query.publishedDate)
         let anyQueryString:String = query.anyQueryString
-        var urlAsString:String = String(format: kApiGetListVideos, self.keys.apiDomain, keys.appKey, String(query.active), String(query.onAir), query.page, perPage,
+        var urlAsString:String = String(format: kApiGetListVideos, self.keys.apiDomain, keys.appKey, playlistId, String(query.active), String(query.onAir), query.page, perPage,
             categoryKey, categoryValue, exceptCategoryKey, exceptCategoryValue,
             search, keyword, query.videoID, query.exceptVideoID, status, query.zObjectID, query.exceptZObjectID,
             createdDate, publishedDate, String(query.dpt),anyQueryString);

@@ -31,9 +31,11 @@ open class QueryVideosModel: QueryBaseModel {
     open var sort: String?
     open var ascending: Bool = false
     open var anyQueryString: String = "" //something like &category[video_type]=Film
+    open var playlistId: String = ""
     
     public init(categoryValue: CategoryValueModel? = nil,
         exceptCategoryValue: CategoryValueModel? = nil,
+        playlistId: String = "",
         searchString: String = "",
         page: Int = kApiFirstPage,
         perPage: Int = 0)
@@ -49,6 +51,7 @@ open class QueryVideosModel: QueryBaseModel {
             self.exceptCategoryKey = exceptCategoryValue!.parent!.titleString
             self.exceptCategoryValue = exceptCategoryValue!.titleString
         }
+        self.playlistId = playlistId
         self.searchString = searchString
     }
     
