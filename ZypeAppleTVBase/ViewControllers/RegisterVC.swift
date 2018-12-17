@@ -36,6 +36,8 @@ class RegisterVC: UIViewController {
             if success {
                 ZypeAppleTVBase.sharedInstance.login(consumer.emailString, passwd: consumer.passwordString, completion: { (loggedIn, error) in
                     if loggedIn {
+                        UserDefaults.standard.set(consumer.emailString, forKey: kUserEmail)
+                        UserDefaults.standard.set(consumer.passwordString, forKey: kUserPassword)
                         UserDefaults.standard.set(true, forKey: kDeviceLinkedStatus)
                         NotificationCenter.default.post(name: Notification.Name(rawValue: kZypeReloadScreenNotification), object: nil)
                         
