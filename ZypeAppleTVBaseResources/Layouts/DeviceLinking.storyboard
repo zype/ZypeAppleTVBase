@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="14313.18" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="14460.31" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="appleTV" orientation="landscape">
         <adaptation id="light"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -233,6 +234,21 @@
                                     <action selector="onRegister:" destination="g0I-rd-GwK" eventType="primaryActionTriggered" id="pZq-L8-cyt"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="plain" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zKW-Hm-b3i" userLabel="Checkbox Button">
+                                <rect key="frame" x="770" y="708" width="60" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <connections>
+                                    <action selector="onTosClick:" destination="g0I-rd-GwK" eventType="primaryActionTriggered" id="c7m-uY-GAs"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="I agree to the terms of service" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="827-RH-SNK">
+                                <rect key="frame" x="860" y="721" width="391" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                     </view>
                     <connections>
@@ -240,6 +256,8 @@
                         <outlet property="passwordTextField" destination="bmb-ec-Gab" id="cFn-Us-BTY"/>
                         <outlet property="registerButton" destination="XbJ-tR-cdx" id="hyG-yA-oun"/>
                         <outlet property="titleLabel" destination="UQx-Vp-bMD" id="Ib5-zd-sG2"/>
+                        <outlet property="tosCheckbox" destination="zKW-Hm-b3i" id="R9F-31-GNK"/>
+                        <outlet property="tosLabel" destination="827-RH-SNK" id="tYi-aC-k64"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="59v-Pf-7fs" userLabel="First Responder" sceneMemberID="firstResponder"/>
