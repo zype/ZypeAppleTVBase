@@ -16,10 +16,23 @@ class RegisterVC: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var tosCheckbox: UIButton!
+    @IBOutlet weak var tosLabel: UILabel!
+    
+    static let validateTosKey = "validate_tos"
+    var tosChecked: Bool = true
+    var checkedBoxImage: UIImage?
+    var uncheckedBoxImage: UIImage?
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if shouldValidateTos() {
+            setupTosCheckbox()
+        } else {
+            hideTos()
+        }
     }
     
     // MARK: - Actions
@@ -36,6 +49,8 @@ class RegisterVC: UIViewController {
             if success {
                 ZypeAppleTVBase.sharedInstance.login(consumer.emailString, passwd: consumer.passwordString, completion: { (loggedIn, error) in
                     if loggedIn {
+                        UserDefaults.standard.set(consumer.emailString, forKey: kUserEmail)
+                        UserDefaults.standard.set(consumer.passwordString, forKey: kUserPassword)
                         UserDefaults.standard.set(true, forKey: kDeviceLinkedStatus)
                         NotificationCenter.default.post(name: Notification.Name(rawValue: kZypeReloadScreenNotification), object: nil)
                         
@@ -63,6 +78,21 @@ class RegisterVC: UIViewController {
         }
     }
     
+    @IBAction func onTosClick(_ sender: UIButton) {
+        if tosChecked {
+            sender.setBackgroundImage(uncheckedBoxImage, for: .normal)
+            sender.setBackgroundImage(uncheckedBoxImage, for: .highlighted)
+            sender.setBackgroundImage(uncheckedBoxImage, for: .selected)
+            tosChecked = false
+        } else {
+            sender.setBackgroundImage(checkedBoxImage, for: .normal)
+            sender.setBackgroundImage(checkedBoxImage, for: .highlighted)
+            sender.setBackgroundImage(checkedBoxImage, for: .selected)
+            tosChecked = true
+        }
+    }
+    
+    
     // MARK: - Utilities
     
     fileprivate func validateFields() -> Bool {
@@ -78,6 +108,10 @@ class RegisterVC: UIViewController {
             }
             guard !password.isEmpty else {
                 self.presentAlertWithText("Please create a password.")
+                return false
+            }
+            if shouldValidateTos() && !tosChecked {
+                self.presentAlertWithText("You must agree with the terms of service in order to proceed.")
                 return false
             }
             
@@ -99,5 +133,48 @@ class RegisterVC: UIViewController {
         let emailRegEx = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: email)
+    }
+    
+    fileprivate func shouldValidateTos() -> Bool {
+        if UserDefaults.standard.bool(forKey: RegisterVC.validateTosKey) {
+            return true
+        }
+        return false
+    }
+    
+    fileprivate func setupTosCheckbox() -> Void {        
+        let podBundle = Bundle(for: ZypeAppleTVBase.self)
+        guard let bundleURL = podBundle.url(forResource: "ZypeAppleTVBaseResources", withExtension: "bundle") else {
+            hideTos()
+            return
+        }
+        guard let bundle = Bundle(url: bundleURL) else {
+            hideTos()
+            return
+        }
+        guard let checkedBox = UIImage(named: "checkedBox.png", in: bundle, compatibleWith: nil),
+            let uncheckedBox = UIImage(named: "uncheckedBox.png", in: bundle, compatibleWith: nil) else {
+                hideTos()
+                return
+        }
+        
+        checkedBoxImage = checkedBox
+        uncheckedBoxImage = uncheckedBox
+        tosCheckbox.setBackgroundImage(checkedBoxImage, for: .normal)
+        tosCheckbox.setBackgroundImage(checkedBoxImage, for: .selected)
+        tosCheckbox.setBackgroundImage(checkedBoxImage, for: .highlighted)
+        tosChecked = true
+
+        showTos()
+    }
+    
+    fileprivate func showTos() -> Void {
+        tosCheckbox.isHidden = false
+        tosLabel.isHidden = false
+    }
+    
+    fileprivate func hideTos() -> Void {
+        tosCheckbox.isHidden = true
+        tosLabel.isHidden = true
     }
 }
