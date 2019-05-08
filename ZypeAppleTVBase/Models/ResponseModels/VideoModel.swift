@@ -26,7 +26,8 @@ open class VideoModel: BaseModel {
     fileprivate(set) open var subscriptionRequired = false
     fileprivate(set) open var passPlanRequired = false
     fileprivate(set) open var onAir = false
-    
+    fileprivate(set) open var registrationRequired = false
+
     fileprivate(set) open var episode: Int = 0
     fileprivate(set) open var series: Int = 0
     
@@ -94,6 +95,12 @@ open class VideoModel: BaseModel {
             onAir = try SSUtils.boolFromDictionary(fromJson, key: kJSONOnAir)        }
         catch _ {
             ZypeLog.error("Exception: VideoModel | On Air")
+        }
+        
+        do {
+            registrationRequired = try SSUtils.boolFromDictionary(fromJson, key: kJSONRegistrationRequired)        }
+        catch _ {
+            ZypeLog.error("Exception: VideoModel | Registration Required")
         }
         
         self.loadPrices(fromJson)

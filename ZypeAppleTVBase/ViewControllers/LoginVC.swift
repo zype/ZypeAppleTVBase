@@ -17,6 +17,8 @@ class LoginVC: UIViewController {
     @IBOutlet weak var loginTitle: UILabel!
     @IBOutlet weak var loginFooter: UILabel!
     
+    open var dismissParentController: UIViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.configureView()
@@ -78,7 +80,9 @@ class LoginVC: UIViewController {
                 if loggedIn {
                      UserDefaults.standard.set(true, forKey: kDeviceLinkedStatus)
                       NotificationCenter.default.post(name: Notification.Name(rawValue: kZypeReloadScreenNotification), object: nil)
+                    self.dismissParentController?.view.isHidden = true;
                     self.dismiss(animated: true, completion: { _ in })
+                    self.dismissParentController?.dismiss(animated: false, completion: nil)
                 }
                 else {
                     UserDefaults.standard.set(false, forKey: kDeviceLinkedStatus)

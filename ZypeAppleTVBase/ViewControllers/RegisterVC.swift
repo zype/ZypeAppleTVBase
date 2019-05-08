@@ -177,4 +177,8 @@ class RegisterVC: UIViewController {
         tosCheckbox.isHidden = true
         tosLabel.isHidden = true
     }
+    
+    @IBAction func onSignIn(_ sender: Any) {
+        ZypeUtilities.presentLoginVC(self, true)
+    }
 }
