@@ -12,6 +12,10 @@ class ZypeRESTController: NSObject, URLSessionDelegate {
     //
     // constants
     //
+    
+    //guide
+    fileprivate let kGetGuides = "%@/program_guides?app_key=%@&per_page=%d"
+    fileprivate let kGetGuidePrograms = "%@/program_guides/%@/entries?app_key=%@&per_page=500&sort=%@&order=%@&start_time.gte=%@&end_time.lte=%@"
 
     //favorites
     fileprivate let kGetFavorites = "%@/consumers/%@/video_favorites/?access_token=%@&page=%d"
@@ -164,6 +168,22 @@ class ZypeRESTController: NSObject, URLSessionDelegate {
         getQuery(urlAsString, withCompletion: completion)
     }
 
+    //MARK: Guides API
+    func getGuides(_ perPage: Int, completion:@escaping (Dictionary<String, AnyObject>?, NSError?) -> Void)
+    {
+        let urlAsString = String(format: kGetGuides, self.keys.apiDomain, self.keys.appKey, perPage)
+        getQuery(urlAsString, withCompletion: completion)
+    }
+    
+    func getGuidePrograms(_ channelID: String,
+                          sort: String, order: String, greaterThan: String, lessThan: String,
+                          completion:@escaping (Dictionary<String, AnyObject>?, NSError?) -> Void)
+    {
+        let urlAsString = String(format: kGetGuidePrograms, self.keys.apiDomain, channelID, self.keys.appKey,
+                                 sort, order, greaterThan, lessThan)
+        getQuery(urlAsString, withCompletion: completion)
+    }
+    
     //MARK:  Favorite API
     func getFavorites(_ accessToken: String,consumerId: String, page: Int, completion:@escaping (Dictionary<String, AnyObject>?, NSError?) -> Void)
     {
