@@ -129,6 +129,23 @@ open class ZypeAppleTVBase: NSObject {
         }
     }
     
+    // MARK: Guide
+    open func getGuides(_ perPage: Int, completion:@escaping (_ objectTypes: Array<GuideModel>?, _ error: NSError?) -> Void)
+    {
+        dataManager == nil ? completion(nil, NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
+            dataManager?.getGuides(perPage, completion: completion)
+    }
+    
+    open func getGuidePrograms(_ channelID: String,
+                               sort: String, order: String, greaterThan: String, lessThan: String,
+                               completion:@escaping (_ objectTypes: Array<GuideProgramModel>?, _ error: NSError?) -> Void)
+    {
+        dataManager == nil ? completion(nil, NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
+            dataManager?.getGuidePrograms(channelID,
+                                          sort: sort, order: order, greaterThan: greaterThan, lessThan: lessThan,
+                                          completion: completion)
+    }
+    
      // MARK: Favorite
     open func getFavorites(_ completion:(_ favorites: Array<FavoriteModel>?, _ error: NSError?) -> Void)
     {

@@ -257,6 +257,59 @@ class ZypeDataManager : NSObject {
             })
         })
     }
+    
+    //MARK: guides
+    func getGuides(_ perPage: Int, completion:@escaping (_ guides: Array<GuideModel>?, _ error: NSError?) -> Void)
+    {
+        tokenManager.accessToken({ (token) -> Void in
+            self.serviceController.getGuides(perPage, completion: { (jsonDic, error) -> Void in
+                var err = error
+                if jsonDic != nil
+                {
+                    err = self.isServiceError(jsonDic!)
+                    if (err == nil)
+                    {
+                        let guides = self.jsonToGuideArrayPrivate(jsonDic)
+                        DispatchQueue.main.async(execute: {
+                            if (guides != nil) {
+                                completion(guides!, nil)
+                            } else {
+                                completion(nil, nil)
+                            }
+                        })
+                    }
+                }
+            })
+        }, update: serviceController.refreshAccessTokenWithCompletionHandler)
+    }
+    
+    func getGuidePrograms(_ channelID: String, sort: String, order: String, greaterThan: String, lessThan: String,
+                          completion:@escaping (_ programs: Array<GuideProgramModel>?, _ error: NSError?) -> Void)
+    {
+        //taken shortcut - will only retrieve first 500 items
+        tokenManager.accessToken({ (token) -> Void in
+            self.serviceController.getGuidePrograms(channelID,
+                                                    sort: sort, order: order, greaterThan: greaterThan, lessThan: lessThan,
+                                                    completion: { (jsonDic, error) -> Void in
+                var err = error
+                if jsonDic != nil
+                {
+                    err = self.isServiceError(jsonDic!)
+                    if (err == nil)
+                    {
+                        let programs = self.jsonToProgramArrayPrivate(jsonDic)
+                        DispatchQueue.main.async(execute: {
+                            if (programs != nil) {
+                                completion(programs!, nil)
+                            } else {
+                                completion(nil, nil)
+                            }
+                        })
+                    }
+                }
+            })
+        }, update: serviceController.refreshAccessTokenWithCompletionHandler)
+    }
 
    //MARK: favorites
     func getFavorites(_ completion:(_ favorites: Array<FavoriteModel>?, _ error: NSError?) -> Void)
@@ -689,7 +742,57 @@ class ZypeDataManager : NSObject {
             completion(self.cacheManager.synchronizeVideos(videos), error)
         })
     }
-
+    
+    fileprivate func jsonToGuideArrayPrivate(_ jsonDic: Dictionary<String, AnyObject>?) -> Array<GuideModel>?
+    {
+        if (jsonDic != nil)
+        {
+            let response = jsonDic![kJSONResponse]
+            if (response != nil)
+            {
+                var array = Array<GuideModel>()
+                if (response as? Array<AnyObject> == nil)
+                {
+                    array.append(GuideModel(json: response as! Dictionary<String, AnyObject>))
+                }
+                else
+                {
+                    for value in response as! Array<AnyObject>
+                    {
+                        array.append(GuideModel(json: value as! Dictionary<String, AnyObject>))
+                    }
+                }
+                return array
+            }
+        }
+        return nil
+    }
+    
+    fileprivate func jsonToProgramArrayPrivate(_ jsonDic: Dictionary<String, AnyObject>?) -> Array<GuideProgramModel>?
+    {
+        if (jsonDic != nil)
+        {
+            let response = jsonDic![kJSONResponse]
+            if (response != nil)
+            {
+                var array = Array<GuideProgramModel>()
+                if (response as? Array<AnyObject> == nil)
+                {
+                    array.append(GuideProgramModel(json: response as! Dictionary<String, AnyObject>))
+                }
+                else
+                {
+                    for value in response as! Array<AnyObject>
+                    {
+                        array.append(GuideProgramModel(json: value as! Dictionary<String, AnyObject>))
+                    }
+                }
+                return array
+            }
+        }
+        return nil
+    }
+    
     fileprivate func jsonToFavoriteArrayPrivate(_ jsonDic: Dictionary<String, AnyObject>?) -> Array<FavoriteModel>?
     {
         if (jsonDic != nil)

@@ -42,6 +42,8 @@ internal let kJSONCategories = "categories"
 internal let kJSONParentId = "parent_id"
 internal let kJSONLayout = "layout"
 internal let kJSONThumbnailLayout = "thumbnail_layout"
+internal let kJSONStartTime = "start_time"
+internal let kJSONEndTime = "end_time"
 
 internal let kJSONCreatedAt = "created_at"
 internal let kJSONUpdatedAt = "updated_at"
