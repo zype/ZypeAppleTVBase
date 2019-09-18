@@ -33,6 +33,9 @@ class ZypeRESTController: NSObject, URLSessionDelegate {
     fileprivate let kGetSubscriptions = "%@/subscriptions/?app_key=%@&page=%d&per_page=%d&q=%@&id=%@&id!=%@"
     fileprivate let kCreateSubscription = "%@/subscriptions/?app_key=%@&subscription[%@]=&@"
 
+    //subscription plan
+    fileprivate let kGetSubscriptionPlan = "%@/plans/?app_key=%@"
+
     //playlists
     fileprivate let kGetPlaylist = "%@/playlists/%@?app_key=%@"
     fileprivate let kGetPlaylists = "%@/playlists?app_key=%@&page=%d&per_page=%d&active=%@&keyword=%@&category[%@]=%@&sort=priority&order=%@&parent_id=%@"
@@ -261,6 +264,15 @@ class ZypeRESTController: NSObject, URLSessionDelegate {
     func removeSubscription(_ ID: String, completion:(Dictionary<String, AnyObject>?, NSError?) -> Void)
     {
         completion(nil, NSError(domain: kErrorDomaine, code: kErrorNotImplemented, userInfo: nil))
+    }
+    
+    func getSubscriptionPlan(_ subscriptions: [String: String], completion:@escaping ([String : AnyObject]?, NSError?) -> Void) {
+        var urlAsString = String(format: kGetSubscriptionPlan, self.keys.apiDomain, self.keys.appKey)
+        for subscription in subscriptions {
+            let queryItem = String(format: "&id[]=%@", subscription.key)
+            urlAsString += queryItem
+        }
+        getQuery(urlAsString, withCompletion: completion)
     }
 
     //MARK: Playlist
