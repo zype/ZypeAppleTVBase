@@ -274,6 +274,11 @@ open class ZypeAppleTVBase: NSObject {
             dataManager?.removeSubscription(subscription, completion: completion)
     }
     
+    open func getSubscriptionPlan(_ subscriptions: [String: String], completion:@escaping (Dictionary<String, AnyObject>?, NSError?) -> Void) {
+        dataManager == nil ? completion(nil, NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :
+            dataManager?.getSubscriptionPlan(subscriptions, completion: completion)
+    }
+
     //MARK: play list
     open func getPlaylist(with id: String, completion: @escaping (_ playlist: [PlaylistModel]?, _ error: NSError?) -> Void) {
         dataManager == nil ? completion(nil, NSError(domain: kErrorDomaine, code: kErrorSDKNotInitialized, userInfo: nil)) :

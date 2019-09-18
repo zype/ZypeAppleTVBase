@@ -526,6 +526,14 @@ class ZypeDataManager : NSObject {
             })
         })
     }
+    
+    func getSubscriptionPlan(_ subscriptions: [String: String], completion:@escaping ([String : AnyObject]?, NSError?) -> Void) {
+        self.serviceController.getSubscriptionPlan(subscriptions) { (data, error) in
+            DispatchQueue.main.async(execute: {
+                completion(data, error)
+            })
+        }
+    }
 
     //MARK: play list
     func getPlaylist(with id: String, toPlaylist: [PlaylistModel] = [PlaylistModel](), completion: @escaping (_ playlist: [PlaylistModel], _ error: NSError?) -> Void) {
