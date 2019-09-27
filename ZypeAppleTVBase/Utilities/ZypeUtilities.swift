@@ -163,7 +163,7 @@ open class ZypeUtilities {
     }
     
     // MARK: - Login
-    open static func presentLoginVC(_ caller: UIViewController) {
+    public static func presentLoginVC(_ caller: UIViewController, _ subscribeDelegate: SubscriptionDelegate? = nil) {
         let podBundle = Bundle(for: ZypeAppleTVBase.self)
         
         if let bundleURL = podBundle.url(forResource: "ZypeAppleTVBaseResources", withExtension: "bundle") {
@@ -172,6 +172,7 @@ open class ZypeUtilities {
                 let storyboard = UIStoryboard(name: "DeviceLinking", bundle: bundle)
                 
                 let vc = storyboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+                vc.subscribeDelegate = subscribeDelegate
                 caller.present(vc, animated: true, completion: nil)
             }else {
                 assertionFailure("Could not load the bundle")
@@ -182,7 +183,7 @@ open class ZypeUtilities {
         }
     }
     
-    open static func presentLoginVC(_ caller: UIViewController, _ dismissParent: Bool ) {
+    public static func presentLoginVC(_ caller: UIViewController, _ dismissParent: Bool, _ subscribeDelegate: SubscriptionDelegate? = nil ) {
         let podBundle = Bundle(for: ZypeAppleTVBase.self)
         
         if let bundleURL = podBundle.url(forResource: "ZypeAppleTVBaseResources", withExtension: "bundle") {
@@ -194,6 +195,7 @@ open class ZypeUtilities {
                 if dismissParent {
                     vc.dismissParentController = caller
                 }
+                vc.subscribeDelegate = subscribeDelegate
                 caller.present(vc, animated: true, completion: nil)
             }else {
                 assertionFailure("Could not load the bundle")
@@ -204,7 +206,7 @@ open class ZypeUtilities {
         }
     }
     
-    open static func presentRegisterVC(_ caller: UIViewController) {
+    public static func presentRegisterVC(_ caller: UIViewController, _ subscribeDelegate: SubscriptionDelegate? = nil) {
         let podBundle = Bundle(for: ZypeAppleTVBase.self)
         
         guard let bundleURL = podBundle.url(forResource: "ZypeAppleTVBaseResources", withExtension: "bundle") else {
@@ -219,6 +221,7 @@ open class ZypeUtilities {
         
         let storyboard = UIStoryboard(name: "DeviceLinking", bundle: bundle)
         let vc = storyboard.instantiateViewController(withIdentifier: "RegisterVC") as! RegisterVC
+        vc.subscribeDelegate = subscribeDelegate
         caller.present(vc, animated: true, completion: nil)
     }
     

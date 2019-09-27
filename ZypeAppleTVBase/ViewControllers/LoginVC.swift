@@ -8,6 +8,10 @@
 
 import Foundation
 
+public protocol SubscriptionDelegate {
+    func loginComplete()
+}
+
 class LoginVC: UIViewController {
 
     @IBOutlet weak var emailField: UITextField!
@@ -18,6 +22,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var loginFooter: UILabel!
     
     open var dismissParentController: UIViewController?
+    open var subscribeDelegate: SubscriptionDelegate? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,6 +88,10 @@ class LoginVC: UIViewController {
                     self.dismissParentController?.view.isHidden = true;
                     self.dismiss(animated: true, completion: { _ in })
                     self.dismissParentController?.dismiss(animated: false, completion: nil)
+                    
+                    if (self.subscribeDelegate != nil) {
+                        self.subscribeDelegate?.loginComplete()
+                    }
                 }
                 else {
                     UserDefaults.standard.set(false, forKey: kDeviceLinkedStatus)
