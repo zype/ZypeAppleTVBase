@@ -23,6 +23,7 @@ class RegisterVC: UIViewController {
     var tosChecked: Bool = true
     var checkedBoxImage: UIImage?
     var uncheckedBoxImage: UIImage?
+    var subscribeDelegate: SubscriptionDelegate? = nil
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -58,6 +59,9 @@ class RegisterVC: UIViewController {
                         self.dismiss(animated: false, completion: {
                             presentingViewController!.dismiss(animated: true)
                         })
+                        if (self.subscribeDelegate != nil) {
+                            self.subscribeDelegate?.loginComplete()
+                        }
                     }
                     else {
                         if let error = error?.localizedDescription {
