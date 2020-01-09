@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AdSupport
 
 class VimeoUrl: BaseUrl, VideoUrl {
     
@@ -14,11 +15,27 @@ class VimeoUrl: BaseUrl, VideoUrl {
     
     fileprivate var kPlayerGetVideo:String {
         let uuid = ZypeAppSettings.sharedInstance.deviceId()
+        let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as! String
+        let appBundle = Bundle.main.bundleIdentifier
+        let deviceType = 7
+        let deviceMake = "Apple"
+        let deviceModel = "AppleTV"
+        let deviceIfa = ASIdentifierManager.shared().advertisingIdentifier
+        let vpi = "mp4"
+        let appId = ZypeAppSettings.sharedInstance.deviceId()
+        
+        var strUrl = "%@/embed/%@.json?app_key=%@&dvr=false&uuid=\(uuid)&app_name=\(appName)&app_bundle=[app_bundle]&app_domain=[app_domain]&device_type=\(deviceType)&device_make=\(deviceMake)&device_model=\(deviceModel)&device_ifa=[device_ifa]&vpi=\(vpi)&app_id=\(appId)"
         if ((ZypeAppleTVBase.sharedInstance.consumer?.isLoggedIn) == true){
-            return "%@/embed/%@.json?access_token=%@&dvr=false&uuid=\(uuid)"
-        } else {
-            return "%@/embed/%@.json?app_key=%@&dvr=false&uuid=\(uuid)"
+            strUrl = "%@/embed/%@.json?access_token=%@&dvr=false&uuid=\(uuid)&app_name=\(appName)&app_bundle=[app_bundle]&app_domain=[app_domain]&device_type=\(deviceType)&device_make=\(deviceMake)&device_model=\(deviceModel)&device_ifa=[device_ifa]&vpi=\(vpi)&app_id=\(appId)"
         }
+        if let bundle = appBundle {
+            strUrl = (strUrl as NSString).replacingOccurrences(of: "[app_bundle]", with: "\(bundle)")
+            strUrl = (strUrl as NSString).replacingOccurrences(of: "[app_domain]", with: "\(bundle)")
+        }
+        if let ifa = deviceIfa {
+            strUrl = (strUrl as NSString).replacingOccurrences(of: "[device_ifa]", with: "\(ifa)")
+        }
+        return strUrl
     }
     
     
