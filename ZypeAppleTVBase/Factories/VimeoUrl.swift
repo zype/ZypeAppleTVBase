@@ -57,7 +57,7 @@ class VimeoUrl: BaseUrl, VideoUrl {
     fileprivate var kPlayerGetVideo:String {
         let uuid = ZypeAppSettings.sharedInstance.deviceId()
         let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as! String
-        let appBundle = "" //Bundle.main.bundleIdentifier
+        let appBundle = Bundle.main.bundleIdentifier
         let deviceType = 7
         let deviceMake = "Apple"
         let deviceModel = "AppleTV"
