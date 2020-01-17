@@ -69,8 +69,10 @@ class VimeoUrl: BaseUrl, VideoUrl {
         if ((ZypeAppleTVBase.sharedInstance.consumer?.isLoggedIn) == true){
             strUrl = "%@/embed/%@.json?access_token=%@&dvr=false&uuid=\(uuid)&app_name=\(appName)&app_bundle=[app_bundle]&app_domain=[app_domain]&device_type=\(deviceType)&device_make=\(deviceMake)&device_model=\(deviceModel)&device_ifa=[device_ifa]&vpi=\(vpi)&app_id=\(appId)&device_ua=[device_ua]"
         }
-        strUrl = (strUrl as NSString).replacingOccurrences(of: "[app_bundle]", with: "\(appBundle)")
-        strUrl = (strUrl as NSString).replacingOccurrences(of: "[app_domain]", with: "\(appBundle)")
+        if let bundle = appBundle {
+            strUrl = (strUrl as NSString).replacingOccurrences(of: "[app_bundle]", with: "\(bundle)")
+            strUrl = (strUrl as NSString).replacingOccurrences(of: "[app_domain]", with: "\(bundle)")
+        }
         
         if let ifa = deviceIfa {
             strUrl = (strUrl as NSString).replacingOccurrences(of: "[device_ifa]", with: "\(ifa)")
