@@ -59,7 +59,7 @@ open class ZypeTokenModel: NSObject {
         }
     }
     
-    override init() {
+    override public init() {
         super.init()
     }
     
