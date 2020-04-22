@@ -20,11 +20,7 @@ class VimeoUrl: BaseUrl, VideoUrl {
     }
     
     func sysUserAgent() ->  String? {
-        let webViewClass: AnyObject.Type = NSClassFromString("UIWebView")!
-        let webViewObject: NSObject.Type = webViewClass as! NSObject.Type
-        let webView: AnyObject = webViewObject.init()
-        let userAgent = webView.stringByEvaluatingJavaScript(from: "navigator.userAgent")
-        return userAgent
+        return ZypeUserAgentBuilder.buildtUserAgent().userAgent()
     }
     
     func userAgent() ->  String? {
@@ -41,13 +37,9 @@ class VimeoUrl: BaseUrl, VideoUrl {
             else if var sysAgent = sysAgent, let range = sysAgent.range(of:"Apple TV;"), let appName = appName, let version = version {
                 sysAgent.replaceSubrange(range, with: "\(machine);")
                 user_agent = "\(sysAgent) \(appName)/\(version)"
+            } else {
+                user_agent = sysAgent
             }
-            #if os(tvOS)
-            if var user_agent_temp = user_agent, let range = user_agent_temp.range(of:"iPhone OS") {
-                user_agent_temp.replaceSubrange(range, with: "\(UIDevice.current.systemName)")
-                user_agent = user_agent_temp
-            }
-            #endif
         }
         return user_agent
     }
