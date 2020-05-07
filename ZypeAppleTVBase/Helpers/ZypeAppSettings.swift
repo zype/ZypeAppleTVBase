@@ -26,7 +26,7 @@ private let sharedInstance = ZypeAppSettings()
 
 open class ZypeAppSettings {
     
-    public static let sharedInstance = ZypeAppSettings()
+    open static let sharedInstance = ZypeAppSettings()
     
     open var appVersion = "1.0.0"
     

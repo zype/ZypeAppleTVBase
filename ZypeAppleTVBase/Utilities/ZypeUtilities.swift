@@ -13,7 +13,7 @@ open class ZypeUtilities {
     //MARK: - Device Linking zObject.
     //Needs to be configured in admin panel for device linking to work
     
-    public static func loadDeviceLinkingZObject() {
+    open static func loadDeviceLinkingZObject() {
         let type = QueryZobjectsModel()
         type.zobjectType = "device_linking"
         ZypeAppleTVBase.sharedInstance.getZobjects(type, completion: {(objects: Array<ZobjectModel>?, error: NSError?) in
@@ -36,7 +36,7 @@ open class ZypeUtilities {
     }
     
     //MARK: - Device Linking
-    public static func presentFrameworkVC(_ caller: UIViewController) {
+    open static func presentFrameworkVC(_ caller: UIViewController) {
         let podBundle = Bundle(for: ZypeAppleTVBase.self)
         
         if let bundleURL = podBundle.url(forResource: "ZypeAppleTVBaseResources", withExtension: "bundle") {
@@ -55,7 +55,7 @@ open class ZypeUtilities {
         }
     }
     
-    public static func presentDeviceLinkingVC(_ caller: UIViewController, deviceLinkingUrl: String) {
+    open static func presentDeviceLinkingVC(_ caller: UIViewController, deviceLinkingUrl: String) {
         let podBundle = Bundle(for: ZypeAppleTVBase.self)
         
         if let bundleURL = podBundle.url(forResource: "ZypeAppleTVBaseResources", withExtension: "bundle") {
@@ -75,11 +75,11 @@ open class ZypeUtilities {
         }
     }
     
-    public static func isDeviceLinked() -> Bool {
+    open static func isDeviceLinked() -> Bool {
         return UserDefaults.standard.bool(forKey: kDeviceLinkedStatus)
     }
     
-    public static func checkDeviceLinkingWithServer() {
+    open static func checkDeviceLinkingWithServer() {
         let deviceString = ZypeAppSettings.sharedInstance.deviceId()
         ZypeAppleTVBase.sharedInstance.getLinkedStatus(deviceString, completion: {(status: Bool?, pin: String?, error: NSError?) in
             if status == true {
@@ -93,7 +93,7 @@ open class ZypeUtilities {
     }
     
     //MARK: - Login with token
-    public static func loginConsumerToGetToken(_ deviceId: String, pin: String?) {
+    open static func loginConsumerToGetToken(_ deviceId: String, pin: String?) {
         if (pin != nil) {
             ZypeAppleTVBase.sharedInstance.login(deviceId, pin: pin!, completion: {(loggedIn: Bool?, error: NSError?) in
                 if loggedIn == true {
@@ -105,7 +105,7 @@ open class ZypeUtilities {
         }
     }
     
-    public static func imageFromResourceBundle(_ imageName: String) -> UIImage? {
+    open static func imageFromResourceBundle(_ imageName: String) -> UIImage? {
         let podBundle = Bundle(for: ZypeAppleTVBase.self)
         if let bundleURL = podBundle.url(forResource: "ZypeAppleTVBaseResources", withExtension: "bundle") {
             if let bundle = Bundle(url: bundleURL) {
@@ -119,7 +119,7 @@ open class ZypeUtilities {
     }
     
     //MARK: - Limit Livestream
-    public static func loadLimitLivestreamZObject() {
+    open static func loadLimitLivestreamZObject() {
         let type = QueryZobjectsModel()
         type.zobjectType = "limit_livestream"
         ZypeAppleTVBase.sharedInstance.getZobjects(type, completion: {(objects: Array<ZobjectModel>?, error: NSError?) in
@@ -139,17 +139,17 @@ open class ZypeUtilities {
         })
     }
     
-    public static func livestreamStarts() {
+    open static func livestreamStarts() {
         ZypeAppSettings.sharedInstance.limitLivestream.starts = Date().timeIntervalSince1970
     }
     
-    public static func livestreamStopped() {
+    open static func livestreamStopped() {
         let playedForDuration = Int(Date().timeIntervalSince1970 - ZypeAppSettings.sharedInstance.limitLivestream.starts)
         ZypeAppSettings.sharedInstance.limitLivestream.played = ZypeAppSettings.sharedInstance.limitLivestream.played + playedForDuration
         print("stopped playing: \(ZypeAppSettings.sharedInstance.limitLivestream.played)")
     }
     
-    public static func livestreamLimitReached() -> Bool {
+    open static func livestreamLimitReached() -> Bool {
         //if limit livestream not set return false
         if (!ZypeAppSettings.sharedInstance.limitLivestream.isSet){
             return false
@@ -225,7 +225,7 @@ open class ZypeUtilities {
         caller.present(vc, animated: true, completion: nil)
     }
     
-    public static func loginUser(_ completion: @escaping (_ result: String) -> Void) {
+    open static func loginUser(_ completion: @escaping (_ result: String) -> Void) {
         let email =  UserDefaults.standard.object(forKey: kUserEmail) as! String?
         let password = UserDefaults.standard.object(forKey: kUserPassword) as! String?
         
@@ -257,7 +257,7 @@ open class ZypeUtilities {
         }
     }
     
-    public static func getLogoutVC() -> LogoutVC? {
+    open static func getLogoutVC() -> LogoutVC? {
         let podBundle = Bundle(for: ZypeAppleTVBase.self)
         
         if let bundleURL = podBundle.url(forResource: "ZypeAppleTVBaseResources", withExtension: "bundle") {

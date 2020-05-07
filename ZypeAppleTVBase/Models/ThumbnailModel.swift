@@ -24,11 +24,11 @@ public enum LayoutOrientation: String {
 
 open class ThumbnailModel: NSObject {
     
-    public let height: Int
-    public let width: Int
-    public let imageURL: String
-    public let name: String
-    public let layout: LayoutOrientation?
+    open let height: Int
+    open let width: Int
+    open let imageURL: String
+    open let name: String
+    open let layout: LayoutOrientation?
     
     init(height: Int, width: Int, url:String, name: String, layout: LayoutOrientation?) {
         self.height = height

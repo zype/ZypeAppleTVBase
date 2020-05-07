@@ -10,7 +10,7 @@ import UIKit
 
 open class CategoryModel : BaseModel {
     
-    public let keywords: Array<String>
+    open let keywords: Array<String>
     fileprivate(set) open var valuesArray: Array<CategoryValueModel>? = nil
         
     init(fromJson: Dictionary<String, AnyObject>)
