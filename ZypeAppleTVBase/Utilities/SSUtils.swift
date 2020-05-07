@@ -12,12 +12,12 @@ enum UtilError: Error {
     case invalidArgument
 }
 
-public let kApiDateFromeStringFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZ"
-public let kApiDateToStringFormat = "yyyy-MM-dd"
+internal let kApiDateFromeStringFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZ"
+internal let kApiDateToStringFormat = "yyyy-MM-dd"
 
 open class SSUtils {
     
-    public static func dateToString(_ date: Date?, format: String = kApiDateToStringFormat) -> String
+    open static func dateToString(_ date: Date?, format: String = kApiDateToStringFormat) -> String
     {
         if date == nil
         {
@@ -29,7 +29,7 @@ open class SSUtils {
         return dateString
     }
     
-    public static func stringToDate(_ string: String, format: String = kApiDateFromeStringFormat) -> Date?
+    open static func stringToDate(_ string: String, format: String = kApiDateFromeStringFormat) -> Date?
     {
         if string.isEmpty
         {
@@ -40,7 +40,7 @@ open class SSUtils {
         return dateFormatter.date(from: string)
     }
     
-    public static func stringFromDictionary(_ dic: Dictionary<String, AnyObject>?, key: String) throws -> String
+    open static func stringFromDictionary(_ dic: Dictionary<String, AnyObject>?, key: String) throws -> String
     {
         if (dic == nil)
         {
@@ -58,7 +58,7 @@ open class SSUtils {
         return value as! String
     }
     
-    public static func intagerFromDictionary(_ dic: Dictionary<String, AnyObject>?, key: String) throws -> Int
+    open static func intagerFromDictionary(_ dic: Dictionary<String, AnyObject>?, key: String) throws -> Int
     {
         if (dic == nil)
         {
@@ -76,7 +76,7 @@ open class SSUtils {
         return value as! Int
     }
 
-    public static func doubleFromDictionary(_ dic: Dictionary<String, AnyObject>?, key: String) throws -> Double
+    open static func doubleFromDictionary(_ dic: Dictionary<String, AnyObject>?, key: String) throws -> Double
     {
         if (dic == nil)
         {
@@ -94,7 +94,7 @@ open class SSUtils {
         return value as! Double
     }
     
-    public static func boolFromDictionary(_ dic: Dictionary<String, AnyObject>?, key: String) throws -> Bool
+    open static func boolFromDictionary(_ dic: Dictionary<String, AnyObject>?, key: String) throws -> Bool
     {
         if (dic == nil)
         {

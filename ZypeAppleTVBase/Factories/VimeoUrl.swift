@@ -67,8 +67,9 @@ class VimeoUrl: BaseUrl, VideoUrl {
             strUrl = (strUrl as NSString).replacingOccurrences(of: "[app_domain]", with: "\(bundle)")
         }
         
-        strUrl = (strUrl as NSString).replacingOccurrences(of: "[device_ifa]", with: "\(deviceIfa)")
-        
+        if let ifa = deviceIfa {
+            strUrl = (strUrl as NSString).replacingOccurrences(of: "[device_ifa]", with: "\(ifa)")
+        }
         if let ua = userAgent() {
             strUrl = (strUrl as NSString).replacingOccurrences(of: "[device_ua]", with: "\(ua)")
         }

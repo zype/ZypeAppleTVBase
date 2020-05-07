@@ -349,8 +349,6 @@
 		A11F0FB91D4A5E5300166479 /* ResponseModels */ = {
 			isa = PBXGroup;
 			children = (
-				4FD21C532449EC8000E2616B /* GuideModel.swift */,
-				4FD21C542449EC8000E2616B /* GuideProgramModel.swift */,
 				A11F0FBA1D4A5E5300166479 /* BaseModel.swift */,
 				A11F0FBB1D4A5E5300166479 /* CategoryModel.swift */,
 				A11F0FBC1D4A5E5300166479 /* CategoryValueModel.swift */,
@@ -448,6 +446,8 @@
 				A11F0F801D4A5E0200166479 /* Frameworks */,
 				A11F0F811D4A5E0200166479 /* Headers */,
 				A11F0F821D4A5E0200166479 /* Resources */,
+				3E3B45084CD860887F53E1B1 /* [CP] Copy Pods Resources */,
+				5C57F18E02345596B45F6839 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -468,6 +468,9 @@
 				A11F0F8A1D4A5E0300166479 /* Frameworks */,
 				A11F0F8B1D4A5E0300166479 /* Resources */,
 				2656C0C2249BCC88D7A09166 /* [CP] Embed Pods Frameworks */,
+				B35EB4C9DB55643F18E3C2FC /* [CP] Copy Pods Resources */,
+				220FC2EC28029E5A300668FF /* 📦 Embed Pods Frameworks */,
+				D291653F55356F874245FFE2 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -506,11 +509,10 @@
 			};
 			buildConfigurationList = A16F790E1CD8EADD00667FEF /* Build configuration list for PBXProject "ZypeAppleTVBase" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = en;
+			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 			);
 			mainGroup = A16F790A1CD8EADD00667FEF;
 			productRefGroup = A16F79151CD8EADD00667FEF /* Products */;
@@ -557,6 +559,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		220FC2EC28029E5A300668FF /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZypeAppleTVBaseTests/Pods-ZypeAppleTVBaseTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2656C0C2249BCC88D7A09166 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -572,6 +589,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZypeAppleTVBaseTests/Pods-ZypeAppleTVBaseTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		3E3B45084CD860887F53E1B1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZypeAppleTVBase/Pods-ZypeAppleTVBase-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		58E4451DA86ABDD4CC2CB0F4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -585,6 +617,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5C57F18E02345596B45F6839 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZypeAppleTVBase/Pods-ZypeAppleTVBase-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9BC3CD781A805121C7874DE5 /* [CP] Check Pods Manifest.lock */ = {
@@ -615,6 +662,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B35EB4C9DB55643F18E3C2FC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZypeAppleTVBaseTests/Pods-ZypeAppleTVBaseTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D291653F55356F874245FFE2 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZypeAppleTVBaseTests/Pods-ZypeAppleTVBaseTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E811B45DF5CCB2DDEF05B779 /* [CP] Check Pods Manifest.lock */ = {
@@ -658,7 +735,6 @@
 				A1C86AC51DA2FD0E00BFE5DF /* LogoutVC.swift in Sources */,
 				A11F0FEC1D4A5E5300166479 /* ZobjectModel.swift in Sources */,
 				A11F0FDE1D4A5E5300166479 /* QueryCategoriesModel.swift in Sources */,
-				4FD21C562449EC8000E2616B /* GuideProgramModel.swift in Sources */,
 				A11F0FDB1D4A5E5300166479 /* ConsumerModel.swift in Sources */,
 				A11F0FD01D4A5E5300166479 /* ZypeConstants.swift in Sources */,
 				A11F0FEB1D4A5E5300166479 /* VideoModel.swift in Sources */,
@@ -682,7 +758,6 @@
 				A11F0FD61D4A5E5300166479 /* ZypeAppSettings.swift in Sources */,
 				A11F0FD31D4A5E5300166479 /* BaseUrl.swift in Sources */,
 				A11F0FEF1D4A5E5300166479 /* ThumbnailModel.swift in Sources */,
-				4FD21C552449EC8000E2616B /* GuideModel.swift in Sources */,
 				A11F0FCE1D4A5E5300166479 /* ZypeRESTController.swift in Sources */,
 				A11F0FF31D4A5E5300166479 /* ZypeLog.swift in Sources */,
 				A11F0FDF1D4A5E5300166479 /* QueryPlaylistsModel.swift in Sources */,
@@ -734,7 +809,7 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
-				SWIFT_VERSION = 5;
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
@@ -753,7 +828,7 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
-				SWIFT_VERSION = 5;
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
@@ -776,7 +851,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
@@ -799,7 +874,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.zype.ZypeAppleTVBase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
@@ -814,7 +889,7 @@
 				MACH_O_TYPE = mh_dylib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.zype.ZypeAppleTVBaseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 3.0;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
 			name = Debug;
@@ -828,7 +903,7 @@
 				MACH_O_TYPE = mh_dylib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.zype.ZypeAppleTVBaseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 3.0;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
 			name = Release;
@@ -879,7 +954,7 @@
 				SDKROOT = appletvos;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = 3;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -924,7 +999,7 @@
 				SDKROOT = appletvos;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				TARGETED_DEVICE_FAMILY = 3;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
