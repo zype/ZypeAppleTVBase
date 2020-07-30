@@ -16,7 +16,7 @@ struct UserAgent {
     public static let uaBitMobile = "Mobile/15E148"
 }
 
-public struct ZypeUserAgentBuilder {
+@objc public class ZypeUserAgentBuilder: NSObject {
     // User agent components
     fileprivate var product: String
     fileprivate var systemInfo: String
@@ -24,7 +24,7 @@ public struct ZypeUserAgentBuilder {
     fileprivate var platformDetails: String
     fileprivate var appVersion: String
     fileprivate var uaBitMobile: String
-
+    
     init(product: String, systemInfo: String, platform: String, platformDetails: String, uaBitMobile: String, appVersion: String) {
         self.product = product
         self.systemInfo = systemInfo
@@ -34,15 +34,15 @@ public struct ZypeUserAgentBuilder {
         self.appVersion = appVersion
     }
     
-    public func userAgent() -> String {
+    @objc public func userAgent() -> String {
         let userAgentItems = [product, systemInfo, platform, platformDetails, uaBitMobile, appVersion]
         return removeEmptyComponentsAndJoin(uaItems: userAgentItems)
     }
     
-    public static func buildtUserAgent() -> ZypeUserAgentBuilder {
+    @objc public static func buildtUserAgent() -> ZypeUserAgentBuilder {
         return ZypeUserAgentBuilder(product: UserAgent.product, systemInfo: "(\(UIDevice.current.model.replacingOccurrences(of: " ", with: "")),3; CPU tvOS \(UIDevice.current.systemVersion.replacingOccurrences(of: ".", with: "_")) like Mac OS X)", platform: UserAgent.platform, platformDetails: UserAgent.platformDetails, uaBitMobile: UserAgent.uaBitMobile, appVersion: ZypeUserAgentBuilder.appNameAndVersion())
     }
-
+    
     /// Helper method to remove the empty components from user agent string that contain only whitespaces or are just empty
     private func removeEmptyComponentsAndJoin(uaItems: [String]) -> String {
         return uaItems.filter{ !$0.isEmpty }.joined(separator: " ")
