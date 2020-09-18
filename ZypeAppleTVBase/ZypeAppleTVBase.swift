@@ -10,8 +10,8 @@ import UIKit
 
 open class ZypeAppleTVBase: NSObject {
 
-    open static let sharedInstance = ZypeAppleTVBase()
-    open static var debug = true
+    public static let sharedInstance = ZypeAppleTVBase()
+    public static var debug = true
     
     fileprivate var dataManager: ZypeDataManager?
     

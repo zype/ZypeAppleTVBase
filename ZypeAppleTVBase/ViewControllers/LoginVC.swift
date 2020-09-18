@@ -28,7 +28,7 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         //self.configureView()
         self.setupText()
-        passwordField.addTarget(self, action: #selector(loginClicked(_:)), for: UIControlEvents.editingDidEnd)
+        passwordField.addTarget(self, action: #selector(loginClicked(_:)), for: UIControl.Event.editingDidEnd)
     }
 
     func setupText() {
@@ -47,13 +47,13 @@ class LoginVC: UIViewController {
         //configure for Dark Mode:
         self.view.backgroundColor = UIColor.black
         
-        self.emailField.backgroundColor =  UIColor.init(colorLiteralRed: 191.0, green: 191.0, blue: 231.0, alpha: 0.3)
+        self.emailField.backgroundColor =  UIColor(red: 191.0, green: 191.0, blue: 231.0, alpha: 0.3)
 
         self.emailField.textColor = UIColor.black
         self.emailField.tintColor = UIColor.green
         self.emailField.keyboardAppearance = UIKeyboardAppearance.dark
         
-        self.passwordField.backgroundColor = UIColor.init(colorLiteralRed: 191.0, green: 191.0, blue: 231.0, alpha: 0.3)
+        self.passwordField.backgroundColor = UIColor(red: 191.0, green: 191.0, blue: 231.0, alpha: 0.3)
         
         self.passwordField.textColor = UIColor.black
         self.passwordField.tintColor = UIColor.green
@@ -86,7 +86,7 @@ class LoginVC: UIViewController {
                      UserDefaults.standard.set(true, forKey: kDeviceLinkedStatus)
                       NotificationCenter.default.post(name: Notification.Name(rawValue: kZypeReloadScreenNotification), object: nil)
                     self.dismissParentController?.view.isHidden = true;
-                    self.dismiss(animated: true, completion: { _ in })
+                    self.dismiss(animated: true, completion: nil)
                     self.dismissParentController?.dismiss(animated: false, completion: nil)
                     
                     if (self.subscribeDelegate != nil) {
