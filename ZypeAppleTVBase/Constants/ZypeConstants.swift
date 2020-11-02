@@ -10,6 +10,7 @@
 let kAppKey = "ZSko8msvWHy7NG28ZqGUqzWytLfp7S3zg1bX-WgY-5jM39dX7bIiTgWyVN_goKiZ"
 let kOAuthClientSecret = ""
 let kOAuthClientId = ""
+let kJSONSubscriptionIds = "subscription_ids"
 
 //NSUserDefaults
 public let kDeviceLinkedStatus = "device_linked"
