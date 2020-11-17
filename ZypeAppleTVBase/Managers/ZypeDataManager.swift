@@ -780,20 +780,13 @@ class ZypeDataManager : NSObject {
     {
         if (jsonDic != nil)
         {
-            let response = jsonDic![kJSONResponse]
-            if (response != nil)
+            let response = jsonDic![kJSONResponse] as? Array<AnyObject>
+            if (response != nil && response!.count > 0)
             {
                 var array = Array<GuideProgramModel>()
-                if (response as? Array<AnyObject> == nil)
+                for value in response!
                 {
-                    array.append(GuideProgramModel(json: response as! Dictionary<String, AnyObject>))
-                }
-                else
-                {
-                    for value in response as! Array<AnyObject>
-                    {
-                        array.append(GuideProgramModel(json: value as! Dictionary<String, AnyObject>))
-                    }
+                    array.append(GuideProgramModel(json: value as! Dictionary<String, AnyObject>))
                 }
                 return array
             }
