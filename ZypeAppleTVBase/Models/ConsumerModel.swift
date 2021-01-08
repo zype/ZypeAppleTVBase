@@ -15,6 +15,7 @@ open class ConsumerModel: NSObject {
     fileprivate (set) open var nameString:String = ""
     fileprivate (set) internal var passwordString: String = ""
     fileprivate (set) open var subscriptionCount: Int = 0
+    fileprivate (set) open var subscriptionIds: Array<AnyObject> = []
     
     public init(name: String = "", email: String = "", password: String = "", subscription: Int = 0)
     {
@@ -29,12 +30,13 @@ open class ConsumerModel: NSObject {
         return ID.isEmpty == false
     }
     
-    func setData(_ consumerId: String, email: String, name: String, subscription: Int)
+    func setData(_ consumerId: String, email: String, name: String, subscription: Int, subscriptions: Array<AnyObject>)
     {
         ID = consumerId
         emailString = email
         nameString = name
         subscriptionCount = subscription
+        subscriptionIds = subscriptions
     }
     
     func reset()
@@ -43,6 +45,7 @@ open class ConsumerModel: NSObject {
         emailString = ""
         nameString = ""
         subscriptionCount = 0
+        subscriptionIds = []
     }
     
 }
