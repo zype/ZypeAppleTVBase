@@ -14,6 +14,8 @@ open class VideoObjectModel: NSObject {
     
     internal(set) open var videoId = ""
     
+    internal(set) open var videoTitle = ""
+    
     internal(set) open var siteId = ""
     
     internal(set) open var playerId = ""
