@@ -40,7 +40,7 @@ open class SSUtils {
         return dateFormatter.date(from: string)
     }
     
-    open static func arrayFromDictionary(_ dic: Dictionary<String, AnyObject>?, key: String) throws -> Array<AnyObject>
+    public static func arrayFromDictionary(_ dic: Dictionary<String, AnyObject>?, key: String) throws -> Array<AnyObject>
     {
         if (dic == nil)
         {
@@ -58,7 +58,7 @@ open class SSUtils {
         return value as! Array<AnyObject>
     }
     
-    open static func stringFromDictionary(_ dic: Dictionary<String, AnyObject>?, key: String) throws -> String
+    public static func stringFromDictionary(_ dic: Dictionary<String, AnyObject>?, key: String) throws -> String
     {
         if (dic == nil)
         {
