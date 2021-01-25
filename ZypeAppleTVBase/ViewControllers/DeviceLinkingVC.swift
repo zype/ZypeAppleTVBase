@@ -22,7 +22,7 @@ class DeviceLinkingVC: UIViewController {
         if (deviceLinkingUrl != nil) {
             firstLineLabel .text = "From your computer or mobile device, go to \(deviceLinkingUrl!)"
         }
-        UIButton.appearance().setTitleColor(UIColor.darkGray, for: UIControlState())
+        UIButton.appearance().setTitleColor(UIColor.darkGray, for: UIControl.State())
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,7 +45,7 @@ class DeviceLinkingVC: UIViewController {
         timer = Timer.scheduledTimer(timeInterval: 5, target:self, selector: #selector(DeviceLinkingVC.checkDeviceStatus), userInfo: nil, repeats: true)
     }
     
-    func checkDeviceStatus(){
+    @objc func checkDeviceStatus(){
         ZypeAppleTVBase.sharedInstance.getLinkedStatus(deviceString, completion: {(status: Bool?, pin: String?, error: NSError?) in
             if status == true {
                 UserDefaults.standard.set(true, forKey: kDeviceLinkedStatus)
@@ -59,6 +59,6 @@ class DeviceLinkingVC: UIViewController {
     }
     
     @IBAction func browseContentButtonClicked(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: {_ in})
+        self.dismiss(animated: true, completion: nil)
     }
 }
