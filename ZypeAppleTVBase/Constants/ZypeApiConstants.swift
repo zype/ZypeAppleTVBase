@@ -16,3 +16,4 @@ internal let kPlayerDomain = "https://player.zype.com"
 
 //HTTP Constants
 internal let kHTTPCodeNoContent = 204
+internal let kHTTPCodeSuccess = 200
