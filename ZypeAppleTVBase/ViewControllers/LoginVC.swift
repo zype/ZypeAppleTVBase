@@ -23,7 +23,8 @@ class LoginVC: UIViewController {
     
     open var dismissParentController: UIViewController?
     open var subscribeDelegate: SubscriptionDelegate? = nil
-    
+    open var isFavoriteFlow = false
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.configureView()
@@ -41,6 +42,10 @@ class LoginVC: UIViewController {
             self.loginFooter.text = pageFooterText as? String
         }
 
+        if isFavoriteFlow {
+            loginTitle.text = UserDefaults.standard.object(forKey: kLoginPageHeaderFavorite) as? String
+            loginFooter.text = UserDefaults.standard.object(forKey: kLoginPageFooterFavorite) as? String
+        }
     }
     
     func configureView() {

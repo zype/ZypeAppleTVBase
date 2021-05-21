@@ -163,7 +163,7 @@ open class ZypeUtilities {
     }
     
     // MARK: - Login
-    public static func presentLoginVC(_ caller: UIViewController, _ subscribeDelegate: SubscriptionDelegate? = nil) {
+    public static func presentLoginVC(_ caller: UIViewController, _ subscribeDelegate: SubscriptionDelegate? = nil, isFavoriteFlow: Bool = false) {
         let podBundle = Bundle(for: ZypeAppleTVBase.self)
         
         if let bundleURL = podBundle.url(forResource: "ZypeAppleTVBaseResources", withExtension: "bundle") {
@@ -173,6 +173,7 @@ open class ZypeUtilities {
                 
                 let vc = storyboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
                 vc.subscribeDelegate = subscribeDelegate
+                vc.isFavoriteFlow = isFavoriteFlow
                 caller.present(vc, animated: true, completion: nil)
             }else {
                 assertionFailure("Could not load the bundle")
