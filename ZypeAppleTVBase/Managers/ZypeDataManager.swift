@@ -725,11 +725,11 @@ class ZypeDataManager : NSObject {
     {
         self.serviceController.unfavoriteObject(token, consumerId: self.consumer.ID, favoriteID: favoriteObject.ID, completion: { (statusCode, error) -> Void in
             DispatchQueue.main.async(execute: {
-                if (statusCode == kHTTPCodeNoContent)
+                if (statusCode == kHTTPCodeNoContent || statusCode == kHTTPCodeSuccess)
                 {
                     self.cacheManager.removeFromFavorites(favoriteObject)
                 }
-                completion(statusCode == kHTTPCodeNoContent, error)
+                completion((statusCode == kHTTPCodeNoContent || statusCode == kHTTPCodeSuccess), error)
             })
         })
     }
