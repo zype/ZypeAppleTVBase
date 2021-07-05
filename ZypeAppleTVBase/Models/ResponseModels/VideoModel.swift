@@ -37,7 +37,8 @@ open class VideoModel: BaseModel {
     
     fileprivate(set) open var thumbnails = Array<ThumbnailModel>()
     fileprivate(set) open var images = Array<ThumbnailModel>()
-    
+    fileprivate(set) open var featured :Bool = false
+
     fileprivate(set) open var fullJson = Dictionary<String, AnyObject>()
     
     init(fromJson: Dictionary<String, AnyObject>)
@@ -109,6 +110,13 @@ open class VideoModel: BaseModel {
             registrationRequired = try SSUtils.boolFromDictionary(fromJson, key: kJSONRegistrationRequired)        }
         catch _ {
             ZypeLog.error("Exception: VideoModel | Registration Required")
+        }
+        
+        do {
+            featured = try SSUtils.boolFromDictionary(fromJson, key: kJSONOnFeatured)
+        }
+        catch _ {
+            ZypeLog.error("Exception: VideoModel | featured")
         }
         
         self.loadPrices(fromJson)
