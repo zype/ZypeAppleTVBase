@@ -72,3 +72,4 @@ internal let kJSONPassPlanRequired = "pass_plan"
 internal let kJSONRegistrationRequired = "registration_required"
 
 internal let kJSONContentType = "content_type"
+internal let kJSONOnFeatured = "featured"
