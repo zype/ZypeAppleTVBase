@@ -24,6 +24,7 @@ open class VideoObjectModel: NSObject {
     
     internal(set) open var consumerId = ""
     
-    internal(set) open var json: Dictionary <String, AnyObject>?
+    internal(set) open var contentFormat = ""
     
+    internal(set) open var json: Dictionary <String, AnyObject>?
 }

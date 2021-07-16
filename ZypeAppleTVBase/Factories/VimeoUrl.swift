@@ -99,17 +99,14 @@ class VimeoUrl: BaseUrl, VideoUrl {
         _ = self.controller!.getQuery(url, withCompletion:{ (jsonDic, error) -> Void in
             let player = VideoObjectModel()
             player.json = jsonDic
-            if let response = jsonDic?[kJSONResponse] as? NSDictionary
-                
-            {
+            if let response = jsonDic?[kJSONResponse] as? NSDictionary {
                 if let jsonBody = response[kJSONBody] as? NSDictionary {
                     let outputs = jsonBody[kJSONOutputs] as? Array <Dictionary<String, String> >
-                    if outputs?.first != nil
-                    {
+                    if outputs?.first != nil {
                         player.videoURL = outputs!.first![kJSONUrl]!
+                        player.contentFormat = outputs!.first![kJSONName]!
                     }
                 }
-                
             }
             completion(player, error)
         })
